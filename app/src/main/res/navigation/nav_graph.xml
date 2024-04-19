@@ -7,35 +7,22 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.fpoly.shoes_app.framework.presentation.ui.first.FirstFragment"
+        android:name="com.fpoly.shoes_app.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/SecondFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.fpoly.shoes_app.framework.presentation.ui.second.SecondFragment"
+        android:name="com.fpoly.shoes_app.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_ThirdFragment"
-            app:destination="@id/ThirdFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/ThirdFragment"
-        android:name="com.fpoly.shoes_app.framework.presentation.ui.third.ThirdFragment"
-        android:label="ThirdFragment"
-        tools:layout="@layout/fragment_third" />
 </navigation>

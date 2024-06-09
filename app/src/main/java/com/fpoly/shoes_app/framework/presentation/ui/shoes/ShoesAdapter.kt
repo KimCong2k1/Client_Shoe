@@ -1,0 +1,46 @@
+package com.fpoly.shoes_app.framework.presentation.ui.shoes
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.fpoly.shoes_app.databinding.ItemShoeViewBinding
+import com.fpoly.shoes_app.framework.domain.model.Shoes
+import com.fpoly.shoes_app.utility.formatPriceShoe
+import com.fpoly.shoes_app.utility.formatSoldShoe
+import com.fpoly.shoes_app.utility.loadImage
+import javax.inject.Inject
+
+private val shoesDiff = object : DiffUtil.ItemCallback<Shoes>() {
+    override fun areItemsTheSame(oldItem: Shoes, newItem: Shoes) = oldItem.id == newItem.id
+
+    override fun areContentsTheSame(oldItem: Shoes, newItem: Shoes) = oldItem == newItem
+}
+
+class ShoesAdapter @Inject constructor() : ListAdapter<Shoes, ShoesViewHolder>(shoesDiff) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ShoesViewHolder(
+        ItemShoeViewBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+    )
+
+    override fun onBindViewHolder(holder: ShoesViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+}
+
+class ShoesViewHolder(
+    private val binding: ItemShoeViewBinding
+) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(shoes: Shoes) {
+        binding.run {
+            imgShoe.loadImage(shoes.thumbnail)
+            tvNameShoe.text = shoes.name
+            tvRateShoe.text = "4.5"
+            val sold = 1000
+            tvSoldShoe.text = sold.formatSoldShoe()
+            tvPriceShoe.text = shoes.price?.formatPriceShoe()
+        }
+    }
+}

@@ -1,6 +1,7 @@
 package com.fpoly.shoes_app.framework.data.dataremove.di
 
 import com.fpoly.shoes_app.framework.data.dataremove.api.CategoriesApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.ShoesApi
 import com.fpoly.shoes_app.utility.BASE_URL
 import com.fpoly.shoes_app.utility.SET_TIME_OUT_API
 import dagger.Module
@@ -45,4 +46,9 @@ object DataRemoveModule {
     @Singleton
     fun provideCategoriesApi(retrofit: Retrofit): CategoriesApi =
         retrofit.create(CategoriesApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideShoesApi(retrofit: Retrofit): ShoesApi =
+        retrofit.create(ShoesApi::class.java)
 }

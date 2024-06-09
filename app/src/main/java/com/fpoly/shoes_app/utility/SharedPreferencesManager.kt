@@ -31,6 +31,4 @@ object SharedPreferencesManager {
 
     private fun getBooleanDataByKey(key: String?): Boolean =
         sharedPreferences.getBoolean(key, false)
-
-
 }

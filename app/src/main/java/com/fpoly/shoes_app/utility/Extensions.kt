@@ -17,3 +17,11 @@ fun ImageView.loadImage(imageUrl: String? = null) {
         error(R.color.primary_white)
     }
 }
+
+fun Int.formatPriceShoe(): String {
+    return this.toString() + "đ"
+}
+
+fun Int.formatSoldShoe(): String {
+    return "Đã bán $this"
+}

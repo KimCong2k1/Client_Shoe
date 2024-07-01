@@ -11,10 +11,10 @@
     <string name="most_popular">Phổ biến nhất</string>
     <string name="see_all">Tất cả</string>
 
-<!--    //quy-->
-<!--    key map-->
+    <!--    //quy-->
+    <!--    key map-->
     <string name="key_map">AIzaSyC659j_v2LylmdRJsQ3Uw9ysEGLE9TDRVw</string>
-<!--    string other-->
+    <!--    string other-->
     <string name="capture">Máy Ảnh</string>
     <string name="selectImg">Chọn Nguồn Ảnh</string>
     <string name="gallery">Thư Viện</string>
@@ -59,6 +59,7 @@
     <string name="update">Cập nhật</string>
     <string name="general_notification">Thông báo</string>
     <string name="sound">Âm thanh</string>
+    <string name="special_offers">Ưu đãi đặc biệt</string>
     <string name="vibrate">Rung</string>
     <string name="promo_vs_discount">Khuyến mại và Giảm giá</string>
     <string name="payments">Thanh toán</string>
@@ -71,7 +72,7 @@
     <string name="resend_code_otp">Gửi lại mã</string>
     <string name="send">Gửi</string>
     <string name="confirm">Xác nhận</string>
-<!--    <string name="profile">Cấu hình</string>-->
+    <!--    <string name="profile">Cấu hình</string>-->
     <string name="phone_suggest">0123456789</string>
     <string name="edit_info">Sửa thông tin</string>
     <string name="address">Địa chỉ</string>

@@ -1,6 +1,13 @@
 package com.fpoly.shoes_app.framework.data.dataremove.di
 
 import com.fpoly.shoes_app.framework.data.dataremove.api.CategoriesApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.ShoesApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.CreateNewPassInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.ForgotMailInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.LoginInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.OTPConfirmInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.SetUpInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.SignUpInterface
 import com.fpoly.shoes_app.utility.BASE_URL
 import com.fpoly.shoes_app.utility.SET_TIME_OUT_API
 import dagger.Module

@@ -20,6 +20,14 @@ fun ImageView.loadImage(imageUrl: String? = null) {
     }
 }
 
+fun Int.formatPriceShoe(): String {
+    return this.toString() + "đ"
+}
+
+fun Int.formatSoldShoe(): String {
+    return "Đã bán $this"
+}
+
 fun String.toMD5(): String {
     val bytes = this.toByteArray()
     val md = MessageDigest.getInstance("MD5")

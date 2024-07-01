@@ -7,10 +7,10 @@
     android:layout_marginTop="@dimen/dimen_24dp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/img_brand"
+        android:id="@+id/imgCategory"
         android:layout_width="@dimen/dimen_60dp"
         android:layout_height="@dimen/dimen_60dp"
-        android:background="@drawable/bg_brand_image"
+        android:background="@drawable/bg_category_image"
         android:padding="@dimen/dimen_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_brand"
+        android:id="@+id/tvCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_12dp"
@@ -29,6 +29,6 @@
         android:textSize="@dimen/text_size_14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_brand"
+        app:layout_constraintTop_toBottomOf="@id/imgCategory"
         tools:text="Adidas" />
 </androidx.constraintlayout.widget.ConstraintLayout>

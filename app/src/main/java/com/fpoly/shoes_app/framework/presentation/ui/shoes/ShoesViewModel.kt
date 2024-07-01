@@ -1,14 +1,14 @@
-package com.fpoly.shoes_app.framework.presentation.ui.home
+package com.fpoly.shoes_app.framework.presentation.ui.shoes
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fpoly.shoes_app.framework.domain.model.Category
+import com.fpoly.shoes_app.framework.domain.model.Shoes
 import com.fpoly.shoes_app.framework.domain.usecase.GetCategoriesUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetShoesUseCase
+import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
 import com.fpoly.shoes_app.utility.GET_POPULAR_SHOES_ALL
-import com.fpoly.shoes_app.utility.ITEM_MORE
-import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,17 +22,15 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
-    private val sharedPreferences: SharedPreferencesManager,
+class ShoesViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getShoesUseCase: GetShoesUseCase
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState: StateFlow<HomeUiState> get() = _uiState
+    private val _uiState = MutableStateFlow(ShoesUiState())
+    val uiState: StateFlow<ShoesUiState> get() = _uiState
 
     init {
         getDataCategories()
-        getDataPopularShoes()
     }
 
     private fun getDataCategories() {
@@ -41,7 +39,7 @@ class HomeViewModel @Inject constructor(
         }.onEach { resource ->
             when (resource.status) {
                 Status.SUCCESS -> _uiState.update { state ->
-                    state.copy(categories = updateCategoriesList(resource.data?.body()),
+                    state.copy(
                         categoriesSelected = updateCategoriesSelectedList(resource.data?.body()).map {
                             if (it.id.isNullOrEmpty()) it to true
                             else it to false
@@ -59,22 +57,6 @@ class HomeViewModel @Inject constructor(
         }.onCompletion {
             _uiState.update { it.copy(isLoading = false) }
         }.launchIn(viewModelScope)
-    }
-
-    private fun updateCategoriesList(categories: List<Category>?): List<Category> {
-        val more = Category(
-            image = "https://i.pinimg.com/564x/e7/65/04/e7650458fe434cd647eafb289a569fe2.jpg",
-            name = ITEM_MORE
-        )
-        return when {
-            categories == null -> emptyList()
-            categories.size == CATEGORIES_SIZE_EQUALS_8 -> categories.take(CATEGORIES_SIZE_EQUALS_8)
-            categories.size > CATEGORIES_SIZE_EQUALS_8 -> categories.take(
-                CATEGORIES_SIZE_MORE_THAN_8
-            ).plus(more)
-
-            else -> categories
-        }
     }
 
     private fun updateCategoriesSelectedList(categories: List<Category>?): List<Category> {
@@ -100,8 +82,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    //get shoes if sold > 0 and max 10 item
-    fun getDataPopularShoes(category: String? = GET_POPULAR_SHOES_ALL) {
+    fun getDataShoes(category: String? = GET_POPULAR_SHOES_ALL, type: String?) {
         flow {
             emit(getShoesUseCase.invoke())
         }.onEach { resource ->
@@ -109,12 +90,8 @@ class HomeViewModel @Inject constructor(
                 Status.SUCCESS -> {
                     _uiState.update { state ->
                         val popularShoes = resource.data?.body()
-                            ?.filter {
-                                (it.sold ?: 0) > 0 &&
-                                        (category == GET_POPULAR_SHOES_ALL || it.category?.name == category)
-                            }
-                            ?.sortedByDescending { it.sold }
-                            ?.take(QUANTITY_POPULAR_SHOES)
+                            ?.filterByTypeAndCategory(type, category)
+                            ?.sortBySoldCount(type)
                         state.copy(popularShoes = popularShoes)
                     }
                 }
@@ -129,9 +106,22 @@ class HomeViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private companion object {
-        private const val CATEGORIES_SIZE_EQUALS_8 = 8
-        private const val CATEGORIES_SIZE_MORE_THAN_8 = 7
-        private const val QUANTITY_POPULAR_SHOES = 10
+    // Extension function to filter shoes based on type and category
+    private fun List<Shoes>.filterByTypeAndCategory(type: String?, category: String?): List<Shoes> {
+        return this.filter { shoe ->
+            if (type == GET_ALL_POPULAR_SHOES) {
+                (shoe.sold
+                    ?: 0) > 0 && (category == GET_POPULAR_SHOES_ALL || shoe.category?.name == category)
+            } else {
+                shoe.category?.name == type
+            }
+        }
+    }
+
+    // Extension function to sort shoes by sold count
+    private fun List<Shoes>.sortBySoldCount(type: String?): List<Shoes> {
+        return this.sortedByDescending { shoe ->
+            if (type == GET_ALL_POPULAR_SHOES) shoe.sold else null
+        }
     }
 }

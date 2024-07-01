@@ -11,10 +11,8 @@
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_slashFragment_to_loginFragmentScreen"
-            app:destination="@id/loginFragmentScreen"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            android:id="@+id/action_SlashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
             app:popUpTo="@id/slashFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -29,7 +27,25 @@
         android:id="@+id/homeFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_shoesFragment"
+            app:destination="@id/shoesFragment">
+            <argument
+                android:name="titleShoes"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/shoesFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.shoes.ShoesFragment"
+        android:label="ShoesFragment"
+        tools:layout="@layout/fragment_shoes">
+        <argument
+            android:name="titleShoes"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/favoritesFragment"

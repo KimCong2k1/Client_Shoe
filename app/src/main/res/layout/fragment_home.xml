@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:overScrollMode="ifContentScrolls">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/dimen_50dp">
+        android:paddingBottom="@dimen/dimen_32dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutTop"
@@ -114,7 +115,7 @@
             android:layout_marginTop="@dimen/dimen_24dp"
             android:fontFamily="@font/poppins_medium"
             android:includeFontPadding="false"
-            android:text="@string/special_offers"
+            android:text="@string/special_programs"
             android:textColor="@color/primary_black"
             android:textSize="@dimen/text_size_16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +158,7 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/cvBanner"
             app:spanCount="4"
-            tools:listitem="@layout/item_brand_with_image_view" />
+            tools:listitem="@layout/item_category_view" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvMostPopular"
@@ -174,6 +175,7 @@
             app:layout_constraintTop_toBottomOf="@id/rcvCategory" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAllPopularShoes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_26dp"
@@ -187,23 +189,27 @@
             app:layout_constraintTop_toBottomOf="@id/rcvCategory" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvTitleBrand"
+            android:id="@+id/rcvCategoriesSelected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_24dp"
             android:layout_marginTop="@dimen/dimen_24dp"
             android:orientation="horizontal"
+            android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/tvMostPopular" />
+            app:layout_constraintTop_toBottomOf="@id/tvMostPopular"
+            tools:listitem="@layout/item_category_selected_view" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvShoes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_24dp"
-            android:layout_marginTop="@dimen/dimen_17dp"
+            android:layout_marginHorizontal="@dimen/dimen_14dp"
+            android:layout_marginTop="@dimen/dimen_24dp"
+            android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/rcvTitleBrand"
-            app:spanCount="2" />
+            app:layout_constraintTop_toBottomOf="@id/rcvCategoriesSelected"
+            app:spanCount="2"
+            tools:listitem="@layout/item_shoe_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,6 +1,7 @@
 package com.fpoly.shoes_app.framework.data.dataremove.di
 
 import com.fpoly.shoes_app.framework.data.dataremove.api.CategoriesApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.ShoesApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.CreateNewPassInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.ForgotMailInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.LoginInterface
@@ -33,19 +34,29 @@ object DataRemoveModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): Retrofit =
-        Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL)
+        Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
             .client(
-                OkHttpClient.Builder().connectTimeout(SET_TIME_OUT_API, TimeUnit.SECONDS)
+                OkHttpClient.Builder()
+                    .connectTimeout(SET_TIME_OUT_API, TimeUnit.SECONDS)
                     .writeTimeout(SET_TIME_OUT_API, TimeUnit.SECONDS)
                     .readTimeout(SET_TIME_OUT_API, TimeUnit.SECONDS)
                     .connectionPool(ConnectionPool(0, 5, TimeUnit.MINUTES))
-                    .addInterceptor(httpLoggingInterceptor).build()
-            ).build()
+                    .addInterceptor(httpLoggingInterceptor)
+                    .build()
+            )
+            .build()
 
     @Provides
     @Singleton
     fun provideCategoriesApi(retrofit: Retrofit): CategoriesApi =
         retrofit.create(CategoriesApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideShoesApi(retrofit: Retrofit): ShoesApi =
+        retrofit.create(ShoesApi::class.java)
 
     @Provides
     @Singleton
@@ -71,9 +82,9 @@ object DataRemoveModule {
     @Singleton
     fun provideSetUpmApi(retrofit: Retrofit): SetUpInterface =
         retrofit.create(SetUpInterface::class.java)
-@Provides
+
+    @Provides
     @Singleton
     fun provideNewPassWordmApi(retrofit: Retrofit): CreateNewPassInterface =
         retrofit.create(CreateNewPassInterface::class.java)
-
 }

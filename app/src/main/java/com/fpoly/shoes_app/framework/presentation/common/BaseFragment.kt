@@ -12,9 +12,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.ViewModelActivity
 import com.fpoly.shoes_app.utility.SharedPreferencesManager
@@ -61,7 +60,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         Log.v(TAG, "onCreateView: $this")
-        _navController = requireActivity().findNavController(R.id.nav_host_fragment_content_main)
+        _navController = findNavController()
         _binding = bindingInflater.invoke(layoutInflater, container, false)
         return _binding?.root
     }

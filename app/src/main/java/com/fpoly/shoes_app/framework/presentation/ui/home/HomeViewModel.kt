@@ -1,6 +1,5 @@
 package com.fpoly.shoes_app.framework.presentation.ui.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fpoly.shoes_app.framework.domain.model.Category

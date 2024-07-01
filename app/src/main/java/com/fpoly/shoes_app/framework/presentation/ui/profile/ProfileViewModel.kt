@@ -1,6 +1,7 @@
 package com.fpoly.shoes_app.framework.presentation.ui.profile
 
-import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 
-class ProfileViewModel: ViewModel() {
+//@HiltViewModel
+class ProfileViewModel {
 }

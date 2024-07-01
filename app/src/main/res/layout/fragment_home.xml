@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:overScrollMode="ifContentScrolls">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -114,7 +115,7 @@
             android:layout_marginTop="@dimen/dimen_24dp"
             android:fontFamily="@font/poppins_medium"
             android:includeFontPadding="false"
-            android:text="@string/special_offers"
+            android:text="@string/special_programs"
             android:textColor="@color/primary_black"
             android:textSize="@dimen/text_size_16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -174,6 +175,7 @@
             app:layout_constraintTop_toBottomOf="@id/rcvCategory" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAllPopularShoes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_26dp"

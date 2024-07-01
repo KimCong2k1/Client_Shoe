@@ -18,10 +18,17 @@ private val categoriesDiff = object : DiffUtil.ItemCallback<Category>() {
 
 class CategoriesAdapter @Inject constructor() :
     ListAdapter<Category, CategoriesViewHolder>(categoriesDiff) {
+
+    private lateinit var _onClick: (Category) -> Unit
+
+    fun setOnClick(onClick: (Category) -> Unit) {
+        _onClick = onClick
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = CategoriesViewHolder(
         ItemCategoryViewBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
-        )
+        ), _onClick
     )
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
@@ -30,12 +37,13 @@ class CategoriesAdapter @Inject constructor() :
 }
 
 class CategoriesViewHolder(
-    private val binding: ItemCategoryViewBinding
+    private val binding: ItemCategoryViewBinding, private val onClick: (Category) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(category: Category) {
         binding.run {
             imgCategory.loadImage(category.image)
             tvCategory.text = category.name
+            root.setOnClickListener { onClick(category) }
         }
     }
 }

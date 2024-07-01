@@ -1,15 +1,14 @@
-package com.fpoly.shoes_app.framework.presentation.ui.home
+package com.fpoly.shoes_app.framework.presentation.ui.shoes
 
+import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.fpoly.shoes_app.databinding.FragmentHomeBinding
+import androidx.navigation.fragment.navArgs
+import com.fpoly.shoes_app.databinding.FragmentShoesBinding
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
-import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelectedAdapter
-import com.fpoly.shoes_app.framework.presentation.ui.shoes.ShoesAdapter
 import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
-import com.fpoly.shoes_app.utility.ITEM_MORE
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.mapNotNull
@@ -17,13 +16,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
-    FragmentHomeBinding::inflate,
-    HomeViewModel::class.java
+class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
+    FragmentShoesBinding::inflate,
+    ShoesViewModel::class.java
 ) {
-
-    @Inject
-    lateinit var categoriesAdapter: CategoriesAdapter
+    private val args: ShoesFragmentArgs by navArgs()
 
     @Inject
     lateinit var categoriesSelectedAdapter: CategoriesSelectedAdapter
@@ -31,8 +28,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     @Inject
     lateinit var shoesAdapter: ShoesAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getDataShoes(type = args.titleShoes)
+    }
+
     override fun setupViews() {
         (requireActivity() as? MainActivity)?.showBottomNavigation(true)
+        binding.run {
+            headerLayout.tvTitle.text = args.titleShoes
+        }
         setupRecyclerView()
     }
 
@@ -41,21 +46,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     }
 
     override fun setOnClick() {
-        setOnClickCategory()
-        setOnClickCategorySelected()
         binding.run {
-            tvAllPopularShoes.setOnClickListener {
-                navController?.navigate(
-                    HomeFragmentDirections.actionHomeFragmentToShoesFragment(GET_ALL_POPULAR_SHOES)
-                )
+            headerLayout.imgBack.setOnClickListener {
+                navController?.popBackStack()
             }
+
+            rcvCategoriesSelected.isVisible = args.titleShoes == GET_ALL_POPULAR_SHOES
+        }
+        categoriesSelectedAdapter.setOnClick {
+            viewModel.handleClickCategoriesSelected(it)
+            viewModel.getDataShoes(it.name, null)
         }
     }
 
     private fun initHandleUiState() {
         lifecycleScope.launch {
             viewModel.uiState.collect { state ->
-                categoriesAdapter.submitList(state.categories)
                 categoriesSelectedAdapter.submitList(state.categoriesSelected)
             }
         }
@@ -79,38 +85,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
     private fun setupRecyclerView() {
         binding.apply {
-            rcvCategory.run {
-                layoutManager = StaggeredGridLayoutManager(
-                    SPAN_COUNT_CATEGORIES,
-                    StaggeredGridLayoutManager.VERTICAL
-                )
-                adapter = categoriesAdapter
-            }
             rcvCategoriesSelected.adapter = categoriesSelectedAdapter
             rcvShoes.adapter = shoesAdapter
         }
-    }
-
-    private fun setOnClickCategory() {
-        categoriesAdapter.setOnClick {
-            if (it.name == ITEM_MORE) {
-                null
-            } else {
-                navController?.navigate(
-                    HomeFragmentDirections.actionHomeFragmentToShoesFragment(it.name ?: "")
-                )
-            }
-        }
-    }
-
-    private fun setOnClickCategorySelected() {
-        categoriesSelectedAdapter.setOnClick {
-            viewModel.handleClickCategoriesSelected(it)
-            viewModel.getDataPopularShoes(it.name)
-        }
-    }
-
-    private companion object {
-        private const val SPAN_COUNT_CATEGORIES = 4
     }
 }

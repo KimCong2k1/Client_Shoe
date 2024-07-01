@@ -37,9 +37,8 @@ class ShoesViewHolder(
         binding.run {
             imgShoe.loadImage(shoes.thumbnail)
             tvNameShoe.text = shoes.name
-            tvRateShoe.text = "4.5"
-            val sold = 1000
-            tvSoldShoe.text = sold.formatSoldShoe()
+            tvRateShoe.text = "${shoes.rate?.rate}"
+            tvSoldShoe.text = shoes.sold?.formatSoldShoe()
             tvPriceShoe.text = shoes.price?.formatPriceShoe()
         }
     }

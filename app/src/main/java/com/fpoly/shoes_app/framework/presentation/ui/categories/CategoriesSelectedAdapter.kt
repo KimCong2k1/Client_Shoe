@@ -39,14 +39,14 @@ class CategoriesSelectedAdapter @Inject constructor() :
         )
 
     override fun onBindViewHolder(holder: CategoriesSelectedViewHolder, position: Int) {
-        holder.bind(getItem(position), position)
+        holder.bind(getItem(position))
     }
 }
 
 class CategoriesSelectedViewHolder(
     private val binding: ItemCategorySelectedViewBinding, private val onClick: (Category) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(category: Pair<Category, Boolean>, position: Int) {
+    fun bind(category: Pair<Category, Boolean>) {
         binding.tvCategorySelected.run {
             text = category.first.name
             setOnClickListener {

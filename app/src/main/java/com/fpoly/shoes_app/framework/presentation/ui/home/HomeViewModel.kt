@@ -63,7 +63,7 @@ class HomeViewModel @Inject constructor(
 
     private fun updateCategoriesList(categories: List<Category>?): List<Category> {
         val more = Category(
-            image = "https://i.pinimg.com/564x/e7/65/04/e7650458fe434cd647eafb289a569fe2.jpg",
+            image = ITEM_MORE,
             name = ITEM_MORE
         )
         return when {

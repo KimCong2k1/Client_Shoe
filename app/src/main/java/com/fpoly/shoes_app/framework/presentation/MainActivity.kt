@@ -1,7 +1,6 @@
 package com.fpoly.shoes_app.framework.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
@@ -10,7 +9,6 @@ import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.IOException
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -20,14 +18,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        try {
-            _binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding?.root)
-            setupBottomNavigation()
-        }catch ( e: IOException){
-            Log.e("catch App",e.toString())
-        }
-
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
+        setupBottomNavigation()
     }
 
     private fun setupBottomNavigation() {
@@ -36,6 +29,11 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         findViewById<BottomNavigationView>(R.id.navBottom)
             .setupWithNavController(navController)
+
+//        // block item in navBottom
+//        binding?.navBottom?.run {
+//            menu.findItem(selectedItemId).isEnabled = false
+//        }
     }
 
     override fun onDestroy() {

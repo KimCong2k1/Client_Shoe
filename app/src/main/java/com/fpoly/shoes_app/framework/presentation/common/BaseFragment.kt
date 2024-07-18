@@ -111,6 +111,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         super.onDetach()
         Log.v(TAG, "onDetach: $this")
     }
+
     abstract fun setupViews()
 
     abstract fun bindViewModel()
@@ -118,7 +119,26 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     abstract fun setOnClick()
 
     protected fun showProgressbar(isShowProgressbar: Boolean) {
-        if (isShowProgressbar) progressDialog.show(childFragmentManager, null)
-        else progressDialog.dismiss()
+        val fragmentManager = childFragmentManager
+        val existingFragment = fragmentManager.findFragmentByTag(TAG_PROGRESSBAR_DIALOG_FRAGMENT)
+
+        if (isShowProgressbar) {
+            if (existingFragment == null) {
+                fragmentManager.beginTransaction()
+                    .add(progressDialog, TAG_PROGRESSBAR_DIALOG_FRAGMENT)
+                    .commitNowAllowingStateLoss()
+            }
+        } else {
+            if (existingFragment != null) {
+                progressDialog.dismiss()
+                fragmentManager.beginTransaction()
+                    .remove(existingFragment)
+                    .commitNowAllowingStateLoss()
+            }
+        }
+    }
+
+    private companion object {
+        private const val TAG_PROGRESSBAR_DIALOG_FRAGMENT = "ProgressbarDialogFragment"
     }
 }

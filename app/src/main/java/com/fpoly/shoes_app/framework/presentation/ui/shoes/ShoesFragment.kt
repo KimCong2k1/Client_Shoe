@@ -35,8 +35,10 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
 
     override fun setupViews() {
         (requireActivity() as? MainActivity)?.showBottomNavigation(true)
-        binding.run {
-            headerLayout.tvTitle.text = args.titleShoes
+        binding.headerLayout.run {
+            tvTitle.text = args.titleShoes
+            imgFilter.isVisible = true
+            imgSearch.isVisible = true
         }
         setupRecyclerView()
     }

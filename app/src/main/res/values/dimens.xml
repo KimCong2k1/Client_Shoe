@@ -28,6 +28,7 @@
     <dimen name="dimen_150dp">150dp</dimen>
     <dimen name="dimen_187dp">187dp</dimen>
     <dimen name="dimen_200dp">200dp</dimen>
+    <dimen name="dimen_400dp">400dp</dimen>
 
     <!--Text size-->
     <dimen name="text_size_10sp">10sp</dimen>

@@ -83,4 +83,10 @@
     <string name="agree">Đồng ý</string>
     <string name="otp_verification">Xác thực OTP</string>
     <string name="send_otp_to_your_mail">Mã OTP sẽ gửi đến email của bạn</string>
+    <string name="description">Chi tiết</string>
+    <string name="size">Kích cỡ</string>
+    <string name="color">Màu sắc</string>
+    <string name="quantity">Số lượng</string>
+    <string name="add_to_cart">Thêm vào giỏ hàng</string>
+    <string name="total_price">Tổng tiền</string>
 </resources>

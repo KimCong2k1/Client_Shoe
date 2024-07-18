@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.ItemCategoryViewBinding
 import com.fpoly.shoes_app.framework.domain.model.Category
+import com.fpoly.shoes_app.utility.ITEM_MORE
 import com.fpoly.shoes_app.utility.loadImage
 import javax.inject.Inject
 
@@ -41,7 +43,11 @@ class CategoriesViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(category: Category) {
         binding.run {
-            imgCategory.loadImage(category.image)
+            if (category.image == ITEM_MORE) {
+                imgCategory.loadImage(R.drawable.ic_more)
+            } else {
+                imgCategory.loadImage(category.image)
+            }
             tvCategory.text = category.name
             root.setOnClickListener { onClick(category) }
         }

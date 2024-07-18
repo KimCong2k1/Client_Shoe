@@ -2,6 +2,7 @@ package com.fpoly.shoes_app.framework.presentation.ui.home
 
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentHomeBinding
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
@@ -10,6 +11,7 @@ import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelect
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.ShoesAdapter
 import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
 import com.fpoly.shoes_app.utility.ITEM_MORE
+import com.fpoly.shoes_app.utility.SPAN_COUNT_CATEGORIES
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.mapNotNull
@@ -94,7 +96,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     private fun setOnClickCategory() {
         categoriesAdapter.setOnClick {
             if (it.name == ITEM_MORE) {
-                null
+                navController?.navigate(R.id.action_homeFragment_to_categoriesFragment)
             } else {
                 navController?.navigate(
                     HomeFragmentDirections.actionHomeFragmentToShoesFragment(it.name ?: "")
@@ -108,9 +110,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             viewModel.handleClickCategoriesSelected(it)
             viewModel.getDataPopularShoes(it.name)
         }
-    }
-
-    private companion object {
-        private const val SPAN_COUNT_CATEGORIES = 4
     }
 }

@@ -39,13 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     lateinit var categoriesSelectedAdapter: CategoriesSelectedAdapter
 
     @Inject
-    lateinit var categoriesWithImageAdapter: CategoriesWithImageAdapter
-
-    @Inject
     lateinit var shoesAdapter: ShoesAdapter
-
-    override fun setupPreViews() {
-    }
 
     override fun setupViews() {
         setupRecyclerView()
@@ -56,6 +50,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     }
 
     override fun setOnClick() {
+        binding.notificationHome.setOnClickListener {
+            val fragmentId = R.id.notificationHomeFragment
+            val navController = findNavController()
+            val currentDestination = navController.currentDestination
+            if (currentDestination == null || currentDestination.id != fragmentId) {
+                navController.navigate(fragmentId, null, navOptions)
+            }
+        }
+
         setOnClickCategorySelected()
         binding.run {
             tvAllPopularShoes.setOnClickListener {
@@ -118,27 +121,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             }.distinctUntilChanged().collect {
                 showProgressbar(it)
             }
-        }
-    }
-
-    override fun setOnClick() {
-        binding.notificationHome.setOnClickListener {
-            val fragmentId = R.id.notificationHomeFragment
-            val navController = findNavController()
-            val currentDestination = navController.currentDestination
-            if (currentDestination == null || currentDestination.id != fragmentId) {
-                navController.navigate(fragmentId, null, navOptions)
-            }
-        }
-    }
-
-    private fun setupCategories() {
-        binding.rcvCategory.run {
-            layoutManager = StaggeredGridLayoutManager(
-                SPAN_COUNT_CATEGORIES,
-                StaggeredGridLayoutManager.VERTICAL
-            )
-            adapter = categoriesWithImageAdapter
         }
     }
 

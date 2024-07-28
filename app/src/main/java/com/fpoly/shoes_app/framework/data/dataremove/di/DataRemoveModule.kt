@@ -15,8 +15,8 @@ import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.OTPConfir
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.SetUpInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.SignUpInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.UpdateAddressInterface
-import com.fpoly.shoes_app.utility.Constants.Companion.BASE_URL
-import com.fpoly.shoes_app.utility.Constants.Companion.SET_TIME_OUT_API
+import com.fpoly.shoes_app.utility.BASE_URL
+import com.fpoly.shoes_app.utility.SET_TIME_OUT_API
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

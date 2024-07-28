@@ -2,10 +2,9 @@ package com.fpoly.shoes_app.framework.presentation.ui.setUpAccount
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fpoly.shoes_app.framework.data.repository.ProfileRepository
 import com.fpoly.shoes_app.framework.domain.model.profile.ProfileResponse
 import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccountResponse
-import com.fpoly.shoes_app.framework.data.repository.SetUpAccountRepository
-import com.fpoly.shoes_app.framework.repository.ProfileRepository
 import com.fpoly.shoes_app.framework.repository.SetUpAccountRepository
 import com.fpoly.shoes_app.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

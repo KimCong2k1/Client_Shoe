@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentAddressBinding
 import com.fpoly.shoes_app.framework.adapter.address.AddressAdapter
-import com.fpoly.shoes_app.framework.data.module.CheckValidate.strNullOrEmpty
+import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate.strNullOrEmpty
 import com.fpoly.shoes_app.framework.domain.model.profile.address.Addresse
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.Status
@@ -43,7 +43,7 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, AddressViewModel>(
                     putParcelable("address", address)
                     putInt("check", 1)
                 }
-                findNavController().navigate(R.id.editoraddFragment, bundle)
+//                findNavController().navigate(R.id.editoraddFragment, bundle)
             })
 
         binding.recycViewAddress.apply {
@@ -171,7 +171,7 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, AddressViewModel>(
             val bundle = Bundle().apply {
                 putInt("check", 0)
             }
-            findNavController().navigate(R.id.editoraddFragment, bundle)
+//            findNavController().navigate(R.id.editoraddFragment, bundle)
         }
 
     }

@@ -6,7 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentCreateNewPassBinding
-import com.fpoly.shoes_app.framework.data.module.CheckValidate.strNullOrEmpty
+import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate.strNullOrEmpty
 import com.fpoly.shoes_app.framework.domain.model.newPass.NewPass
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.forgot.CustomDialogFragment

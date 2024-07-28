@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.databinding.FragmentEditProfileBinding
-import com.fpoly.shoes_app.framework.data.module.CheckValidate
+import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate
 import com.fpoly.shoes_app.framework.domain.model.profile.ProfileResponse
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.setUpAccount.SetUpAccountViewModel

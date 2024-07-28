@@ -3,7 +3,6 @@ package com.fpoly.shoes_app.framework.presentation.common
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
-import android.os.VibratorManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -49,8 +48,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
 
     @Inject
     internal lateinit var progressDialog: ProgressbarDialogFragment
-
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -120,7 +117,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         Log.v(TAG, "onDetach: $this")
     }
 
-    abstract fun setupPreViews()
+    open fun setupPreViews() {}
     abstract fun setupViews()
 
     abstract fun bindViewModel()

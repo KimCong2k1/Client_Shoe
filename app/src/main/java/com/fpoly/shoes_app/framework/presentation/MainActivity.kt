@@ -1,16 +1,15 @@
 package com.fpoly.shoes_app.framework.presentation
 
-import android.content.Context
-import android.graphics.Rect
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Rect
 import android.media.AudioManager
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -50,12 +49,9 @@ class MainActivity : AppCompatActivity() {
         setupBottomNavigation()
         try {
             audioManager = this.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-            _binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding?.root)
             if (!hasPermissions(this, *PERMISSIONS)) {
                 ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_REQUEST_CODE)
             }
-            setupBottomNavigation()
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     Log.w("TAG", "Fetching FCM registration token failed", task.exception)
@@ -79,24 +75,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigation() {
-        if (!isBottomNavigationSetup) {
-            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
-            val navController = navHostFragment.navController
-            val bottomNavigationView = findViewById<BottomNavigationView>(R.id.navBottom)
-
-            bottomNavigationView.setupWithNavController(navController)
-            bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-                val currentDestination = navController.currentDestination?.id
-                if (currentDestination != item.itemId) {
-                    navController.navigate(item.itemId)
-                    true
-                } else {
-                    false
-                }
-            }
-
-            isBottomNavigationSetup = true
-        }
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+        val navController = navHostFragment.navController
+        findViewById<BottomNavigationView>(R.id.navBottom)
+            .setupWithNavController(navController)
     }
 
     override fun onStop() {

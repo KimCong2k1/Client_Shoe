@@ -19,10 +19,16 @@ private val shoesDiff = object : DiffUtil.ItemCallback<Shoes>() {
 }
 
 class ShoesAdapter @Inject constructor() : ListAdapter<Shoes, ShoesViewHolder>(shoesDiff) {
+    private lateinit var _onClick: (Shoes) -> Unit
+
+    fun setOnClick(onClick: (Shoes) -> Unit) {
+        _onClick = onClick
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ShoesViewHolder(
         ItemShoeViewBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
-        )
+        ), _onClick
     )
 
     override fun onBindViewHolder(holder: ShoesViewHolder, position: Int) {
@@ -31,7 +37,8 @@ class ShoesAdapter @Inject constructor() : ListAdapter<Shoes, ShoesViewHolder>(s
 }
 
 class ShoesViewHolder(
-    private val binding: ItemShoeViewBinding
+    private val binding: ItemShoeViewBinding,
+    private val onClick: (Shoes) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(shoes: Shoes) {
         binding.run {
@@ -40,6 +47,7 @@ class ShoesViewHolder(
             tvRateShoe.text = "${shoes.rate?.rate}"
             tvSoldShoe.text = shoes.sold?.formatSoldShoe()
             tvPriceShoe.text = shoes.price?.formatPriceShoe()
+            cvImageShoe.setOnClickListener { onClick(shoes) }
         }
     }
 }

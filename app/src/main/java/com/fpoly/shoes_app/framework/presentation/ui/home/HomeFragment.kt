@@ -43,7 +43,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     }
 
     override fun setOnClick() {
-        setOnClickCategory()
         setOnClickCategorySelected()
         binding.run {
             tvAllPopularShoes.setOnClickListener {
@@ -51,6 +50,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                     HomeFragmentDirections.actionHomeFragmentToShoesFragment(GET_ALL_POPULAR_SHOES)
                 )
             }
+        }
+
+        categoriesAdapter.setOnClick {
+            if (it.name == ITEM_MORE) {
+                navController?.navigate(R.id.action_homeFragment_to_categoriesFragment)
+            } else {
+                navController?.navigate(
+                    HomeFragmentDirections.actionHomeFragmentToShoesFragment(it.name ?: "")
+                )
+            }
+        }
+
+        shoesAdapter.setOnClick {
+            navController?.navigate(
+                HomeFragmentDirections.actionHomeFragmentToShoeDetailFragment(it.id ?: "")
+            )
         }
     }
 
@@ -90,18 +105,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             }
             rcvCategoriesSelected.adapter = categoriesSelectedAdapter
             rcvShoes.adapter = shoesAdapter
-        }
-    }
-
-    private fun setOnClickCategory() {
-        categoriesAdapter.setOnClick {
-            if (it.name == ITEM_MORE) {
-                navController?.navigate(R.id.action_homeFragment_to_categoriesFragment)
-            } else {
-                navController?.navigate(
-                    HomeFragmentDirections.actionHomeFragmentToShoesFragment(it.name ?: "")
-                )
-            }
         }
     }
 

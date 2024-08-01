@@ -3,7 +3,6 @@ package com.fpoly.shoes_app.utility
 import android.widget.ImageView
 import coil.load
 import com.fpoly.shoes_app.R
-import java.math.BigInteger
 import java.security.MessageDigest
 
 fun ImageView.loadImage(imgResource: Int? = null) {
@@ -26,6 +25,10 @@ fun Int.formatPriceShoe(): String {
 
 fun Int.formatSoldShoe(): String {
     return "Đã bán $this"
+}
+
+fun Int.formatReviewShoe(): String {
+    return "$this bình luận"
 }
 
 fun String.toMD5(): String {

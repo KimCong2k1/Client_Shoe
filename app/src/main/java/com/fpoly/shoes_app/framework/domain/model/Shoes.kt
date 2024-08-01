@@ -24,7 +24,7 @@ data class Shoes(
     val thumbnail: String? = null,
     @SerializedName("status")
     val status: Int? = 0, // 0: Inactive, 1: Active, 2: Sold
-    @SerializedName("brandShoe")
+    @SerializedName("typerShoe")
     val category: Category? = null,
     @SerializedName("imageShoe")
     val imagesShoe: List<String>? = emptyList(),

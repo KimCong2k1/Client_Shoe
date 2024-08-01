@@ -1,4 +1,4 @@
-package com.fpoly.shoes_app.framework.repository
+package com.fpoly.shoes_app.framework.data.repository
 
 import android.util.Log
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.ForgotMailInterface

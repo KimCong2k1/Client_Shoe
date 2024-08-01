@@ -39,7 +39,8 @@ class CategoriesAdapter @Inject constructor() :
 }
 
 class CategoriesViewHolder(
-    private val binding: ItemCategoryViewBinding, private val onClick: (Category) -> Unit
+    private val binding: ItemCategoryViewBinding,
+    private val onClick: (Category) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(category: Category) {
         binding.run {

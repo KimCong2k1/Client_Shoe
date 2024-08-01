@@ -3,13 +3,9 @@ package com.fpoly.shoes_app.framework.presentation.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.LoginInterface
+import com.fpoly.shoes_app.framework.data.repository.LoginRepository
 import com.fpoly.shoes_app.framework.domain.model.login.Login
 import com.fpoly.shoes_app.framework.domain.model.login.LoginResponse
-import com.fpoly.shoes_app.framework.domain.model.signUp.SignUp
-import com.fpoly.shoes_app.framework.domain.model.signUp.SignUpResponse
-import com.fpoly.shoes_app.framework.repository.LoginRepository
-import com.fpoly.shoes_app.framework.repository.SignUpRepository
 import com.fpoly.shoes_app.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginRepository:LoginRepository,
+    private val loginRepository: LoginRepository,
 ) : ViewModel() {
     private val _loginResult = MutableStateFlow<Resource<LoginResponse>>(Resource.init(null))
     val loginResult: StateFlow<Resource<LoginResponse>> = _loginResult

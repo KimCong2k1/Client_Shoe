@@ -8,7 +8,6 @@ import com.fpoly.shoes_app.framework.domain.usecase.GetCategoriesUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetShoesUseCase
 import com.fpoly.shoes_app.utility.GET_POPULAR_SHOES_ALL
 import com.fpoly.shoes_app.utility.ITEM_MORE
-import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val sharedPreferences: SharedPreferencesManager,
+
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getShoesUseCase: GetShoesUseCase
 ) : ViewModel() {

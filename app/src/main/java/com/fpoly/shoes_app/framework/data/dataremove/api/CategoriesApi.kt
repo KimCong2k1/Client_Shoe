@@ -5,6 +5,8 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface CategoriesApi {
+
+    // get all types (categories)
     @GET("getalltype")
     suspend fun getCategories(): Response<List<Category>>
 }

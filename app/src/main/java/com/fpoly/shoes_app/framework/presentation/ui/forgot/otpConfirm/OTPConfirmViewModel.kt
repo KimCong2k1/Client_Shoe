@@ -6,8 +6,8 @@ import com.fpoly.shoes_app.framework.domain.model.login.Login
 import com.fpoly.shoes_app.framework.domain.model.login.LoginResponse
 import com.fpoly.shoes_app.framework.domain.model.otpConfirm.OtpConfirm
 import com.fpoly.shoes_app.framework.domain.model.otpConfirm.OtpConfirmResponse
-import com.fpoly.shoes_app.framework.repository.LoginRepository
-import com.fpoly.shoes_app.framework.repository.OTPConfirmReponsitory
+import com.fpoly.shoes_app.framework.data.repository.LoginRepository
+import com.fpoly.shoes_app.framework.data.repository.OTPConfirmReponsitory
 import com.fpoly.shoes_app.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OTPConfirmViewModel
 @Inject constructor(
-private val otpConfirmRepository: OTPConfirmReponsitory,
+    private val otpConfirmRepository: OTPConfirmReponsitory,
 ) : ViewModel() {
     private val _otpConfirmResult = MutableStateFlow<Resource<OtpConfirmResponse>>(Resource.init(null))
     val otpConfirmResult: StateFlow<Resource<OtpConfirmResponse>> = _otpConfirmResult

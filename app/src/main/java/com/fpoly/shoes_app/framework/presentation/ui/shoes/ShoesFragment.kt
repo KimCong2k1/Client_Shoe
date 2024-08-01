@@ -59,6 +59,12 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
             viewModel.handleClickCategoriesSelected(it)
             viewModel.getDataShoes(it.name, null)
         }
+
+        shoesAdapter.setOnClick {
+            navController?.navigate(
+                ShoesFragmentDirections.actionShoesFragmentToShoeDetailFragment(it.id ?: "")
+            )
+        }
     }
 
     private fun initHandleUiState() {

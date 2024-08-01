@@ -39,6 +39,14 @@
         <action
             android:id="@+id/action_homeFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment">
+            <argument
+                android:name="idShoe"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment
@@ -49,6 +57,14 @@
         <argument
             android:name="titleShoes"
             app:argType="string" />
+
+        <action
+            android:id="@+id/action_shoesFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment">
+            <argument
+                android:name="idShoe"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment
@@ -172,5 +188,14 @@
                 android:name="titleShoes"
                 app:argType="string" />
         </action>
+    </fragment>
+    <fragment
+        android:id="@+id/shoeDetailFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment"
+        android:label="ShoeDetailFragment"
+        tools:layout="@layout/fragment_shoe_detail">
+        <argument
+            android:name="idShoe"
+            app:argType="string" />
     </fragment>
 </navigation>

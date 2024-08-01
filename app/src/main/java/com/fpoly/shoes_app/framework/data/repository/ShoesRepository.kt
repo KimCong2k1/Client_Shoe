@@ -9,4 +9,8 @@ class ShoesRepository @Inject constructor(private val shoesApi: ShoesApi) {
     suspend fun getShoes() = withContext(Dispatchers.IO) {
         shoesApi.getShoes()
     }
+
+    suspend fun getShoeDetail(id: String) = withContext(Dispatchers.IO) {
+        shoesApi.getShoeDetail(id)
+    }
 }

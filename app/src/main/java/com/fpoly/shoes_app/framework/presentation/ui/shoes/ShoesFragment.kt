@@ -5,7 +5,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.fpoly.shoes_app.databinding.FragmentShoesBinding
-import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelectedAdapter
 import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
@@ -34,7 +33,6 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
     }
 
     override fun setupViews() {
-        (requireActivity() as? MainActivity)?.showBottomNavigation(true)
         binding.headerLayout.run {
             tvTitle.text = args.titleShoes
             imgFilter.isVisible = true

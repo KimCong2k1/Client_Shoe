@@ -4,7 +4,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentHomeBinding
-import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelectedAdapter
@@ -34,7 +33,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     lateinit var shoesAdapter: ShoesAdapter
 
     override fun setupViews() {
-        (requireActivity() as? MainActivity)?.showBottomNavigation(true)
         setupRecyclerView()
     }
 

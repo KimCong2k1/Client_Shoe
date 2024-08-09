@@ -53,7 +53,7 @@
 
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.fpoly.shoes_app.framework.presentation.ui.favorites.FavoritesFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.favourites.FavouritesFragment"
         android:label="FavoritesFragment"
         tools:layout="@layout/fragment_favorites" />
 

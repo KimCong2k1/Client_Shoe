@@ -51,9 +51,12 @@ dependencies {
     implementation ("com.google.maps:google-maps-services:2.2.0")
     implementation("com.google.android.gms:play-services-maps:19.0.0")
     //stdlib
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.24")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
     //toast
     implementation ("io.github.muddz:styleabletoast:2.4.0")
+    //codeHistory
+    implementation ("com.google.zxing:core:3.4.1")
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
     //end quy
 
 

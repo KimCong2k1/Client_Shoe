@@ -32,11 +32,16 @@
 
         <ImageView
             android:id="@+id/imgAvatar"
-            android:layout_width="@dimen/dimen_100dp"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="@dimen/dimen_100dp"
             android:background="@drawable/circular_background"
             android:scaleType="centerCrop"
-            android:src="@drawable/baseline_account_circle_24" />
+            android:src="@drawable/baseline_account_circle_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="@dimen/dimen_20dp"
@@ -99,7 +104,7 @@
             android:layout_marginHorizontal="@dimen/dimen_16dp"
             android:drawablePadding="@dimen/dimen_10dp"
             android:focusable="false"
-            android:hint="@string/date"
+            android:hint="@string/dateBirth"
             android:imeOptions="actionNext"
             android:inputType="date"
             android:padding="@dimen/dimen_17dp"

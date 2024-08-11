@@ -9,28 +9,24 @@
         android:orderInCategory="100"
         android:title="@string/home"
         app:showAsAction="withText" />
-
-    <item
-        android:id="@+id/favoritesFragment"
-        android:icon="@drawable/ic_favorite"
-        android:orderInCategory="100"
-        android:title="@string/favorites"
-        app:showAsAction="withText" />
-
     <item
         android:id="@+id/cartFragment"
         android:icon="@drawable/ic_cart"
         android:orderInCategory="100"
         android:title="@string/cart"
         app:showAsAction="withText" />
-
     <item
         android:id="@+id/ordersFragment"
         android:icon="@drawable/ic_order"
         android:orderInCategory="100"
         android:title="@string/orders"
         app:showAsAction="withText" />
-
+    <item
+        android:id="@+id/historyFragment"
+        android:icon="@drawable/ic_cart_history"
+        android:orderInCategory="100"
+        android:title="@string/history"
+        app:showAsAction="withText" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"

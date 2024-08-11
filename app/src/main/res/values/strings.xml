@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">shoes_app</string>
-    <string name="home">Home</string>
-    <string name="favorites">Favorites</string>
-    <string name="cart">Cart</string>
-    <string name="orders">Orders</string>
-    <string name="profile">Profile</string>
-
+    <string name="home">Nhà</string>
+    <string name="favorites">Yêu Thích</string>
+    <string name="history">Lịch Sử</string>
+    <string name="orders">Đơn Hàng</string>
+    <string name="cart">Giỏ Hàng</string>
+    <string name="profile">Cài đặt</string>
+    <string name="priceDemo">0000</string>
+    <string name="dateDemo">0000/00/00</string>
     <string name="search">Tìm kiếm</string>
     <string name="special_programs">Chương trình đặc biệt</string>
     <string name="most_popular">Phổ biến nhất</string>
@@ -22,6 +24,7 @@
     <string name="congratulation">Chào mừng trở lại !</string>
     <string name="force_input_email">Vui lòng nhập email</string>
     <string name="forgot_password">Quên mật khẩu</string>
+    <string name="detailHistory">Chi tiết lịch sử đơn hàng</string>
     <string name="fail_password">Sai tài khoản hoặc mật khẩu</string>
     <string name="accountAlreadyExists">Tài khoản đã tồn tại</string>
     <string name="is_number_phone">Vui lòng nhập đủ số điện thoại</string>
@@ -42,7 +45,8 @@
     <string name="create_acc">Tạo tài khoản</string>
     <string name="quick_create">Tạo tài khoản nhanh</string>
     <string name="full_name">Nhập vào tên đầy đủ của bạn</string>
-    <string name="date">Nhập vào ngày sinh</string>
+    <string name="dateBirth">Nhập vào ngày sinh</string>
+    <string name="date">Ngày tháng</string>
     <string name="email_config">Nhập vào email</string>
     <string name="phone_config">Nhập vào số điện thoại</string>
     <string name="text_continue">Tiếp tục</string>
@@ -53,6 +57,7 @@
     <string name="point_name">Tên địa điểm</string>
     <string name="default_address">Đặt làm địa chỉ mặc định</string>
     <string name="add">Thêm</string>
+    <string name="historyTool">Lịch sử giao dịch</string>
     <string name="success">Thành công</string>
     <string name="inputFullInfo">Vui lòng nhập đầy đủ thông tin</string>
     <string name="create_your_password">Tạo mật khẩu mới của bạn</string>
@@ -79,7 +84,7 @@
     <string name="name">Họ và tên</string>
     <string name="logout">Đăng xuất</string>
     <string name="confirm_logout">Bạn chắc chắn muốn đăng xuất?</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Từ chối</string>
     <string name="agree">Đồng ý</string>
     <string name="otp_verification">Xác thực OTP</string>
     <string name="send_otp_to_your_mail">Mã OTP sẽ gửi đến email của bạn</string>
@@ -89,4 +94,11 @@
     <string name="quantity">Số lượng</string>
     <string name="add_to_cart">Thêm vào giỏ hàng</string>
     <string name="total_price">Tổng tiền</string>
+    <string name="all">Tất cả</string>
+    <string name="back">Back</string>
+    <string name="seeAllHistory">Tất cả lịch sử đơn hàng</string>
+    <string name="price_original">Giá Gốc</string>
+    <string name="method">Phương thức thanh toán</string>
+    <string name="price_Sell">Số tiền được giảm</string>
+    <string name="status">Trạng thái</string>
 </resources>

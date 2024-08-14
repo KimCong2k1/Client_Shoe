@@ -17,7 +17,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(
 
     @Inject
     lateinit var splashAdapter: SplashAdapter
+    override fun setupPreViews() {
 
+    }
     override fun setupViews() {
         binding.viewPagerSplash.adapter = splashAdapter
         binding.dotsIndicator.attachTo(binding.viewPagerSplash)
@@ -39,7 +41,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(
             viewModel.singleEvent.collect { event ->
                 when (event) {
                     is SplashSingleEvent.NavigateToNextScreen ->
-                        navController?.navigate(R.id.action_SlashFragment_to_homeFragment)
+                        navController?.navigate(R.id.action_slashFragment_to_loginFragmentScreen)
                 }
             }
         }

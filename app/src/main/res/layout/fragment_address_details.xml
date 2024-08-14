@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".framework.presentation.ui.profile.addressDetail.AddressDetailsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/color_background_toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
+        app:title="@string/tittle_Address" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardViewLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_card_login"
+        android:paddingVertical="@dimen/dimen_10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/layoutTextView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/dimen_4dp"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:text="@string/detail_address"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_25sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:background="@android:color/darker_gray" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTextView1">
+
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:text="@string/point_name"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutInputUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt1">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameAddressEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_edt_config_info"
+                    android:drawablePadding="@dimen/dimen_10dp"
+                    android:imeOptions="actionNext"
+                    android:enabled="false"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="@dimen/dimen_17dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black_overlay"
+                    android:textSize="@dimen/text_size_15sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:text="@string/detail_address"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutInputUserName" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutInputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addressDetailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_edt_config_info"
+                    android:drawableEnd="@drawable/baseline_add_location_alt_24"
+                    android:drawablePadding="@dimen/dimen_10dp"
+                    android:ellipsize="end"
+                    android:enabled="false"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="@dimen/dimen_17dp"
+                    android:textColorHint="@color/black_overlay"
+                    android:textSize="@dimen/text_size_15sp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/addressDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint2">
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dimen_16dp"
+                android:text="@string/default_address"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_16dp"
+            android:background="@drawable/custom_button_login"
+            android:backgroundTint="@color/black"
+            android:text="@string/update"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addressDetail" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintView"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cardViewLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardViewLogin" />
+</androidx.constraintlayout.widget.ConstraintLayout>

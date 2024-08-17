@@ -108,12 +108,12 @@
 
         <fragment
             android:id="@+id/seeAllHistoryFragment"
-            android:name="com.fpoly.shoes_app.framework.presentation.ui.history.seeAllHistory.SeeAllHistoryFragment"
+            android:name="com.fpoly.shoes_app.framework.presentation.ui.orders.history.seeAllHistory.SeeAllHistoryFragment"
             android:label="fragment_see_all_history"
             tools:layout="@layout/fragment_see_all_history" />
         <fragment
             android:id="@+id/historyFragment"
-            android:name="com.fpoly.shoes_app.framework.presentation.ui.history.HistoryFragment"
+            android:name="com.fpoly.shoes_app.framework.presentation.ui.orders.history.HistoryFragment"
             android:label="fragment_history"
             tools:layout="@layout/fragment_history">
             <action
@@ -191,7 +191,7 @@
         </fragment>
     <fragment
         android:id="@+id/detailHistoryFragment"
-        android:name="com.fpoly.shoes_app.framework.presentation.ui.history.seeAllHistory.detaiHistory.DetailHistoryFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.orders.history.detaiHistory.DetailHistoryFragment"
         android:label="fragment_detail_history"
         tools:layout="@layout/fragment_detail_history" />
 

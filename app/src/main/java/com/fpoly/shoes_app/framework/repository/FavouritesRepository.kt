@@ -1,6 +1,6 @@
 package com.fpoly.shoes_app.framework.repository
 
-import com.fpoly.shoes_app.framework.data.dataremove.api.FavouritesApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.FavouritesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

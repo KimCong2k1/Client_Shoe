@@ -9,6 +9,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 object CheckValidate {
+
     fun checkPhone(
         context: Context, edtData: TextInputEditText, layoutData: TextInputLayout, button: Button
     ): Boolean {

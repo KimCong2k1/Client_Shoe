@@ -1,4 +1,4 @@
-package com.fpoly.shoes_app.framework.data.dataremove.api
+package com.fpoly.shoes_app.framework.data.dataremove.api.getInterface
 
 import com.fpoly.shoes_app.framework.domain.model.favourite.Favourites
 import retrofit2.Response

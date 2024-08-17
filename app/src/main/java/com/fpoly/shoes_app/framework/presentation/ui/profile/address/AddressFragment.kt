@@ -9,10 +9,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentAddressBinding
-import com.fpoly.shoes_app.framework.adapter.AddressAdapter
+import com.fpoly.shoes_app.framework.adapter.address.AddressAdapter
 import com.fpoly.shoes_app.framework.domain.model.profile.AddressDetail
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @AndroidEntryPoint
 class AddressFragment : Fragment() {

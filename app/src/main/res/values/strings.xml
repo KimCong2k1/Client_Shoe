@@ -15,7 +15,7 @@
 
     <!--    //quy-->
     <!--    key map-->
-    <string name="key_map">AIzaSyC659j_v2LylmdRJsQ3Uw9ysEGLE9TDRVw</string>
+    <string name="key_map">AIzaSyCH8B5nvbZwslomTAn6u4-ZGG145XHCXLA</string>
     <!--    string other-->
     <string name="capture">Máy Ảnh</string>
     <string name="selectImg">Chọn Nguồn Ảnh</string>
@@ -101,4 +101,5 @@
     <string name="method">Phương thức thanh toán</string>
     <string name="price_Sell">Số tiền được giảm</string>
     <string name="status">Trạng thái</string>
+    <string name="myOder">Đơn hàng của tôi</string>
 </resources>

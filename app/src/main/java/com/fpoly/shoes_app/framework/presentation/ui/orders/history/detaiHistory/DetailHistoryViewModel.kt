@@ -1,4 +1,4 @@
-package com.fpoly.shoes_app.framework.presentation.ui.history.seeAllHistory.detaiHistory
+package com.fpoly.shoes_app.framework.presentation.ui.orders.history.detaiHistory
 
 import androidx.lifecycle.ViewModel
 

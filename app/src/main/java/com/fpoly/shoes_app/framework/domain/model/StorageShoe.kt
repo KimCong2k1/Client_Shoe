@@ -6,10 +6,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class StorageShoe(
-    @SerializedName("_id")
-    val id: String? = null,
+    @SerializedName("colorShoe")
+    val colorShoe: Color? = null,
+    @SerializedName("sizeShoe")
+    val sizeShoe: Size? = null,
     @SerializedName("importQuanlity")
     val quantity: Int? = 0,
-    @SerializedName("soldQuanlity")
-    val sold: Int? = 0,
+    @SerializedName("sellQuanlity")
+    val sell: Int? = 0,
 ) : Parcelable

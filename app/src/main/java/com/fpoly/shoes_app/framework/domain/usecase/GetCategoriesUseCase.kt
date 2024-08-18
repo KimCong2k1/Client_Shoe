@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class GetCategoriesUseCase @Inject constructor(private val categoriesRepository: CategoriesRepository) {
     suspend operator fun invoke() = try {
-        Resource.success(categoriesRepository.getCategories())
+        Resource.success(categoriesRepository.getCategories().body())
     } catch (e: Exception) {
         Resource.error(null, e.message)
     }

@@ -3,6 +3,8 @@ package com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fpoly.shoes_app.framework.domain.model.Color
+import com.fpoly.shoes_app.framework.domain.model.Size
 import com.fpoly.shoes_app.framework.domain.usecase.GetShoeDetailUseCase
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.MAX_SHOE
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.PLUS
@@ -34,7 +36,11 @@ class ShoeDetailViewModel @Inject constructor(
             when (resource.status) {
                 Status.SUCCESS -> {
                     _uiState.update { state ->
-                        state.copy(shoeDetail = resource.data?.body())
+                        state.copy(
+                            shoeDetail = resource.data,
+                            sizes = resource.data?.sizes?.map { Pair(it, false) },
+                            colors = resource.data?.colors?.map { Pair(it, false) },
+                        )
                     }
                 }
 
@@ -61,7 +67,7 @@ class ShoeDetailViewModel @Inject constructor(
                 }
 
                 PLUS -> {
-                    if (uiState.value.countShoe < (uiState.value.sizeStore ?: 0) &&
+                    if (uiState.value.countShoe < uiState.value.sizeStore &&
                         uiState.value.countShoe < MAX_SHOE
                     ) {
                         uiState.value.countShoe.plus(1)
@@ -82,10 +88,48 @@ class ShoeDetailViewModel @Inject constructor(
 
     fun handleEditTextCount() {
         viewModelScope.launch {
-            val countShoe = if (uiState.value.countShoe > (uiState.value.sizeStore ?: 0))
+            val countShoe = if (uiState.value.countShoe > uiState.value.sizeStore)
                 uiState.value.sizeStore
             else uiState.value.countShoe
-            _uiState.update { it.copy(countShoe = countShoe ?: 0) }
+            _uiState.update { it.copy(countShoe = countShoe) }
+        }
+    }
+
+    fun handleClickSize(size: Size) {
+        viewModelScope.launch {
+            val mutableSizeSelected = mutableListOf<Pair<Size, Boolean>>()
+            uiState.value.sizes?.forEach {
+                if (it.first == size) {
+                    mutableSizeSelected.add(Pair(size, true))
+                } else {
+                    mutableSizeSelected.add(Pair(it.first, false))
+                }
+            }
+            _uiState.update { state ->
+                state.copy(
+                    sizes = mutableSizeSelected,
+                    sizeSelected = Pair(size, true),
+                )
+            }
+        }
+    }
+
+    fun handleClickColor(color: Color) {
+        viewModelScope.launch {
+            val mutableColorSelected = mutableListOf<Pair<Color, Boolean>>()
+            uiState.value.colors?.forEach {
+                if (it.first == color) {
+                    mutableColorSelected.add(Pair(color, true))
+                } else {
+                    mutableColorSelected.add(Pair(it.first, false))
+                }
+            }
+            _uiState.update { state ->
+                state.copy(
+                    colors = mutableColorSelected,
+                    colorSelected = Pair(color, true),
+                )
+            }
         }
     }
 }

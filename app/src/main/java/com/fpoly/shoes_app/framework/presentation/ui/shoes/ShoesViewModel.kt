@@ -40,7 +40,7 @@ class ShoesViewModel @Inject constructor(
             when (resource.status) {
                 Status.SUCCESS -> _uiState.update { state ->
                     state.copy(
-                        categoriesSelected = updateCategoriesSelectedList(resource.data?.body()).map {
+                        categoriesSelected = updateCategoriesSelectedList(resource.data).map {
                             if (it.id.isNullOrEmpty()) it to true
                             else it to false
                         })
@@ -53,9 +53,9 @@ class ShoesViewModel @Inject constructor(
                 else -> {}
             }
         }.onStart {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLoadingCategories = true) }
         }.onCompletion {
-            _uiState.update { it.copy(isLoading = false) }
+            _uiState.update { it.copy(isLoadingCategories = false) }
         }.launchIn(viewModelScope)
     }
 
@@ -82,14 +82,17 @@ class ShoesViewModel @Inject constructor(
         }
     }
 
-    fun getDataShoes(category: String? = GET_POPULAR_SHOES_ALL, type: String?) {
+    fun getDataShoes(
+        category: String? = GET_POPULAR_SHOES_ALL,
+        type: String? = GET_ALL_POPULAR_SHOES,
+    ) {
         flow {
             emit(getShoesUseCase.invoke())
         }.onEach { resource ->
             when (resource.status) {
                 Status.SUCCESS -> {
                     _uiState.update { state ->
-                        val popularShoes = resource.data?.body()
+                        val popularShoes = resource.data
                             ?.filterByTypeAndCategory(type, category)
                             ?.sortBySoldCount(type)
                         state.copy(popularShoes = popularShoes)
@@ -100,9 +103,9 @@ class ShoesViewModel @Inject constructor(
                 else -> {}
             }
         }.onStart {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLoadingShoes = true) }
         }.onCompletion {
-            _uiState.update { it.copy(isLoading = false) }
+            _uiState.update { it.copy(isLoadingShoes = false) }
         }.launchIn(viewModelScope)
     }
 
@@ -110,7 +113,7 @@ class ShoesViewModel @Inject constructor(
     private fun List<Shoes>.filterByTypeAndCategory(type: String?, category: String?): List<Shoes> {
         return this.filter { shoe ->
             if (type == GET_ALL_POPULAR_SHOES) {
-                (shoe.sold
+                (shoe.quantity?.minus(shoe.sell ?: 0)
                     ?: 0) > 0 && (category == GET_POPULAR_SHOES_ALL || shoe.category?.name == category)
             } else {
                 shoe.category?.name == type
@@ -121,7 +124,7 @@ class ShoesViewModel @Inject constructor(
     // Extension function to sort shoes by sold count
     private fun List<Shoes>.sortBySoldCount(type: String?): List<Shoes> {
         return this.sortedByDescending { shoe ->
-            if (type == GET_ALL_POPULAR_SHOES) shoe.sold else null
+            if (type == GET_ALL_POPULAR_SHOES) shoe.quantity?.minus(shoe.sell ?: 0) else null
         }
     }
 }

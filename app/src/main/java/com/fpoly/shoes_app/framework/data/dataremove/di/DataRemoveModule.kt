@@ -1,5 +1,6 @@
 package com.fpoly.shoes_app.framework.data.dataremove.di
 
+import com.fpoly.shoes_app.framework.data.dataremove.api.BannerApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.CategoriesApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.ShoesApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.CreateNewPassInterface
@@ -57,6 +58,11 @@ object DataRemoveModule {
     @Singleton
     fun provideShoesApi(retrofit: Retrofit): ShoesApi =
         retrofit.create(ShoesApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideBannerApi(retrofit: Retrofit): BannerApi =
+        retrofit.create(BannerApi::class.java)
 
     @Provides
     @Singleton

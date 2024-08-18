@@ -45,7 +45,7 @@ class ShoesViewHolder(
             imgShoe.loadImage(shoes.thumbnail)
             tvNameShoe.text = shoes.name
             tvRateShoe.text = "${shoes.rate?.rate}"
-            tvSoldShoe.text = shoes.sold?.formatSoldShoe()
+            tvSoldShoe.text = shoes.quantity?.minus(shoes.sell ?: 0)?.formatSoldShoe()
             tvPriceShoe.text = shoes.price?.formatPriceShoe()
             cvImageShoe.setOnClickListener { onClick(shoes) }
         }

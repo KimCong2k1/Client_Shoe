@@ -29,6 +29,14 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
+            android:id="@+id/action_homeFragment_to_bannerDetailFragment"
+            app:destination="@id/bannerDetailFragment">
+            <argument
+                android:name="banner"
+                app:argType="com.fpoly.shoes_app.framework.domain.model.Banners" />
+        </action>
+
+        <action
             android:id="@+id/action_homeFragment_to_shoesFragment"
             app:destination="@id/shoesFragment">
             <argument
@@ -197,5 +205,14 @@
         <argument
             android:name="idShoe"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/bannerDetailFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.banner.BannerDetailFragment"
+        android:label="BannerDetailFragment"
+        tools:layout="@layout/fragment_banner_detail">
+        <argument
+            android:name="banner"
+            app:argType="com.fpoly.shoes_app.framework.domain.model.Banners" />
     </fragment>
 </navigation>

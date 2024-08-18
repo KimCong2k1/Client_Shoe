@@ -8,13 +8,14 @@ import androidx.navigation.fragment.navArgs
 import com.fpoly.shoes_app.databinding.FragmentShoeDetailBinding
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.formatPriceShoe
+import com.fpoly.shoes_app.utility.formatQuantityShoe
+import com.fpoly.shoes_app.utility.formatReviewShoe
 import com.fpoly.shoes_app.utility.formatSoldShoe
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailViewModel>(
@@ -23,6 +24,12 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
 ) {
     @Inject
     lateinit var imageShoeDetailAdapter: ImageShoeDetailAdapter
+
+    @Inject
+    lateinit var sizesAdapter: SizesShoeDetailAdapter
+
+    @Inject
+    lateinit var colorsAdapter: ColorsShoeDetailAdapter
 
     private val args: ShoeDetailFragmentArgs by navArgs()
 
@@ -35,6 +42,9 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
         binding.run {
             viewPagerImageShoe.adapter = imageShoeDetailAdapter
             binding.dotsIndicator.attachTo(viewPagerImageShoe)
+
+            rcvSize.adapter = sizesAdapter
+            rcvColor.adapter = colorsAdapter
         }
     }
 
@@ -50,11 +60,13 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
         lifecycleScope.launch {
             viewModel.uiState.collect { state ->
                 imageShoeDetailAdapter.submitList(state.shoeDetail?.imagesShoe)
+                sizesAdapter.submitList(state.sizes)
+                colorsAdapter.submitList(state.colors)
                 binding.run {
                     tvNameShoe.text = state.shoeDetail?.name
-                    tvSoldShoe.text = state.shoeDetail?.sold?.formatSoldShoe()
+                    tvSoldShoe.text = state.sold?.formatSoldShoe()
                     tvRateShoe.text = state.shoeDetail?.rate?.rate.toString()
-                    tvReviewShoe.text = state.shoeDetail?.rate?.comments?.size.toString()
+                    tvReviewShoe.text = state.shoeDetail?.rate?.comments?.size?.formatReviewShoe()
                     tvContentDescription.text = state.shoeDetail?.description
                 }
             }
@@ -64,9 +76,9 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
             viewModel.uiState
                 .mapNotNull { it.countShoe }
                 .collect {
-                    binding.tvNumberQuantity.run {
-                        setText(it.toString())
-                        setSelection(it.toString().length)
+                    binding.run {
+                        tvNumberQuantity.setText(it.toString())
+                        tvNumberQuantity.setSelection(it.toString().length)
                     }
                 }
         }
@@ -86,6 +98,27 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
                 .distinctUntilChanged()
                 .collect {
                     binding.tvButton.isEnabled = it
+                }
+        }
+
+        lifecycleScope.launch {
+            viewModel.uiState
+                .mapNotNull { it.isCountEnable }
+                .collect {
+                    binding.run {
+                        tvNumberQuantity.isEnabled = it
+                        imgReduce.isEnabled = it
+                        imgPlus.isEnabled = it
+                    }
+                }
+        }
+
+        lifecycleScope.launch {
+            viewModel.uiState
+                .mapNotNull { it.sizeStore }
+                .distinctUntilChanged()
+                .collect {
+                    binding.tvQuantity.text = it.formatQuantityShoe()
                 }
         }
     }
@@ -110,9 +143,18 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
                 tvNumberQuantity.clearFocus()
                 viewModel.handleCountShoe(PLUS)
             }
+
             imgReduce.setOnClickListener {
                 tvNumberQuantity.clearFocus()
                 viewModel.handleCountShoe(REDUCE)
+            }
+
+            sizesAdapter.setOnClick {
+                viewModel.handleClickSize(it)
+            }
+
+            colorsAdapter.setOnClick {
+                viewModel.handleClickColor(it)
             }
         }
     }
@@ -121,5 +163,6 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
         const val REDUCE = 0
         const val PLUS = 1
         const val MAX_SHOE = 999
+        const val IS_WHITE_COLOR = "#FFF"
     }
 }

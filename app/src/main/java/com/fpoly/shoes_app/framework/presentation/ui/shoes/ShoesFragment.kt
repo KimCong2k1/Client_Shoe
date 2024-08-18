@@ -55,7 +55,7 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
         }
         categoriesSelectedAdapter.setOnClick {
             viewModel.handleClickCategoriesSelected(it)
-            viewModel.getDataShoes(it.name, null)
+            viewModel.getDataShoes(it.name, args.titleShoes)
         }
 
         shoesAdapter.setOnClick {

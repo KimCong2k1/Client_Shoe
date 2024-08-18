@@ -44,7 +44,8 @@ class CategoriesSelectedAdapter @Inject constructor() :
 }
 
 class CategoriesSelectedViewHolder(
-    private val binding: ItemCategorySelectedViewBinding, private val onClick: (Category) -> Unit
+    private val binding: ItemCategorySelectedViewBinding,
+    private val onClick: (Category) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(category: Pair<Category, Boolean>) {
         binding.tvCategorySelected.run {

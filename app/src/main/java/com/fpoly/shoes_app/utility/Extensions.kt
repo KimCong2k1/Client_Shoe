@@ -28,7 +28,11 @@ fun Int.formatSoldShoe(): String {
 }
 
 fun Int.formatReviewShoe(): String {
-    return "$this bình luận"
+    return "($this bình luận)"
+}
+
+fun Int.formatQuantityShoe(): String {
+    return "Kho: $this"
 }
 
 fun String.toMD5(): String {

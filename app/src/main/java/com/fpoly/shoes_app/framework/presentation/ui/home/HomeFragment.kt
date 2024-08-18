@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentHomeBinding
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
+import com.fpoly.shoes_app.framework.presentation.ui.banner.BannerAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelectedAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.ShoesAdapter
@@ -22,6 +23,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     FragmentHomeBinding::inflate,
     HomeViewModel::class.java
 ) {
+    @Inject
+    lateinit var bannerAdapter: BannerAdapter
 
     @Inject
     lateinit var categoriesAdapter: CategoriesAdapter
@@ -65,9 +68,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 HomeFragmentDirections.actionHomeFragmentToShoeDetailFragment(it.id ?: "")
             )
         }
+
+        bannerAdapter.setOnClick {
+            navController?.navigate(
+                HomeFragmentDirections.actionHomeFragmentToBannerDetailFragment(it)
+            )
+        }
     }
 
     private fun initHandleUiState() {
+        lifecycleScope.launch {
+            viewModel.uiState
+                .mapNotNull { it.banners }
+                .collect {
+                    bannerAdapter.submitList(it)
+                }
+        }
+
         lifecycleScope.launch {
             viewModel.uiState.collect { state ->
                 categoriesAdapter.submitList(state.categories)
@@ -94,6 +111,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
     private fun setupRecyclerView() {
         binding.apply {
+            viewPagerBanner.adapter = bannerAdapter
+            binding.dotsIndicator.attachTo(viewPagerBanner)
             rcvCategory.run {
                 layoutManager = StaggeredGridLayoutManager(
                     SPAN_COUNT_CATEGORIES,

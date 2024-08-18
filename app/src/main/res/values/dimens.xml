@@ -32,6 +32,7 @@
     <dimen name="dimen_400dp">400dp</dimen>
 
     <!--Text size-->
+    <dimen name="text_size_0sp">0sp</dimen>
     <dimen name="text_size_10sp">10sp</dimen>
     <dimen name="text_size_12sp">12sp</dimen>
     <dimen name="text_size_14sp">14sp</dimen>

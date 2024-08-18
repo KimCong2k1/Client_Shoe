@@ -1,76 +1,178 @@
 package com.fpoly.shoes_app.framework.presentation.ui.profile.address
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentAddressBinding
-import com.fpoly.shoes_app.framework.adapter.AddressAdapter
-import com.fpoly.shoes_app.framework.domain.model.profile.AddressDetail
+import com.fpoly.shoes_app.framework.adapter.address.AddressAdapter
+import com.fpoly.shoes_app.framework.data.module.CheckValidate.strNullOrEmpty
+import com.fpoly.shoes_app.framework.domain.model.profile.address.Addresse
+import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
+import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.muddz.styleabletoast.StyleableToast
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AddressFragment : Fragment() {
-    private var _binding: FragmentAddressBinding? = null
-    private var listAddressDetails =
-        listOf(
-            AddressDetail("Home", "Ba Đình,Hà Nội", 21.039430738632642, 105.83454867959188),
-            AddressDetail(
-                "Company",
-                "Số 9 P. Trần Bình, Mai Dịch, Cầu Giấy, Hà Nội",
-                21.033714620270327,
-                105.77855956451597
-            ),
-            AddressDetail(
-                "Keangnam Landmark Tower 72",
-                "Khu E6, Phạm Hùng, Mễ Trì, Cầu Giấy, Hà Nội",
-                21.017714275852267,
-                105.78457284113405
-            ),
-            AddressDetail(
-                "National Convention Center",
-                "57 Phạm Hùng, Mễ Trì, Nam Từ Liêm, Hà Nội",
-                21.007833539027175,
-                105.78816173220403
-            ),
-        )
-    private val binding get() = _binding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentAddressBinding.inflate(inflater, container, false)
-        binding?.toolbar?.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
-        setupRecyclerView()
-        return binding!!.root
-    }
+class AddressFragment : BaseFragment<FragmentAddressBinding, AddressViewModel>(
+    FragmentAddressBinding::inflate, AddressViewModel::class.java
+) {
+    private lateinit var addressAdapter: AddressAdapter
+    private var listAddressDetails: MutableList<Addresse>? = mutableListOf()
+    private var check = false
 
     private fun setupRecyclerView() {
-        val addressAdapter = AddressAdapter(listAddressDetails) { address ->
-            val bundle = Bundle().apply {
+        addressAdapter = AddressAdapter(listAddressDetails,
+            // Lambda function for handling item click
+            { address ->
+                val bundle = Bundle().apply {
                     putParcelable("address", address)
+                }
+                findNavController().navigate(R.id.addressDetailsFragment, bundle)
+            },
+            // Lambda function for handling edit click
+            { address ->
+                val bundle = Bundle().apply {
+                    putParcelable("address", address)
+                    putInt("check", 1)
+                }
+                findNavController().navigate(R.id.editoraddFragment, bundle)
+            })
 
-            }
-            findNavController().navigate(R.id.addressDetailsFragment, bundle)
+        binding.recycViewAddress.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = addressAdapter
         }
-        binding!!.recycViewAddress.layoutManager = LinearLayoutManager(requireContext())
-        binding!!.recycViewAddress.adapter = addressAdapter
+
+        // Setup ItemTouchHelper for swipe-to-delete functionality
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+            0, // dragDirs (not used here)
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT // swipeDirs
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val address = listAddressDetails!![position]
+                viewModel.deleteAddress(address.id)
+                loadAgain()
+                addressAdapter.deleteItem(position)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(binding.recycViewAddress)
+    }
+    override fun setupPreViews() {
+        loadAgain()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding
+    override fun setupViews() {
+        setupRecyclerView()
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            loadAgain()
+        }
+    }
+    private fun loadAgain(){
+        viewModel.fetchAllAddresses(sharedPreferences.getIdUser())
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun bindViewModel() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            if (check) {
+                viewModel.deleteAddressResult.collect { result ->
+                    when (result.status) {
+                        Status.SUCCESS -> {
+                            result.data?.let { addressResponse ->
+                                if (addressResponse.success) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        addressResponse.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+                                    StyleableToast.makeText(
+                                        requireContext(), addressResponse.message, R.style.fail
+                                    ).show()
+                                }
+                            }
+                        }
+
+                        Status.ERROR -> {
+                            val errorMessage = strNullOrEmpty(result.message)
+                            StyleableToast.makeText(
+                                requireContext(), errorMessage, R.style.fail
+                            ).show()
+                        }
+
+                        Status.LOADING -> Unit
+                        Status.INIT -> Unit
+                    }
+                }
+            }
+            viewModel.allAddressResult.collect { result ->
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        showProgressbar(false)
+                        if (result.data?.addresses.isNullOrEmpty()){
+                            binding.swipeRefreshLayout.isRefreshing = false
+                            binding.textNoData.visibility = View.VISIBLE
+                            return@collect
+                        }
+                        result.data?.let { addressResponse ->
+                            if (addressResponse.success) {
+                                binding.swipeRefreshLayout.isRefreshing = false
+                                listAddressDetails?.clear()
+                                addressResponse.addresses?.let { listAddressDetails?.addAll(it) }
+                                addressAdapter.notifyDataSetChanged()
+                            } else {
+                                StyleableToast.makeText(
+                                    requireContext(), addressResponse.message, R.style.fail
+                                ).show()
+                            }
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        showProgressbar(false)
+                        val errorMessage = strNullOrEmpty(result.message)
+                        StyleableToast.makeText(
+                            requireContext(), errorMessage, R.style.fail
+                        ).show()
+                    }
+
+                    Status.LOADING -> showProgressbar(true)
+                    Status.INIT -> Unit
+                }
+            }
+        }
+
+    }
+
+    override fun setOnClick() {
+        binding.btnAddAddress.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt("check", 0)
+            }
+            findNavController().navigate(R.id.editoraddFragment, bundle)
+        }
+
     }
 }

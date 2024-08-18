@@ -4,14 +4,19 @@ import com.fpoly.shoes_app.framework.data.dataremove.api.BannerApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.CategoriesApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.FavoriteApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.ShoesApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.deleteInterface.DeleteaddressInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.AlladdressInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.ProfileInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.AddAddressInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.CreateNewPassInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.ForgotMailInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.LoginInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.OTPConfirmInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.SetUpInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.SignUpInterface
-import com.fpoly.shoes_app.utility.BASE_URL
-import com.fpoly.shoes_app.utility.SET_TIME_OUT_API
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.UpdateAddressInterface
+import com.fpoly.shoes_app.utility.Constants.Companion.BASE_URL
+import com.fpoly.shoes_app.utility.Constants.Companion.SET_TIME_OUT_API
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -92,11 +97,37 @@ object DataRemoveModule {
 
     @Provides
     @Singleton
-    fun provideNewPassWordmApi(retrofit: Retrofit): CreateNewPassInterface =
+    fun provideNewPassWordApi(retrofit: Retrofit): CreateNewPassInterface =
         retrofit.create(CreateNewPassInterface::class.java)
 
     @Provides
     @Singleton
     fun provideFavoriteApi(retrofit: Retrofit): FavoriteApi =
         retrofit.create(FavoriteApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideProfileApi(retrofit: Retrofit): ProfileInterface =
+        retrofit.create(ProfileInterface::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAddressApi(retrofit: Retrofit): AlladdressInterface =
+        retrofit.create(AlladdressInterface::class.java)
+
+    @Provides
+    @Singleton
+    fun proviDedeleteAddressApi(retrofit: Retrofit): DeleteaddressInterface =
+        retrofit.create(DeleteaddressInterface::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAddAddressApi(retrofit: Retrofit): AddAddressInterface =
+        retrofit.create(AddAddressInterface::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUpdateAddressApi(retrofit: Retrofit): UpdateAddressInterface =
+        retrofit.create(UpdateAddressInterface::class.java)
+
 }

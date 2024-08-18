@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">shoes_app</string>
+    <string name="nameApp">ShoeFbee</string>
     <string name="home">Home</string>
     <string name="favorites">Favorites</string>
     <string name="cart">Cart</string>
@@ -8,12 +9,13 @@
     <string name="hello">Xin chào !</string>
     <string name="search">Tìm kiếm</string>
     <string name="special_programs">Chương trình đặc biệt</string>
+    <string name="tittle_Address">Address Detail</string>
     <string name="most_popular">Phổ biến nhất</string>
     <string name="see_all">Tất cả</string>
 
     <!--    //quy-->
     <!--    key map-->
-    <string name="key_map">AIzaSyC659j_v2LylmdRJsQ3Uw9ysEGLE9TDRVw</string>
+    <string name="key_map" translatable="false" templateMergeStrategy="preserve">AIzaSyCH8B5nvbZwslomTAn6u4-ZGG145XHCXLA</string>
     <!--    string other-->
     <string name="capture">Máy Ảnh</string>
     <string name="selectImg">Chọn Nguồn Ảnh</string>
@@ -32,6 +34,7 @@
     <string name="passwordIncorrect">Nhập mật khẩu không trùng khớp</string>
     <string name="remember">Ghi nhớ</string>
     <string name="login">Đăng nhập</string>
+    <string name="login_Success">Đăng nhập thành công</string>
     <string name="new_user">Bạn chưa có tài khoản ?" "</string>
     <string name="sign_in">Đăng ký</string>
     <string name="dummy_button">Dummy Button</string>
@@ -43,9 +46,10 @@
     <string name="quick_create">Tạo tài khoản nhanh</string>
     <string name="full_name">Nhập vào tên đầy đủ của bạn</string>
     <string name="date">Nhập vào ngày sinh</string>
-    <string name="email_config">Nhập vào email</string>
+    <string name="email">you.@gmail.com</string>
     <string name="phone_config">Nhập vào số điện thoại</string>
     <string name="text_continue">Tiếp tục</string>
+    <string name="new_address">Tạo Địa Chỉ Mới</string>
     <string name="txt2_custom_dialog">Tài khoản của bạn sẵn sàng sử dụng.Bạn sẽ tiến đến Trang chủ sau giây lát</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="ba_dinh_const">Ba Đình,Hà Nội</string>
@@ -53,8 +57,10 @@
     <string name="point_name">Tên địa điểm</string>
     <string name="default_address">Đặt làm địa chỉ mặc định</string>
     <string name="add">Thêm</string>
+    <string name="no_find_address">Không Tìm Được Địa Chỉ Trùng Khớp</string>
     <string name="success">Thành công</string>
     <string name="inputFullInfo">Vui lòng nhập đầy đủ thông tin</string>
+    <string name="pleaseOTP">Vui lòng nhập mã OTP</string>
     <string name="create_your_password">Tạo mật khẩu mới của bạn</string>
     <string name="update">Cập nhật</string>
     <string name="general_notification">Thông báo</string>
@@ -74,6 +80,7 @@
     <string name="confirm">Xác nhận</string>
     <!--    <string name="profile">Cấu hình</string>-->
     <string name="phone_suggest">0123456789</string>
+    <string name="birthDay">0000-00-00</string>
     <string name="edit_info">Sửa thông tin</string>
     <string name="address">Địa chỉ</string>
     <string name="name">Họ và tên</string>
@@ -83,6 +90,11 @@
     <string name="agree">Đồng ý</string>
     <string name="otp_verification">Xác thực OTP</string>
     <string name="send_otp_to_your_mail">Mã OTP sẽ gửi đến email của bạn</string>
+    <string name="enter_place">Enter place</string>
+    <string name="noData">Không có dữ liệu</string>
+    <string name="titleShoeFbee">Thông báo mới từ ShoeFbee</string>
+    <string name="messageShoeFbee">Nội dung mới từ ShoeFbee</string>
+    <string name="msg_token_fmt">msg_token_fmt</string>
     <string name="description">Chi tiết</string>
     <string name="size">Kích cỡ</string>
     <string name="color">Màu sắc</string>

@@ -9,8 +9,8 @@ import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccount
 import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccountResponse
 import com.fpoly.shoes_app.framework.data.repository.ForgotMailRepository
 import com.fpoly.shoes_app.framework.data.repository.SetUpAccountRepository
+import com.fpoly.shoes_app.framework.repository.ForgotMailRepository
 import com.fpoly.shoes_app.utility.Resource
-import com.fpoly.shoes_app.utility.SharedPreferencesManager.setIdUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

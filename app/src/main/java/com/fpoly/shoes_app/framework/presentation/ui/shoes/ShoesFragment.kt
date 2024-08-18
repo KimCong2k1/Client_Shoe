@@ -5,9 +5,9 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.fpoly.shoes_app.databinding.FragmentShoesBinding
-import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelectedAdapter
+import com.fpoly.shoes_app.framework.presentation.ui.favorites.ShoesAdapter
 import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -34,7 +34,6 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
     }
 
     override fun setupViews() {
-        (requireActivity() as? MainActivity)?.showBottomNavigation(true)
         binding.headerLayout.run {
             tvTitle.text = args.titleShoes
             imgFilter.isVisible = true
@@ -57,7 +56,13 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
         }
         categoriesSelectedAdapter.setOnClick {
             viewModel.handleClickCategoriesSelected(it)
-            viewModel.getDataShoes(it.name, null)
+            viewModel.getDataShoes(it.name, args.titleShoes)
+        }
+
+        shoesAdapter.setOnClick {
+            navController?.navigate(
+                ShoesFragmentDirections.actionShoesFragmentToShoeDetailFragment(it.id ?: "")
+            )
         }
     }
 

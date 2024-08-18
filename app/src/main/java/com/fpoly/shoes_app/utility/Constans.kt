@@ -7,3 +7,7 @@ const val ITEM_MORE =" More"
 const val GET_ALL_POPULAR_SHOES = "Phổ biến nhất"
 const val GET_POPULAR_SHOES_ALL = "All"
 const val SPAN_COUNT_CATEGORIES = 4
+
+const val Active = 0
+const val InActive = 1
+const val Sold = 2

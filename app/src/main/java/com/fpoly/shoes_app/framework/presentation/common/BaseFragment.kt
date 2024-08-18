@@ -68,11 +68,10 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.v(TAG, "onViewCreated: $this")
-        (requireActivity() as MainActivity).showBottomNavigation(false)
+        (requireActivity() as? MainActivity)?.showBottomNavigation(true)
         setupViews()
         setOnClick()
         bindViewModel()
-
     }
 
     override fun onStart() {

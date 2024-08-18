@@ -33,7 +33,7 @@ class CategoriesViewModel @Inject constructor(
         }.onEach { resource ->
             when (resource.status) {
                 Status.SUCCESS -> _uiState.update { state ->
-                    state.copy(categories = resource.data?.body())
+                    state.copy(categories = resource.data)
                 }
 
                 Status.ERROR -> Log.e(

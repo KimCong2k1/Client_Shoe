@@ -1,10 +1,8 @@
 package com.fpoly.shoes_app.framework.presentation.ui.categories
 
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.fpoly.shoes_app.databinding.FragmentCategoriesBinding
-import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.SPAN_COUNT_CATEGORIES
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +21,6 @@ class CategoriesFragment : BaseFragment<FragmentCategoriesBinding, CategoriesVie
     lateinit var categoriesAdapter: CategoriesAdapter
 
     override fun setupViews() {
-        (requireActivity() as? MainActivity)?.showBottomNavigation(true)
         setupRecyclerView()
         binding.headerLayout.run {
             tvTitle.text = TITLE_CATEGORY

@@ -4,11 +4,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentHomeBinding
-import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
+import com.fpoly.shoes_app.framework.presentation.ui.banner.BannerAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelectedAdapter
-import com.fpoly.shoes_app.framework.presentation.ui.shoes.ShoesAdapter
+import com.fpoly.shoes_app.framework.presentation.ui.favorites.ShoesAdapter
 import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
 import com.fpoly.shoes_app.utility.ITEM_MORE
 import com.fpoly.shoes_app.utility.SPAN_COUNT_CATEGORIES
@@ -23,6 +23,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     FragmentHomeBinding::inflate,
     HomeViewModel::class.java
 ) {
+    @Inject
+    lateinit var bannerAdapter: BannerAdapter
 
     @Inject
     lateinit var categoriesAdapter: CategoriesAdapter
@@ -34,7 +36,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     lateinit var shoesAdapter: ShoesAdapter
 
     override fun setupViews() {
-        (requireActivity() as? MainActivity)?.showBottomNavigation(true)
         setupRecyclerView()
     }
 
@@ -43,7 +44,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     }
 
     override fun setOnClick() {
-        setOnClickCategory()
         setOnClickCategorySelected()
         binding.run {
             tvAllPopularShoes.setOnClickListener {
@@ -52,9 +52,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 )
             }
         }
+
+        categoriesAdapter.setOnClick {
+            if (it.name == ITEM_MORE) {
+                navController?.navigate(R.id.action_homeFragment_to_categoriesFragment)
+            } else {
+                navController?.navigate(
+                    HomeFragmentDirections.actionHomeFragmentToShoesFragment(it.name ?: "")
+                )
+            }
+        }
+
+        shoesAdapter.setOnClick {
+            navController?.navigate(
+                HomeFragmentDirections.actionHomeFragmentToShoeDetailFragment(it.id ?: "")
+            )
+        }
+
+        bannerAdapter.setOnClick {
+            navController?.navigate(
+                HomeFragmentDirections.actionHomeFragmentToBannerDetailFragment(it)
+            )
+        }
     }
 
     private fun initHandleUiState() {
+        lifecycleScope.launch {
+            viewModel.uiState
+                .mapNotNull { it.banners }
+                .collect {
+                    bannerAdapter.submitList(it)
+                }
+        }
+
         lifecycleScope.launch {
             viewModel.uiState.collect { state ->
                 categoriesAdapter.submitList(state.categories)
@@ -81,6 +111,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
     private fun setupRecyclerView() {
         binding.apply {
+            viewPagerBanner.adapter = bannerAdapter
+            binding.dotsIndicator.attachTo(viewPagerBanner)
             rcvCategory.run {
                 layoutManager = StaggeredGridLayoutManager(
                     SPAN_COUNT_CATEGORIES,
@@ -90,18 +122,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             }
             rcvCategoriesSelected.adapter = categoriesSelectedAdapter
             rcvShoes.adapter = shoesAdapter
-        }
-    }
-
-    private fun setOnClickCategory() {
-        categoriesAdapter.setOnClick {
-            if (it.name == ITEM_MORE) {
-                navController?.navigate(R.id.action_homeFragment_to_categoriesFragment)
-            } else {
-                navController?.navigate(
-                    HomeFragmentDirections.actionHomeFragmentToShoesFragment(it.name ?: "")
-                )
-            }
         }
     }
 

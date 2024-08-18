@@ -29,6 +29,14 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
+            android:id="@+id/action_homeFragment_to_bannerDetailFragment"
+            app:destination="@id/bannerDetailFragment">
+            <argument
+                android:name="banner"
+                app:argType="com.fpoly.shoes_app.framework.domain.model.Banners" />
+        </action>
+
+        <action
             android:id="@+id/action_homeFragment_to_shoesFragment"
             app:destination="@id/shoesFragment">
             <argument
@@ -39,6 +47,14 @@
         <action
             android:id="@+id/action_homeFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment">
+            <argument
+                android:name="idShoe"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment
@@ -49,6 +65,14 @@
         <argument
             android:name="titleShoes"
             app:argType="string" />
+
+        <action
+            android:id="@+id/action_shoesFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment">
+            <argument
+                android:name="idShoe"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment
@@ -172,5 +196,23 @@
                 android:name="titleShoes"
                 app:argType="string" />
         </action>
+    </fragment>
+    <fragment
+        android:id="@+id/shoeDetailFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment"
+        android:label="ShoeDetailFragment"
+        tools:layout="@layout/fragment_shoe_detail">
+        <argument
+            android:name="idShoe"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/bannerDetailFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.banner.BannerDetailFragment"
+        android:label="BannerDetailFragment"
+        tools:layout="@layout/fragment_banner_detail">
+        <argument
+            android:name="banner"
+            app:argType="com.fpoly.shoes_app.framework.domain.model.Banners" />
     </fragment>
 </navigation>

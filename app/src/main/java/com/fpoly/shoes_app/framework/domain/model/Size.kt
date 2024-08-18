@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Size(
+    @SerializedName("_id")
+    val id: String? = null,
     @SerializedName("size")
     val size: String? = null,
-    @SerializedName("quantity")
-    val quantity: Int? = 0
 ) : Parcelable

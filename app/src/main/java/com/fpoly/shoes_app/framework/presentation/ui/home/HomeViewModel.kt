@@ -4,11 +4,11 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fpoly.shoes_app.framework.domain.model.Category
+import com.fpoly.shoes_app.framework.domain.usecase.GetBannerUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetCategoriesUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetShoesUseCase
 import com.fpoly.shoes_app.utility.GET_POPULAR_SHOES_ALL
 import com.fpoly.shoes_app.utility.ITEM_MORE
-import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,9 +23,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val sharedPreferences: SharedPreferencesManager,
     private val getCategoriesUseCase: GetCategoriesUseCase,
-    private val getShoesUseCase: GetShoesUseCase
+    private val getShoesUseCase: GetShoesUseCase,
+    private val getBannerUseCase: GetBannerUseCase,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> get() = _uiState
@@ -33,6 +33,7 @@ class HomeViewModel @Inject constructor(
     init {
         getDataCategories()
         getDataPopularShoes()
+        getBannerList()
     }
 
     private fun getDataCategories() {
@@ -41,8 +42,8 @@ class HomeViewModel @Inject constructor(
         }.onEach { resource ->
             when (resource.status) {
                 Status.SUCCESS -> _uiState.update { state ->
-                    state.copy(categories = updateCategoriesList(resource.data?.body()),
-                        categoriesSelected = updateCategoriesSelectedList(resource.data?.body()).map {
+                    state.copy(categories = updateCategoriesList(resource.data),
+                        categoriesSelected = updateCategoriesSelectedList(resource.data).map {
                             if (it.id.isNullOrEmpty()) it to true
                             else it to false
                         })
@@ -55,9 +56,9 @@ class HomeViewModel @Inject constructor(
                 else -> {}
             }
         }.onStart {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLoadingCategories = true) }
         }.onCompletion {
-            _uiState.update { it.copy(isLoading = false) }
+            _uiState.update { it.copy(isLoadingCategories = false) }
         }.launchIn(viewModelScope)
     }
 
@@ -108,12 +109,12 @@ class HomeViewModel @Inject constructor(
             when (resource.status) {
                 Status.SUCCESS -> {
                     _uiState.update { state ->
-                        val popularShoes = resource.data?.body()
+                        val popularShoes = resource.data
                             ?.filter {
-                                (it.sold ?: 0) > 0 &&
+                                (it.quantity?.minus(it.sell ?: 0) ?: 0) > 0 &&
                                         (category == GET_POPULAR_SHOES_ALL || it.category?.name == category)
                             }
-                            ?.sortedByDescending { it.sold }
+                            ?.sortedByDescending { it.quantity?.minus(it.sell ?: 0) }
                             ?.take(QUANTITY_POPULAR_SHOES)
                         state.copy(popularShoes = popularShoes)
                     }
@@ -123,9 +124,32 @@ class HomeViewModel @Inject constructor(
                 else -> {}
             }
         }.onStart {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLoadingShoes = true) }
         }.onCompletion {
-            _uiState.update { it.copy(isLoading = false) }
+            _uiState.update { it.copy(isLoadingShoes = false) }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getBannerList() {
+        flow {
+            emit(getBannerUseCase.invoke())
+        }.onEach { resource ->
+            when (resource.status) {
+                Status.SUCCESS -> {
+                    val banners = resource.data
+                    _uiState.update { state ->
+                        state.copy(banners = banners)
+                    }
+                }
+
+                Status.ERROR -> Log.e("HomeViewModel", "getDataBanner: Error ${resource.message}")
+
+                else -> {}
+            }
+        }.onStart {
+            _uiState.update { it.copy(isLoadingBanners = true) }
+        }.onCompletion {
+            _uiState.update { it.copy(isLoadingBanners = false) }
         }.launchIn(viewModelScope)
     }
 

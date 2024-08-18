@@ -18,13 +18,11 @@ data class Shoes(
     val price: Int? = 0,
     @SerializedName("description")
     val description: String? = null,
-    @SerializedName("gender")
-    val gender: Int? = 0, // 0: Male, 1: Female, 2: Other
     @SerializedName("thumbnail")
     val thumbnail: String? = null,
     @SerializedName("status")
-    val status: Int? = 0, // 0: Inactive, 1: Active, 2: Sold
-    @SerializedName("brandShoe")
+    val status: Int? = 0, // 0: Active, 1: Inactive, 2: Sold
+    @SerializedName("typerShoe")
     val category: Category? = null,
     @SerializedName("imageShoe")
     val imagesShoe: List<String>? = emptyList(),
@@ -36,6 +34,10 @@ data class Shoes(
     val storageShoe: List<StorageShoe>? = emptyList(),
     @SerializedName("importQuanlityAll")
     val quantity: Int? = 0,
-    @SerializedName("soldQuanlityAll")
-    val sold: Int? = 0
+    @SerializedName("sellQuanlityAll")
+    val sell: Int? = 0,
+    @SerializedName("createDate")
+    val created: String? = null,
+    @SerializedName("updateDate")
+    val updated: String? = null,
 ) : Parcelable

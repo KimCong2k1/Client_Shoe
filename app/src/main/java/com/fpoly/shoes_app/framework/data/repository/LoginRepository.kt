@@ -1,4 +1,4 @@
-package com.fpoly.shoes_app.framework.repository
+package com.fpoly.shoes_app.framework.data.repository
 
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.LoginInterface
 import com.fpoly.shoes_app.framework.domain.model.login.Login

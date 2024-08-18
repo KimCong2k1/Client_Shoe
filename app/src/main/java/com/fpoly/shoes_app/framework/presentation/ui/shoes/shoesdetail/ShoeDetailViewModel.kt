@@ -9,6 +9,7 @@ import com.fpoly.shoes_app.framework.domain.usecase.GetShoeDetailUseCase
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.MAX_SHOE
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.PLUS
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.REDUCE
+import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.RESET_COUNT_SHOES
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -109,6 +110,7 @@ class ShoeDetailViewModel @Inject constructor(
                 state.copy(
                     sizes = mutableSizeSelected,
                     sizeSelected = Pair(size, true),
+                    countShoe = RESET_COUNT_SHOES,
                 )
             }
         }
@@ -128,6 +130,7 @@ class ShoeDetailViewModel @Inject constructor(
                 state.copy(
                     colors = mutableColorSelected,
                     colorSelected = Pair(color, true),
+                    countShoe = RESET_COUNT_SHOES,
                 )
             }
         }

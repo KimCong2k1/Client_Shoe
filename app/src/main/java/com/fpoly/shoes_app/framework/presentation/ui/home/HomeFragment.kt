@@ -8,7 +8,7 @@ import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.banner.BannerAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelectedAdapter
-import com.fpoly.shoes_app.framework.presentation.ui.shoes.ShoesAdapter
+import com.fpoly.shoes_app.framework.presentation.ui.favorites.ShoesAdapter
 import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
 import com.fpoly.shoes_app.utility.ITEM_MORE
 import com.fpoly.shoes_app.utility.SPAN_COUNT_CATEGORIES

@@ -1,4 +1,4 @@
-package com.fpoly.shoes_app.framework.presentation.ui.shoes
+package com.fpoly.shoes_app.framework.presentation.ui.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.fpoly.shoes_app.databinding.ItemShoeViewBinding
 import com.fpoly.shoes_app.framework.domain.model.Shoes
-import com.fpoly.shoes_app.framework.presentation.ui.favorites.ShoesViewHolder
+import com.fpoly.shoes_app.framework.presentation.ui.shoes.ShoesViewHolder
 import com.fpoly.shoes_app.utility.formatPriceShoe
 import com.fpoly.shoes_app.utility.formatSoldShoe
 import com.fpoly.shoes_app.utility.loadImage

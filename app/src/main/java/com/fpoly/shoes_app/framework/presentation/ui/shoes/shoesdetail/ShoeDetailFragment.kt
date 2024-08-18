@@ -164,5 +164,6 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
         const val PLUS = 1
         const val MAX_SHOE = 999
         const val IS_WHITE_COLOR = "#FFF"
+        const val RESET_COUNT_SHOES = 0
     }
 }

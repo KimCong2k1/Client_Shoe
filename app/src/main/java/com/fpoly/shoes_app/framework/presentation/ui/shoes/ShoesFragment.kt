@@ -7,6 +7,7 @@ import androidx.navigation.fragment.navArgs
 import com.fpoly.shoes_app.databinding.FragmentShoesBinding
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelectedAdapter
+import com.fpoly.shoes_app.framework.presentation.ui.favorites.ShoesAdapter
 import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged

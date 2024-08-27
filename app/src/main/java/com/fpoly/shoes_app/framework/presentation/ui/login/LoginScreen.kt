@@ -64,7 +64,6 @@ class LoginScreen : BaseFragment<FragmentLoginScreenBinding, LoginViewModel>(
                         val loginResponse = result.data
                         if (loginResponse?.success == true) {
                             val navController = findNavController()
-
                             if (check) {
                                 sharedPreferences.setPassWord(username, password.toMD5())
                                 fragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);

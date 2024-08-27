@@ -5,10 +5,12 @@ import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.OrderRepos
 import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.CategoriesApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.FavouritesApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.ShoesApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.ConfirmTakeInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.CreateNewPassInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.ForgotMailInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.LoginInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.OTPConfirmInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.RateInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.SetUpInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.SignUpInterface
 import com.fpoly.shoes_app.framework.data.datasource.active.OrderRepositoryImpl
@@ -81,6 +83,10 @@ object DataRemoveModule {
     @Singleton
     fun provideSignUpmApi(retrofit: Retrofit): SignUpInterface =
         retrofit.create(SignUpInterface::class.java)
+ @Provides
+    @Singleton
+    fun provideConfirmTakeApi(retrofit: Retrofit): ConfirmTakeInterface =
+        retrofit.create(ConfirmTakeInterface::class.java)
 
     @Provides
     @Singleton
@@ -91,6 +97,10 @@ object DataRemoveModule {
     @Singleton
     fun provideNewPassWordmApi(retrofit: Retrofit): CreateNewPassInterface =
         retrofit.create(CreateNewPassInterface::class.java)
+    @Provides
+    @Singleton
+    fun provideRateApi(retrofit: Retrofit): RateInterface =
+        retrofit.create(RateInterface::class.java)
 
     @Provides
     @Singleton

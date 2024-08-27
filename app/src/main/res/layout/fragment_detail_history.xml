@@ -22,106 +22,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/barcodeImageView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_marginVertical="@dimen/dimen_10dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:id="@+id/inforShoe"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dimen_16dp"
-        android:background="@drawable/bg_sold_shoe_view"
-        android:backgroundTint="@color/white"
-        android:elevation="@dimen/dimen_10dp"
-        android:orientation="horizontal"
-        android:padding="@dimen/dimen_20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barcodeImageView">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card"
-            android:layout_width="@dimen/dimen_0dp"
-            android:layout_height="@dimen/dimen_60dp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/dimen_50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imageShoe"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/baseline_propane_tank_24" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/content"
-            android:layout_width="@dimen/dimen_0dp"
-            android:layout_height="wrap_content"
-            android:gravity="start|center"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/dimen_10dp"
-            app:layout_constraintStart_toEndOf="@+id/card"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="20dp">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/nameShoe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@string/history"
-                android:textSize="@dimen/text_size_16sp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/contentShoe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="@string/history"
-                android:textSize="@dimen/text_size_14sp" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/describe"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/colorShoe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="@string/history"
-                android:textSize="@dimen/text_size_14sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/sizeShoe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@string/history"
-                android:textSize="@dimen/text_size_12sp" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycComplete"
+    android:layout_marginTop="@dimen/dimen_20dp"
+    android:layout_marginHorizontal="@dimen/dimen_16dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/barcodeImageView"
+    android:layout_width="@dimen/dimen_0dp"
+    android:layout_height="wrap_content"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/priceShoe"
@@ -134,7 +47,7 @@
         android:padding="@dimen/dimen_20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inforShoe">
+        app:layout_constraintTop_toBottomOf="@+id/recycComplete">
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -280,6 +193,7 @@
             android:layout_marginVertical="@dimen/dimen_5dp"
             android:paddingVertical="@dimen/dimen_10dp"
             android:text="@string/status"
+            android:textSize="@dimen/text_size_10sp"
             android:background="@drawable/bg_sold_shoe_view"
             android:textColor="@color/white"
             android:backgroundTint="@color/black"
@@ -288,5 +202,21 @@
             app:layout_constraintTop_toBottomOf="@+id/dateDemo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/leaveReview"
+        android:textSize="@dimen/text_size_16sp"
+        android:gravity="center"
+        android:background="@drawable/bg_sold_shoe_view"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/text_size_20sp"
+        android:padding="@dimen/dimen_10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

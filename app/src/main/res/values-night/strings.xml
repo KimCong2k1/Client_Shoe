@@ -2,4 +2,8 @@
 <resources>
     <string name="price_original">Giá Gốc</string>
     <string name="myOder">Đơn hàng của tôi</string>
+    <string name="procedureOrder">Quy trình đơn hàng</string>
+    <string name="waitAccept">Chờ Xác Nhận</string>
+    <string name="howToOrder">Đơn hàng của bạn thế nào?</string>
+    <string name="funRate">Vui lòng đưa ra đánh giá của bạn và đánh giá của bạn</string>
 </resources>

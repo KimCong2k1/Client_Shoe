@@ -5,6 +5,8 @@ import coil.load
 import com.fpoly.shoes_app.R
 import java.math.BigInteger
 import java.security.MessageDigest
+import java.text.NumberFormat
+import java.util.Locale
 
 fun ImageView.loadImage(imgResource: Int? = null) {
     this.load(imgResource) {
@@ -33,4 +35,10 @@ fun String.toMD5(): String {
     val md = MessageDigest.getInstance("MD5")
     val digest = md.digest(bytes)
     return digest.joinToString("") { "%02x".format(it) }
+}
+
+fun String.formatToVND(): String {
+    val number = this.toLongOrNull() ?: return "Invalid number"
+    val format = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
+    return format.format(number)
 }

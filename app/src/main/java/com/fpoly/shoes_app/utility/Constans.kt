@@ -1,6 +1,6 @@
 package com.fpoly.shoes_app.utility
 
-const val BASE_URL = "http://192.168.1.7:8000/api/"
+const val BASE_URL = "http://192.168.1.7:3000/api/"
 const val SET_TIME_OUT_API = 100L
 const val ITEM_MORE ="More"
 const val GET_ALL_POPULAR_SHOES = "Phổ biến nhất"

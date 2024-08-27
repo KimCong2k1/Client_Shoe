@@ -5,14 +5,18 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class HistoryShoe(
-    val _id: String,
-    val dateOrder: String,
-    val name: String,
-    val orderDetails: List<OrderDetailX>, // List of order details for this shoe
-    val pay: String,
-    val promo: Int,
-    val status: String,
-    val thumbnail: String,
-    val total: Int,
-    val totalPre: Int
+    val _id: String?,
+    val addressOrder: String?,
+    val shoeId: String?,
+    val dateOrder: String?,
+    val nameOrder: String?,
+    val orderDetails: List<OrderDetail>?,
+    val orderStatusDetails: List<OrderStatusDetail>?,
+    val pay: String?,
+    val phoneNumber: Int?,
+    val promo: Int?,
+    val status: String?,
+    val thumbnail: String?,
+    val total: Int?,
+    val totalPre: Int?
 ) : Parcelable

@@ -36,7 +36,6 @@ class NotificationAdapter (
                 onSwitchChanged(notification, isChecked)
             }
         }
-
         override fun getItemCount(): Int {
             return notifications.size
         }

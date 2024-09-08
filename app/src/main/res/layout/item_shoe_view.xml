@@ -24,15 +24,17 @@
             app:srcCompat="@drawable/ic_launcher_background" />
     </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/imgFavorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_10dp"
         android:adjustViewBounds="true"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_favorite_selected"
         app:layout_constraintEnd_toEndOf="@id/cvImageShoe"
         app:layout_constraintTop_toTopOf="@id/cvImageShoe"
-        app:srcCompat="@drawable/ic_favorite" />
+        app:tint="@color/favorite_color" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvNameShoe"

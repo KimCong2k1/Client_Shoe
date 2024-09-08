@@ -4,13 +4,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.bumptech.glide.Glide
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentHomeBinding
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.banner.BannerAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesAdapter
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelectedAdapter
-import com.fpoly.shoes_app.framework.presentation.ui.favorites.ShoesAdapter
+import com.fpoly.shoes_app.framework.presentation.ui.shoes.ShoesAdapter
 import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
 import com.fpoly.shoes_app.utility.ITEM_MORE
 import com.fpoly.shoes_app.utility.SPAN_COUNT_CATEGORIES
@@ -89,6 +90,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 HomeFragmentDirections.actionHomeFragmentToBannerDetailFragment(it)
             )
         }
+
+        shoesAdapter.setOnClickFavorite {
+            if (it.second) viewModel.deleteFavorite(it.first.id.orEmpty())
+            else viewModel.addFavorite(it.first.id.orEmpty())
+        }
     }
 
     private fun initHandleUiState() {
@@ -109,7 +115,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
         lifecycleScope.launch {
             viewModel.uiState.mapNotNull {
-                it.popularShoes
+                it.shoes
             }.distinctUntilChanged().collect {
                 shoesAdapter.submitList(it)
             }
@@ -120,6 +126,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 it.isLoading
             }.distinctUntilChanged().collect {
                 showProgressbar(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.uiState.collect { state ->
+                binding.run {
+                    tvName.text = state.nameUser
+                    Glide.with(requireContext())
+                        .load(state.imageUser ?: R.drawable.baseline_account_circle_24)
+                        .into(imgAvatar)
+                }
             }
         }
     }

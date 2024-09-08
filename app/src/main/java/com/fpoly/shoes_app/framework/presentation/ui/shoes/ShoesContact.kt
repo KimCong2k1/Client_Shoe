@@ -9,8 +9,18 @@ import kotlinx.parcelize.Parcelize
 data class ShoesUiState(
     val categoriesSelected: List<Pair<Category, Boolean>>? = emptyList(),
     val popularShoes: List<Shoes>? = emptyList(),
+    val favoriteShoes: List<Shoes>? = emptyList(),
     val isLoadingShoes: Boolean = false,
     val isLoadingCategories: Boolean = false,
+    val isLoadingFavorite: Boolean = false,
 ) : Parcelable {
-    val isLoading get() = isLoadingShoes || isLoadingCategories
+    val isLoading get() = isLoadingShoes || isLoadingCategories || isLoadingFavorite
+
+    val shoes: List<Pair<Shoes, Boolean>>
+        get() {
+            val favoriteId = favoriteShoes?.map { it.id }?.toSet() ?: emptySet()
+            return popularShoes?.map { shoe ->
+                shoe to favoriteId.contains(shoe.id)
+            } ?: emptyList()
+        }
 }

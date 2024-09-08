@@ -7,7 +7,6 @@ import androidx.navigation.fragment.navArgs
 import com.fpoly.shoes_app.databinding.FragmentShoesBinding
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesSelectedAdapter
-import com.fpoly.shoes_app.framework.presentation.ui.favorites.ShoesAdapter
 import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -64,6 +63,11 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
                 ShoesFragmentDirections.actionShoesFragmentToShoeDetailFragment(it.id ?: "")
             )
         }
+
+        shoesAdapter.setOnClickFavorite {
+            if (it.second) viewModel.deleteFavorite(it.first.id.orEmpty())
+            else viewModel.addFavorite(it.first.id.orEmpty())
+        }
     }
 
     private fun initHandleUiState() {
@@ -75,7 +79,7 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
 
         lifecycleScope.launch {
             viewModel.uiState.mapNotNull {
-                it.popularShoes
+                it.shoes
             }.distinctUntilChanged().collect {
                 shoesAdapter.submitList(it)
             }

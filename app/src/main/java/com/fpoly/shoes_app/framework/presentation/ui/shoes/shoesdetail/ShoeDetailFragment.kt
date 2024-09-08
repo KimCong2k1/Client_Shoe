@@ -65,7 +65,7 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
                 binding.run {
                     tvNameShoe.text = state.shoeDetail?.name
                     tvSoldShoe.text = state.sold?.formatSoldShoe()
-                    tvRateShoe.text = state.shoeDetail?.rate?.rate.toString()
+                    tvRateShoe.text = (state.shoeDetail?.rate?.rate ?: 0.0).toString()
                     tvReviewShoe.text = state.shoeDetail?.rate?.comments?.size?.formatReviewShoe()
                     tvContentDescription.text = state.shoeDetail?.description
                 }

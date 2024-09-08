@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.fpoly.shoes_app.databinding.ItemShoeViewBinding
 import com.fpoly.shoes_app.framework.domain.model.Shoes
-import com.fpoly.shoes_app.framework.presentation.ui.shoes.ShoesViewHolder
 import com.fpoly.shoes_app.utility.formatPriceShoe
 import com.fpoly.shoes_app.utility.formatSoldShoe
 import com.fpoly.shoes_app.utility.loadImage
@@ -19,27 +18,34 @@ private val shoesDiff = object : DiffUtil.ItemCallback<Shoes>() {
     override fun areContentsTheSame(oldItem: Shoes, newItem: Shoes) = oldItem == newItem
 }
 
-class ShoesAdapter @Inject constructor() : ListAdapter<Shoes, ShoesViewHolder>(shoesDiff) {
+class FavoriteAdapter @Inject constructor() : ListAdapter<Shoes, FavoriteViewHolder>(shoesDiff) {
     private lateinit var _onClick: (Shoes) -> Unit
+
+    private lateinit var _onClickFavorite: (Shoes) -> Unit
 
     fun setOnClick(onClick: (Shoes) -> Unit) {
         _onClick = onClick
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ShoesViewHolder(
+    fun setOnClickFavorite(onClick: (Shoes) -> Unit) {
+        _onClickFavorite = onClick
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FavoriteViewHolder(
         ItemShoeViewBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
-        ), _onClick
+        ), _onClick, _onClickFavorite
     )
 
-    override fun onBindViewHolder(holder: ShoesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }
 
-class ShoesViewHolder(
+class FavoriteViewHolder(
     private val binding: ItemShoeViewBinding,
-    private val onClick: (Shoes) -> Unit
+    private val onClick: (Shoes) -> Unit,
+    private val onClickFavorite: (Shoes) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(shoes: Shoes) {
         binding.run {
@@ -48,7 +54,9 @@ class ShoesViewHolder(
             tvRateShoe.text = "${shoes.rate?.rate}"
             tvSoldShoe.text = shoes.quantity?.minus(shoes.sell ?: 0)?.formatSoldShoe()
             tvPriceShoe.text = shoes.price?.formatPriceShoe()
+            imgFavorite.isSelected = true
             cvImageShoe.setOnClickListener { onClick(shoes) }
+            imgFavorite.setOnClickListener { onClickFavorite(shoes) }
         }
     }
 }

@@ -1,14 +1,22 @@
 package com.fpoly.shoes_app.framework.presentation.ui.home
 
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fpoly.shoes_app.framework.data.repository.ProfileRepository
+import com.fpoly.shoes_app.framework.domain.FavoriteRequest
 import com.fpoly.shoes_app.framework.domain.model.Category
+import com.fpoly.shoes_app.framework.domain.usecase.AddFavoriteUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetBannerUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetCategoriesUseCase
+import com.fpoly.shoes_app.framework.domain.usecase.GetFavoriteUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetShoesUseCase
+import com.fpoly.shoes_app.framework.domain.usecase.RemoveFavoriteUseCase
 import com.fpoly.shoes_app.utility.GET_POPULAR_SHOES_ALL
 import com.fpoly.shoes_app.utility.ITEM_MORE
+import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,6 +34,11 @@ class HomeViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getShoesUseCase: GetShoesUseCase,
     private val getBannerUseCase: GetBannerUseCase,
+    private val getFavoriteUseCase: GetFavoriteUseCase,
+    private val addFavoriteUseCase: AddFavoriteUseCase,
+    private val removeFavoriteUseCase: RemoveFavoriteUseCase,
+    private val profileRepository: ProfileRepository,
+    private val sharedPreferences: SharedPreferencesManager,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> get() = _uiState
@@ -34,6 +47,8 @@ class HomeViewModel @Inject constructor(
         getDataCategories()
         getDataPopularShoes()
         getBannerList()
+        getFavorite()
+        getProfile()
     }
 
     private fun getDataCategories() {
@@ -80,7 +95,7 @@ class HomeViewModel @Inject constructor(
 
     private fun updateCategoriesSelectedList(categories: List<Category>?): List<Category> {
         val all = Category(
-            name = "All"
+            name = GET_POPULAR_SHOES_ALL
         )
         val mutableCategoriesSelected = categories.orEmpty().toMutableList()
         mutableCategoriesSelected.add(0, all)
@@ -150,6 +165,73 @@ class HomeViewModel @Inject constructor(
             _uiState.update { it.copy(isLoadingBanners = true) }
         }.onCompletion {
             _uiState.update { it.copy(isLoadingBanners = false) }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getFavorite() {
+        flow {
+            emit(getFavoriteUseCase.invoke(sharedPreferences.getIdUser()))
+        }.onEach { resource ->
+            when (resource.status) {
+                Status.SUCCESS -> {
+                    _uiState.update { state ->
+                        state.copy(favoriteShoes = resource.data)
+                    }
+                }
+
+                Status.ERROR -> Log.e("HomeViewModel", "getDataShoes: Error ${resource.message}")
+                else -> {}
+            }
+        }.onStart {
+            _uiState.update { it.copy(isLoadingFavorite = true) }
+        }.onCompletion {
+            _uiState.update { it.copy(isLoadingFavorite = false) }
+        }.launchIn(viewModelScope)
+    }
+
+    fun addFavorite(id: String) {
+        flow {
+            addFavoriteUseCase.invoke(
+                FavoriteRequest(
+                    shoeId = id,
+                    userId = sharedPreferences.getIdUser(),
+                )
+            ).let { emit(it) }
+        }.onEach {
+            getFavorite()
+        }.launchIn(viewModelScope)
+    }
+
+    fun deleteFavorite(id: String) {
+        flow {
+            removeFavoriteUseCase.invoke(
+                FavoriteRequest(
+                    shoeId = id,
+                    userId = sharedPreferences.getIdUser(),
+                )
+            ).let { emit(it) }
+        }.onEach {
+            getFavorite()
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getProfile() {
+        flow {
+            emit(profileRepository.profile(sharedPreferences.getIdUser()).body()?.user)
+        }.onEach { user ->
+            val decodeDataImg =
+                Base64.decode(user?.imageAccount?.`$binary`?.base64.toString(), Base64.DEFAULT)
+            val image = BitmapFactory.decodeByteArray(decodeDataImg, 0, decodeDataImg.size)
+            _uiState.update {
+                it.copy(
+                    nameUser = user?.fullName,
+                    imageUser = image,
+                )
+            }
+        }.onStart {
+            _uiState.update { it.copy(isLoadingUser = true) }
+        }.onCompletion {
+            _uiState.update { it.copy(isLoadingUser = false) }
         }.launchIn(viewModelScope)
     }
 

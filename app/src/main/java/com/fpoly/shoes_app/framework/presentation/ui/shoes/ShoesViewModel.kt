@@ -3,12 +3,17 @@ package com.fpoly.shoes_app.framework.presentation.ui.shoes
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fpoly.shoes_app.framework.domain.FavoriteRequest
 import com.fpoly.shoes_app.framework.domain.model.Category
 import com.fpoly.shoes_app.framework.domain.model.Shoes
+import com.fpoly.shoes_app.framework.domain.usecase.AddFavoriteUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetCategoriesUseCase
+import com.fpoly.shoes_app.framework.domain.usecase.GetFavoriteUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetShoesUseCase
+import com.fpoly.shoes_app.framework.domain.usecase.RemoveFavoriteUseCase
 import com.fpoly.shoes_app.utility.GET_ALL_POPULAR_SHOES
 import com.fpoly.shoes_app.utility.GET_POPULAR_SHOES_ALL
+import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,13 +29,18 @@ import javax.inject.Inject
 @HiltViewModel
 class ShoesViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
-    private val getShoesUseCase: GetShoesUseCase
+    private val getShoesUseCase: GetShoesUseCase,
+    private val getFavoriteUseCase: GetFavoriteUseCase,
+    private val addFavoriteUseCase: AddFavoriteUseCase,
+    private val removeFavoriteUseCase: RemoveFavoriteUseCase,
+    private val sharedPreferences: SharedPreferencesManager,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(ShoesUiState())
     val uiState: StateFlow<ShoesUiState> get() = _uiState
 
     init {
         getDataCategories()
+        getFavorite()
     }
 
     private fun getDataCategories() {
@@ -61,7 +71,7 @@ class ShoesViewModel @Inject constructor(
 
     private fun updateCategoriesSelectedList(categories: List<Category>?): List<Category> {
         val all = Category(
-            name = "All"
+            name = GET_POPULAR_SHOES_ALL
         )
         val mutableCategoriesSelected = categories.orEmpty().toMutableList()
         mutableCategoriesSelected.add(0, all)
@@ -126,5 +136,52 @@ class ShoesViewModel @Inject constructor(
         return this.sortedByDescending { shoe ->
             if (type == GET_ALL_POPULAR_SHOES) shoe.quantity?.minus(shoe.sell ?: 0) else null
         }
+    }
+
+    private fun getFavorite() {
+        flow {
+            emit(getFavoriteUseCase.invoke(sharedPreferences.getIdUser()))
+        }.onEach { resource ->
+            when (resource.status) {
+                Status.SUCCESS -> {
+                    _uiState.update { state ->
+                        state.copy(favoriteShoes = resource.data)
+                    }
+                }
+
+                Status.ERROR -> Log.e("HomeViewModel", "getDataShoes: Error ${resource.message}")
+                else -> {}
+            }
+        }.onStart {
+            _uiState.update { it.copy(isLoadingFavorite = true) }
+        }.onCompletion {
+            _uiState.update { it.copy(isLoadingFavorite = false) }
+        }.launchIn(viewModelScope)
+    }
+
+    fun addFavorite(id: String) {
+        flow {
+            addFavoriteUseCase.invoke(
+                FavoriteRequest(
+                    shoeId = id,
+                    userId = sharedPreferences.getIdUser(),
+                )
+            ).let { emit(it) }
+        }.onEach {
+            getFavorite()
+        }.launchIn(viewModelScope)
+    }
+
+    fun deleteFavorite(id: String) {
+        flow {
+            removeFavoriteUseCase.invoke(
+                FavoriteRequest(
+                    shoeId = id,
+                    userId = sharedPreferences.getIdUser(),
+                )
+            ).let { emit(it) }
+        }.onEach {
+            getFavorite()
+        }.launchIn(viewModelScope)
     }
 }

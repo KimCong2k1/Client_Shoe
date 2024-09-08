@@ -27,7 +27,7 @@
         android:id="@+id/homeFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_notificationHomeFragment"
             app:destination="@id/notificationHomeFragment" />
@@ -83,7 +83,15 @@
         android:id="@+id/favoritesFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.favorites.FavoritesFragment"
         android:label="FavoritesFragment"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favoritesFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment">
+            <argument
+                android:name="idShoe"
+                app:argType="string" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/ordersFragment"
@@ -114,9 +122,9 @@
         <action
             android:id="@+id/action_addressFragment_to_addressDetailsFragment"
             app:destination="@id/addressDetailsFragment" />
-<!--        <action-->
-<!--            android:id="@+id/action_addressFragment_to_blankFragment"-->
-<!--            app:destination="@id/editoraddFragment" />-->
+        <!--        <action-->
+        <!--            android:id="@+id/action_addressFragment_to_blankFragment"-->
+        <!--            app:destination="@id/editoraddFragment" />-->
     </fragment>
     <fragment
         android:id="@+id/addressDetailsFragment"
@@ -222,11 +230,11 @@
             android:name="banner"
             app:argType="com.fpoly.shoes_app.framework.domain.model.Banners" />
     </fragment>
-<!--    <fragment-->
-<!--        android:id="@+id/editoraddFragment"-->
-<!--        android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.editOrAdd.EditOrAddFragment"-->
-<!--        android:label="fragment_blank"-->
-<!--        tools:layout="@layout/fragment_editoradd" />-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/editoraddFragment"-->
+    <!--        android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.editOrAdd.EditOrAddFragment"-->
+    <!--        android:label="fragment_blank"-->
+    <!--        tools:layout="@layout/fragment_editoradd" />-->
     <fragment
         android:id="@+id/notificationHomeFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.home.notification.NotificationHomeFragment"

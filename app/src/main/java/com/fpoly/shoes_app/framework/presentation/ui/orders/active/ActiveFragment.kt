@@ -1,7 +1,7 @@
 package com.fpoly.shoes_app.framework.presentation.ui.orders.active
 
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +13,7 @@ import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.orders.OrdersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class ActiveFragment : BaseFragment<FragmentActiveBinding, OrdersViewModel>(
     FragmentActiveBinding::inflate,
@@ -27,7 +28,6 @@ class ActiveFragment : BaseFragment<FragmentActiveBinding, OrdersViewModel>(
     override fun setupViews() {
         (requireActivity() as MainActivity).showBottomNavigation(true)
         idUser = sharedPreferences.getIdUser()
-
         activeAdapter = HistoryAdapter(
             historyShoes = emptyList(),
             onClickActive = { active ->
@@ -59,14 +59,14 @@ class ActiveFragment : BaseFragment<FragmentActiveBinding, OrdersViewModel>(
                 binding.swipeRefreshLayout.isRefreshing = state.isLoading
                 if (!state.isLoading) {
                     activeAdapter.updateHistoryShoes(state.historyShoes)
-                    state.errorMessage?.let { showMessage(it) }
+                    state.errorMessage?.let {
+                        binding.textNoData.visibility = View.VISIBLE
+                    }
                 }
             }
         }
     }
-    private fun showMessage(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
+
     override fun setOnClick() {
     }
 }

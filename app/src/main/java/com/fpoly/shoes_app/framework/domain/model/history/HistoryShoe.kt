@@ -18,5 +18,5 @@ data class HistoryShoe(
     val status: String?,
     val thumbnail: String?,
     val total: Int?,
-    val totalPre: Int?
+    val totalPre: Int?,
 ) : Parcelable

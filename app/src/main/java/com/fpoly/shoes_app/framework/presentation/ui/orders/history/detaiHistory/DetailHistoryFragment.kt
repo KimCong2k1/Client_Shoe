@@ -151,13 +151,13 @@ class DetailHistoryFragment : BaseFragment<FragmentDetailHistoryBinding, DetailH
             Toast.makeText(
                 requireContext(), dialogBinding.ratingBar.rating.toString(), Toast.LENGTH_SHORT
             ).show()
-            viewModel.setUp(
+            viewModel.rate(
                 UpdateRate(
                     commentText = dialogBinding.commentRate.text.toString(),
-                    oderId =listOfNotNull("66c96e004c804ca74c2cfb42"),
                     rateNumber = dialogBinding.ratingBar.rating.toInt(),
-                    shoeId = historyShoe.orderDetails?.map {"66b8dca0e5663d624f47f0df" } ?: emptyList(),
-                    userId = "6673eb34167c5a3c87932cc7"
+//                    shoeId = "66b8dccae5663d624f47f105" ,
+                    shoeId = historyShoe.orderDetails?.map { it._id.toString() } ?: emptyList() ,
+                    userId = idUser
                 )
             )
             bottomSheetDialog.dismiss()

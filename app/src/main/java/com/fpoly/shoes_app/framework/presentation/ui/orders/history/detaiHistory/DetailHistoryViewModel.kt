@@ -1,13 +1,11 @@
 package com.fpoly.shoes_app.framework.presentation.ui.orders.history.detaiHistory
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccount
-import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccountResponse
 import com.fpoly.shoes_app.framework.domain.model.updateRate.UpdateRate
 import com.fpoly.shoes_app.framework.domain.model.updateRate.UpdateRateResponse
 import com.fpoly.shoes_app.framework.repository.RateRepository
-import com.fpoly.shoes_app.framework.repository.SetUpAccountRepository
 import com.fpoly.shoes_app.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject
+
 @HiltViewModel
 class DetailHistoryViewModel@Inject constructor(
     private val rateRepository: RateRepository,
@@ -22,7 +21,8 @@ class DetailHistoryViewModel@Inject constructor(
     private val _setUpResult = MutableStateFlow<Resource<UpdateRateResponse>>(Resource.init(null))
     val rateResult: StateFlow<Resource<UpdateRateResponse>> = _setUpResult
 
-    fun setUp(rate:UpdateRate) {
+    fun rate(rate:UpdateRate) {
+        Log.e("rate",rate.shoeId.toString())
         viewModelScope.launch {
             _setUpResult.value = Resource.loading(null)
             try {

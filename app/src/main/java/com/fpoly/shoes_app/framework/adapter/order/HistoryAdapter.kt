@@ -42,7 +42,7 @@ class HistoryAdapter(
                 else -> R.string.description
             })
             wait.visibility = View.GONE
-            if (historyShoe.orderStatusDetails?.size==4 && historyShoe.status=="active")
+            if (historyShoe.orderStatusDetails?.size==5 && historyShoe.status=="active")
                 wait.visibility = View.VISIBLE
 
             priceShoeTextView.text = historyShoe.total.toString().formatToVND()

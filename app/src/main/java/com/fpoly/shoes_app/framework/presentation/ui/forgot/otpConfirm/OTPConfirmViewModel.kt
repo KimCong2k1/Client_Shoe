@@ -21,11 +21,11 @@ private val otpConfirmRepository: OTPConfirmReponsitory,
     private val _otpConfirmResult = MutableStateFlow<Resource<OtpConfirmResponse>>(Resource.init(null))
     val otpConfirmResult: StateFlow<Resource<OtpConfirmResponse>> = _otpConfirmResult
 
-    fun otpConfirm(id: String, otp: String) {
+    fun otpConfirm(email: String, otp: String) {
         viewModelScope.launch {
             _otpConfirmResult.value = Resource.loading(null)
             try {
-                val response = otpConfirmRepository.otpConfirm(OtpConfirm(id, otp))
+                val response = otpConfirmRepository.otpConfirm(OtpConfirm(email, otp))
                 if (response.isSuccessful) {
                     val signUpResponse = response.body()
                     if (signUpResponse != null) {

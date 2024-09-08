@@ -54,7 +54,7 @@ class DetailActiveFragment: BaseFragment<FragmentDetailActiveBinding, DetailActi
                 4 -> 5
                 else -> allViews.size
             }
-            if (historyShoe!!.orderStatusDetails?.size==4){
+            if (historyShoe!!.orderStatusDetails?.size==5){
                 comfirmTake.visibility = View.VISIBLE
             }
             val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.black)

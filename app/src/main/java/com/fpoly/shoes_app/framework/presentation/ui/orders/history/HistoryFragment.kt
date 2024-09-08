@@ -1,7 +1,7 @@
 package com.fpoly.shoes_app.framework.presentation.ui.orders.history
 
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,7 +51,9 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding, OrdersViewModel>(
                 binding.swipeRefreshLayout.isRefreshing = state.isLoading
                 if (!state.isLoading) {
                     historyAdapter.updateHistoryShoes(state.historyShoes)
-                    state.errorMessage?.let { showMessage(it) }
+                    state.errorMessage?.let {
+                        binding.textNoData.visibility = View.VISIBLE
+                    }
                 }
             }
         }
@@ -59,9 +61,6 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding, OrdersViewModel>(
     private fun clearListAndFetchData() {
         historyAdapter.updateHistoryShoes(emptyList())
         viewModel.getCompletedOrders(idUser)
-    }
-    private fun showMessage(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
     override fun setOnClick() {
     }

@@ -11,7 +11,7 @@ data class ForgotMail(
 ): Parcelable
 
  class ForgotMailResponse(
-    @SerializedName("idAccount") val idAccount: String?,
+    @SerializedName("userId") val userId: String?,
      success: Boolean,
      message: String?
 ) : BaseErrResponse(success, message)

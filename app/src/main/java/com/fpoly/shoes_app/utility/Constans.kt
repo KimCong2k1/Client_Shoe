@@ -1,6 +1,6 @@
 package com.fpoly.shoes_app.utility
 
-const val BASE_URL = "http://192.168.1.250:3000/api/"
+const val BASE_URL = "http://192.168.1.251:3000/api/"
 const val SET_TIME_OUT_API = 0L
 
 const val ITEM_MORE = "Thêm"
@@ -11,3 +11,26 @@ const val SPAN_COUNT_CATEGORIES = 4
 const val Active = 0
 const val InActive = 1
 const val Sold = 2
+
+const val ADDRESS_DEFAULT = "0"
+const val ADDRESS_NORMAL = "1"
+
+const val HA_NOI = "hanoi"
+
+const val IS_PRICE_NULL = "-"
+
+const val IS_100 = 100L
+
+object RequestKey {
+    const val SHIPPING_CHECKOUT_REQUEST_KEY = "shipping_checkout_request_key"
+    const val DISCOUNT_CHECKOUT_REQUEST_KEY = "discount_checkout_request_key"
+    const val ADDRESS_CHECKOUT_REQUEST_KEY = "address_checkout_request_key"
+    const val RELOAD_ADDRESS_CHECKOUT_REQUEST_KEY = "reload_address_checkout_request_key"
+}
+
+object ResultKey {
+    const val SHIPPING_CHECKOUT_RESULT_KEY = "shipping_checkout_result_key"
+    const val DISCOUNT_CHECKOUT_RESULT_KEY = "discount_checkout_result_key"
+    const val ADDRESS_CHECKOUT_RESULT_KEY = "address_checkout_result_key"
+    const val RELOAD_ADDRESS_CHECKOUT_RESULT_KEY = "reload_address_checkout_result_key"
+}

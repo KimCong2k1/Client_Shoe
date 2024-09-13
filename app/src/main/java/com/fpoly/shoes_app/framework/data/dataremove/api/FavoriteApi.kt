@@ -1,8 +1,7 @@
 package com.fpoly.shoes_app.framework.data.dataremove.api
 
-import com.fpoly.shoes_app.framework.domain.FavoriteRequest
+import com.fpoly.shoes_app.framework.domain.model.FavoritesRequest
 import com.fpoly.shoes_app.framework.domain.model.Favorites
-import com.fpoly.shoes_app.framework.domain.model.Shoes
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -17,11 +16,11 @@ interface FavoriteApi {
 
     @POST("addfavourite")
     suspend fun addFavorite(
-        @Body favoriteRequest: FavoriteRequest,
-    ): Response<Shoes>
+        @Body favoriteRequest: FavoritesRequest,
+    ): Response<Any>
 
     @POST("removefavourite")
     suspend fun removeFavorite(
-        @Body favoriteRequest: FavoriteRequest,
-    ): Response<Shoes>
+        @Body favoriteRequest: FavoritesRequest,
+    ): Response<Any>
 }

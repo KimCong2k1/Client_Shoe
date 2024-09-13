@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fpoly.shoes_app.framework.domain.model.Color
 import com.fpoly.shoes_app.framework.domain.model.Size
+import com.fpoly.shoes_app.framework.domain.usecase.AddCartUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetShoeDetailUseCase
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.MAX_SHOE
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.PLUS
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.REDUCE
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.RESET_COUNT_SHOES
+import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +27,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ShoeDetailViewModel @Inject constructor(
-    private val getShoeDetailUseCase: GetShoeDetailUseCase
+    private val getShoeDetailUseCase: GetShoeDetailUseCase,
+    private val addCartUseCase: AddCartUseCase,
+    private val sharedPreferences: SharedPreferencesManager,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(ShoeDetailContact())
     val uiState: StateFlow<ShoeDetailContact> get() = _uiState
@@ -38,6 +42,7 @@ class ShoeDetailViewModel @Inject constructor(
                 Status.SUCCESS -> {
                     _uiState.update { state ->
                         state.copy(
+                            userId = sharedPreferences.getIdUser(),
                             shoeDetail = resource.data,
                             sizes = resource.data?.sizes?.map { Pair(it, false) },
                             colors = resource.data?.colors?.map { Pair(it, false) },
@@ -134,5 +139,29 @@ class ShoeDetailViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun addShoeToCart() {
+        flow {
+            emit(addCartUseCase.invoke(cartRequest = uiState.value.addShoeToCart()))
+        }.onEach { resource ->
+            when (resource.status) {
+                Status.SUCCESS -> {
+                    _uiState.update {
+                        it.copy(countShoe = 0)
+                    }
+                }
+
+                Status.ERROR -> {
+                    Log.e("ShoeDetailViewModel", "addShoeToCart: Error ${resource.message}")
+                }
+
+                else -> {}
+            }
+        }.onStart {
+            _uiState.update { it.copy(isLoading = true) }
+        }.onCompletion {
+            _uiState.update { it.copy(isLoading = false) }
+        }.launchIn(viewModelScope)
     }
 }

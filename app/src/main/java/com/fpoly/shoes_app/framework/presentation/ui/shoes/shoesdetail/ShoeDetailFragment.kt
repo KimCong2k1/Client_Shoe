@@ -2,10 +2,13 @@ package com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentShoeDetailBinding
+import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.formatPriceShoe
 import com.fpoly.shoes_app.utility.formatQuantityShoe
@@ -16,6 +19,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailViewModel>(
@@ -139,6 +143,16 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
                 }
             }
 
+            tvNumberQuantity.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    viewModel.handleEditTextCount()
+                    (requireActivity() as? MainActivity)?.hideKeyboard()
+                    tvNumberQuantity.clearFocus()
+                    return@setOnEditorActionListener true
+                }
+                false
+            }
+
             imgPlus.setOnClickListener {
                 tvNumberQuantity.clearFocus()
                 viewModel.handleCountShoe(PLUS)
@@ -155,6 +169,16 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
 
             colorsAdapter.setOnClick {
                 viewModel.handleClickColor(it)
+            }
+
+            tvButton.setOnClickListener {
+                viewModel.addShoeToCart()
+                showAlertDialog(
+                    title = getString(R.string.add_cart_title),
+                    button = getString(R.string.add_shoe_to_cart_button),
+                    buttonCancel = getString(R.string.cancel_dialog_shoe_to_cart_button),
+                    onClick = { navController?.popBackStack() },
+                )
             }
         }
     }

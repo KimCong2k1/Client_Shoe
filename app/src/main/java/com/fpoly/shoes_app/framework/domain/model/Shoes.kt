@@ -15,7 +15,7 @@ data class Shoes(
     @SerializedName("name")
     val name: String? = null,
     @SerializedName("price")
-    val price: Int? = 0,
+    val price: Long? = 0L,
     @SerializedName("description")
     val description: String? = null,
     @SerializedName("thumbnail")

@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +17,8 @@ import com.fpoly.shoes_app.framework.adapter.address.AddressAdapter
 import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate.strNullOrEmpty
 import com.fpoly.shoes_app.framework.domain.model.profile.address.Addresse
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
+import com.fpoly.shoes_app.utility.RequestKey
+import com.fpoly.shoes_app.utility.ResultKey
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.muddz.styleabletoast.StyleableToast
@@ -27,6 +31,8 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, AddressViewModel>(
     private lateinit var addressAdapter: AddressAdapter
     private var listAddressDetails: MutableList<Addresse>? = mutableListOf()
     private var check = false
+
+    private val args: AddressFragmentArgs by navArgs()
 
     private fun setupRecyclerView() {
         addressAdapter = AddressAdapter(listAddressDetails,
@@ -168,6 +174,14 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, AddressViewModel>(
 
     override fun setOnClick() {
         binding.btnAddAddress.setOnClickListener {
+            // reload address checkout if add address and from address checkout
+            if (args.args) {
+                val result = Bundle().apply {
+                    putBoolean(ResultKey.RELOAD_ADDRESS_CHECKOUT_RESULT_KEY, true)
+                }
+                setFragmentResult(RequestKey.RELOAD_ADDRESS_CHECKOUT_REQUEST_KEY, result)
+            }
+
             val bundle = Bundle().apply {
                 putInt("check", 0)
             }

@@ -38,8 +38,8 @@ import java.io.File
 class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewModel>(
     FragmentProfileBinding::inflate, SetUpAccountViewModel::class.java
 ) {
-    private var uriPath :Uri?=null
-    private var imageShow :String?=null
+    private var uriPath: Uri? = null
+    private var imageShow: String? = null
     private lateinit var captureImageLauncher: ActivityResultLauncher<Intent>
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
     private lateinit var idUser: String
@@ -59,7 +59,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             sharedPreferences.removeUser()
             sharedPreferences.removeIdUser()
             val navController = findNavController()
-            childFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            childFragmentManager.popBackStackImmediate(
+                null,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
             navController.navigate(R.id.loginFragmentScreen)
             Log.e("userWait", sharedPreferences.getUserNameWait())
             Log.e("user", sharedPreferences.getUserName())
@@ -149,16 +152,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
         val imagePath = uri?.let { File(Imagesss.getPathFromUri(it, context)) }
         viewModel.setUp(idUser, imagePath, null, null, null, null, null)
     }
+
     private fun handleSuccess(profileResponse: ProfileResponse?) {
         Log.e("profileResponse", profileResponse.toString())
         profileResponse?.user?.let { user ->
             binding.shimmerLayout.stopShimmer()
             binding.shimmerLayout.hideShimmer()
-            val dataImage =user.imageAccount?.`$binary`?.base64.toString()
+            val dataImage = user.imageAccount?.`$binary`?.base64.toString()
             imageShow = dataImage
             val decodeDataImg = Base64.decode(dataImage, Base64.DEFAULT)
             bmp = BitmapFactory.decodeByteArray(decodeDataImg, 0, decodeDataImg.size)
-            bmp?.let { Glides(it,requireContext(),binding.idAvatar) }
+            bmp?.let { Glides(it, requireContext(), binding.idAvatar) }
             binding.nameProfile.text = user.fullName ?: getString(R.string.name)
             binding.phoneProfile.text = user.phoneNumber ?: getString(R.string.phone_suggest)
         }
@@ -184,23 +188,25 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             navigateToFragment(R.id.editProfileFragment)
         }
         binding.constraintAddess.setOnClickListener {
-            navigateToFragment(R.id.addressFragment)
+            navController?.navigate(
+                ProfileFragmentDirections.actionProfileFragmentToAddressFragment(false),
+            )
         }
         binding.constraintNotification.setOnClickListener {
             navigateToFragment(R.id.generalSettingFragment)
         }
         binding.relative.setOnClickListener {
-                AddImage.openImageDialog(imageShow,requireContext(), requireActivity()) { intent ->
-                    when (intent.action) {
-                        MediaStore.ACTION_IMAGE_CAPTURE -> captureImageLauncher.launch(intent)
-                        Intent.ACTION_PICK -> pickImageLauncher.launch(intent)
-                    }
+            AddImage.openImageDialog(imageShow, requireContext(), requireActivity()) { intent ->
+                when (intent.action) {
+                    MediaStore.ACTION_IMAGE_CAPTURE -> captureImageLauncher.launch(intent)
+                    Intent.ACTION_PICK -> pickImageLauncher.launch(intent)
                 }
+            }
 
         }
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //
 //        if (resultCode == Activity.RESULT_OK) {
@@ -218,11 +224,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
 //            viewModel.setUp(idUser,imagePath, null, null, null, null,null)
 //        }
 //    }
-private fun navigateToFragment(fragmentId: Int) {
-    val navController = findNavController()
-    val currentDestination = navController.currentDestination
-    if (currentDestination == null || currentDestination.id != fragmentId) {
-        navController.navigate(fragmentId, null, navOptions)
+    private fun navigateToFragment(fragmentId: Int) {
+        val navController = findNavController()
+        val currentDestination = navController.currentDestination
+        if (currentDestination == null || currentDestination.id != fragmentId) {
+            navController.navigate(fragmentId, null, navOptions)
+        }
     }
-}
 }

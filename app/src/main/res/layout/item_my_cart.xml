@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_launcher_background" />
     </androidx.cardview.widget.CardView>
 
@@ -28,7 +29,7 @@
         android:id="@+id/tvNameShoe"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginStart="@dimen/dimen_8dp"
         android:layout_marginEnd="@dimen/dimen_10dp"
         android:fontFamily="@font/poppins_medium"
         android:includeFontPadding="false"
@@ -45,6 +46,7 @@
         android:layout_width="@dimen/dimen_24dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        android:background="?actionBarItemBackground"
         app:layout_constraintBottom_toBottomOf="@id/tvNameShoe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvNameShoe"
@@ -54,12 +56,23 @@
         android:id="@+id/viewColor"
         android:layout_width="@dimen/dimen_16dp"
         android:layout_height="@dimen/dimen_16dp"
-        android:layout_marginStart="@dimen/dimen_16dp"
+        android:layout_marginStart="@dimen/dimen_8dp"
         android:layout_marginTop="@dimen/dimen_10dp"
         android:background="@drawable/bg_color"
         app:layout_constraintStart_toEndOf="@id/cvImageShoe"
         app:layout_constraintTop_toBottomOf="@id/tvNameShoe"
         tools:backgroundTint="@color/primary_black" />
+
+    <View
+        android:id="@+id/viewColorWhite"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_0dp"
+        android:background="@drawable/bg_color_white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/viewColor"
+        app:layout_constraintEnd_toEndOf="@id/viewColor"
+        app:layout_constraintStart_toStartOf="@id/viewColor"
+        app:layout_constraintTop_toTopOf="@id/viewColor" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvColor"
@@ -102,14 +115,13 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/layoutQuantity"
-        android:layout_width="@dimen/dimen_150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_24dp"
         android:layout_marginTop="@dimen/dimen_10dp"
         android:background="@drawable/bg_quantity_view"
         android:orientation="horizontal"
-        android:paddingHorizontal="@dimen/dimen_17dp"
-        android:paddingVertical="@dimen/dimen_10dp"
+        android:padding="@dimen/dimen_5dp"
         app:layout_constraintBottom_toBottomOf="@id/cvImageShoe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewColor">
@@ -120,27 +132,26 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
+            android:background="?actionBarItemBackground"
             android:contentDescription="@null"
-            android:padding="@dimen/dimen_10dp"
+            android:paddingHorizontal="@dimen/dimen_5dp"
+            android:paddingVertical="@dimen/dimen_10dp"
             android:src="@drawable/ic_reduce"
             app:tint="@color/count_color" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvNumberQuantity"
-            android:layout_width="@dimen/dimen_0dp"
+            android:layout_width="@dimen/dimen_45dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="@null"
             android:fontFamily="@font/poppins_medium"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:inputType="number"
-            android:maxLength="3"
             android:singleLine="true"
             android:textColor="@color/count_color"
             android:textSize="@dimen/text_size_16sp"
-            tools:text="1" />
+            tools:text="555" />
 
         <ImageView
             android:id="@+id/imgPlus"
@@ -148,9 +159,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
+            android:background="?actionBarItemBackground"
             android:contentDescription="@null"
-            android:paddingHorizontal="@dimen/dimen_10dp"
-            android:paddingVertical="@dimen/dimen_5dp"
+            android:paddingHorizontal="@dimen/dimen_5dp"
+            android:paddingVertical="@dimen/dimen_4dp"
             android:src="@drawable/ic_plus"
             app:tint="@color/count_color" />
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -159,13 +171,13 @@
         android:id="@+id/tvPrice"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_14dp"
+        android:layout_marginStart="@dimen/dimen_8dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/poppins_medium"
         android:includeFontPadding="false"
         android:singleLine="true"
         android:textColor="@color/primary_black"
-        android:textSize="@dimen/text_size_14sp"
+        android:textSize="@dimen/dimen_16dp"
         app:layout_constraintBottom_toBottomOf="@id/layoutQuantity"
         app:layout_constraintEnd_toStartOf="@id/layoutQuantity"
         app:layout_constraintStart_toEndOf="@id/cvImageShoe"

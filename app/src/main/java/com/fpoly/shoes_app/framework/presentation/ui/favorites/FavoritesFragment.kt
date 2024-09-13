@@ -25,7 +25,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
     lateinit var favoriteAdapter: FavoriteAdapter
 
     override fun setupViews() {
-        (requireActivity() as MainActivity).showBottomNavigation(true)
+        (requireActivity() as? MainActivity)?.showBottomNavigation(true)
         binding.run {
             headerLayout.imgBack.isVisible = false
             headerLayout.tvTitle.text = getString(R.string.favorites_title)
@@ -59,7 +59,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
 
         favoriteAdapter.setOnClick {
             navController?.navigate(
-                FavoritesFragmentDirections.actionFavoritesFragmentToShoeDetailFragment(it.id.orEmpty())
+                FavoritesFragmentDirections.actionFavoritesFragmentToShoeDetailFragment(it.id.orEmpty(), )
             )
         }
 

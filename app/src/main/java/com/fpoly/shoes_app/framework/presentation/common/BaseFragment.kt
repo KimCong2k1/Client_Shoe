@@ -1,5 +1,6 @@
 package com.fpoly.shoes_app.framework.presentation.common
 
+import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
@@ -14,12 +16,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.fpoly.shoes_app.databinding.AlertDialogViewBinding
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.ViewModelActivity
 import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.dialog.ProgressbarDialogFragment
 import com.fpoly.shoes_app.utility.service.ServiceUtil
 import javax.inject.Inject
+
 
 abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     private val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB,
@@ -142,6 +146,38 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
                     .commitNowAllowingStateLoss()
             }
         }
+    }
+
+    protected fun showAlertDialog(
+        title: String = "",
+        description: String = "",
+        button: String = "",
+        buttonCancel: String = "",
+        onClick: () -> Unit = {},
+    ) {
+        val builder = AlertDialog.Builder(requireActivity())
+        val binding = AlertDialogViewBinding.inflate(LayoutInflater.from(requireContext()))
+        builder.setView(binding.root)
+        val dialog = builder.create()
+        dialog.setCanceledOnTouchOutside(false)
+        binding.run {
+            tvTitle.text = title
+            tvDescription.text = description
+            btnButton.tvButton.text = button
+            tvCancel.text = buttonCancel
+
+            tvTitle.isVisible = title.isNotBlank()
+            tvDescription.isVisible = description.isNotBlank()
+            btnButton.root.isVisible = button.isNotBlank()
+            tvCancel.isVisible = buttonCancel.isNotBlank()
+
+            btnButton.root.setOnClickListener {
+                onClick()
+                dialog.dismiss()
+            }
+            tvCancel.setOnClickListener { dialog.dismiss() }
+        }
+        dialog.show()
     }
 
     private companion object {

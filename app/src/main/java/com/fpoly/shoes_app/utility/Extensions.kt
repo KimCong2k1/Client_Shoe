@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import coil.load
 import com.fpoly.shoes_app.R
 import java.security.MessageDigest
+import java.text.Normalizer
 
 fun ImageView.loadImage(imgResource: Int? = null) {
     this.load(imgResource) {
@@ -22,17 +23,22 @@ fun ImageView.loadImage(imageUrl: String? = null) {
         error(R.color.primary_white)
     }
 }
+
 fun Context.getBitmapFromDrawable(drawableResId: Int): Bitmap {
     val drawable = ContextCompat.getDrawable(this, drawableResId)
-    val bitmap = Bitmap.createBitmap(drawable!!.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+    val bitmap = Bitmap.createBitmap(
+        drawable!!.intrinsicWidth,
+        drawable.intrinsicHeight,
+        Bitmap.Config.ARGB_8888
+    )
     val canvas = Canvas(bitmap)
     drawable.setBounds(0, 0, canvas.width, canvas.height)
     drawable.draw(canvas)
     return bitmap
 }
 
-fun Int.formatPriceShoe(): String {
-    return this.toString() + "đ"
+fun Long.formatPriceShoe(): String {
+    return "${this}đ"
 }
 
 fun Int.formatSoldShoe(): String {
@@ -53,3 +59,20 @@ fun String.toMD5(): String {
     val digest = md.digest(bytes)
     return digest.joinToString("") { "%02x".format(it) }
 }
+
+fun Int?.toTotal(price: Long?): Long = this?.times(price ?: 0L) ?: 0L
+
+fun String.toDiscount(): String = "-$this"
+
+fun String.normalizeString(): String {
+    val normalized = Normalizer.normalize(this, Normalizer.Form.NFD)
+        .replace("\\p{InCombiningDiacriticalMarks}".toRegex(), "")
+
+    val noSpaces = normalized.replace("\\s".toRegex(), "")
+
+    return noSpaces.lowercase()
+}
+
+fun Int.formatDiscountTitle(): String = "Phiếu giảm giá $this%"
+
+fun String.formatDiscountDescription(): String = "Có hiệu lực đến $this"

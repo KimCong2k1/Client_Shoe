@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fpoly.shoes_app.framework.data.repository.ProfileRepository
-import com.fpoly.shoes_app.framework.domain.FavoriteRequest
+import com.fpoly.shoes_app.framework.domain.model.FavoritesRequest
 import com.fpoly.shoes_app.framework.domain.model.Category
 import com.fpoly.shoes_app.framework.domain.usecase.AddFavoriteUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetBannerUseCase
@@ -192,7 +192,7 @@ class HomeViewModel @Inject constructor(
     fun addFavorite(id: String) {
         flow {
             addFavoriteUseCase.invoke(
-                FavoriteRequest(
+                FavoritesRequest(
                     shoeId = id,
                     userId = sharedPreferences.getIdUser(),
                 )
@@ -205,7 +205,7 @@ class HomeViewModel @Inject constructor(
     fun deleteFavorite(id: String) {
         flow {
             removeFavoriteUseCase.invoke(
-                FavoriteRequest(
+                FavoritesRequest(
                     shoeId = id,
                     userId = sharedPreferences.getIdUser(),
                 )

@@ -14,10 +14,10 @@ import javax.inject.Inject
 
 private val shoesDiff = object : DiffUtil.ItemCallback<Pair<Shoes, Boolean>>() {
     override fun areItemsTheSame(oldItem: Pair<Shoes, Boolean>, newItem: Pair<Shoes, Boolean>) =
-        oldItem.first.id == newItem.first.id
+        oldItem == newItem
 
     override fun areContentsTheSame(oldItem: Pair<Shoes, Boolean>, newItem: Pair<Shoes, Boolean>) =
-        oldItem.first == newItem.first
+        oldItem == newItem
 }
 
 class ShoesAdapter @Inject constructor() :

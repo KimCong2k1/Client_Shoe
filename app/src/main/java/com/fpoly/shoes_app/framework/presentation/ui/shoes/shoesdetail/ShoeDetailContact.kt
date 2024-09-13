@@ -1,6 +1,7 @@
 package com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail
 
 import android.os.Parcelable
+import com.fpoly.shoes_app.framework.domain.model.CartRequest
 import com.fpoly.shoes_app.framework.domain.model.Color
 import com.fpoly.shoes_app.framework.domain.model.Shoes
 import com.fpoly.shoes_app.framework.domain.model.Size
@@ -9,6 +10,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ShoeDetailContact(
+    val userId: String? = null,
     val shoeDetail: Shoes? = null,
     val isLoading: Boolean? = false,
     val countShoe: Int = 0,
@@ -29,6 +31,14 @@ data class ShoeDetailContact(
     val priceTotal get() = (shoeDetail?.price ?: 0) * countShoe
     val isCountEnable get() = sizeSelected?.second == true && colorSelected?.second == true
 }
+
+fun ShoeDetailContact.addShoeToCart(): CartRequest = CartRequest(
+    userId = this.userId.orEmpty(),
+    shoeId = this.shoeDetail?.id.orEmpty(),
+    sizeId = this.sizeSelected?.first?.id.orEmpty(),
+    colorId = this.colorSelected?.first?.id.orEmpty(),
+    numberShoe = this.countShoe,
+)
 
 private fun List<StorageShoe>?.checkShoes() =
     this?.map { it.quantity?.minus(it.quantity.minus(it.sell ?: 0)) }

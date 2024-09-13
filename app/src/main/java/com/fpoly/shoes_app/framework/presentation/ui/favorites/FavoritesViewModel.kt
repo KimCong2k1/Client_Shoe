@@ -3,8 +3,8 @@ package com.fpoly.shoes_app.framework.presentation.ui.favorites
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fpoly.shoes_app.framework.domain.FavoriteRequest
 import com.fpoly.shoes_app.framework.domain.model.Category
+import com.fpoly.shoes_app.framework.domain.model.FavoritesRequest
 import com.fpoly.shoes_app.framework.domain.usecase.GetCategoriesUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetFavoriteUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetShoesUseCase
@@ -121,7 +121,7 @@ class FavoritesViewModel @Inject constructor(
     fun deleteFavorite(id: String) {
         flow {
             removeFavoriteUseCase.invoke(
-                FavoriteRequest(
+                FavoritesRequest(
                     shoeId = id,
                     userId = sharedPreferences.getIdUser(),
                 )

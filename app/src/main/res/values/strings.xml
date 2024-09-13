@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">shoes_app</string>
     <string name="nameApp">ShoeFbee</string>
-    <string name="home">Home</string>
-    <string name="favorites">Favorites</string>
-    <string name="cart">Cart</string>
-    <string name="orders">Orders</string>
-    <string name="profile">Profile</string>
+    <string name="home">Trang chủ</string>
+    <string name="favorites">Yêu thích</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="orders">Đơn hàng</string>
+    <string name="profile">Thông tin</string>
     <string name="hello">Xin chào !</string>
     <string name="search">Tìm kiếm</string>
     <string name="special_programs">Chương trình đặc biệt</string>
@@ -15,7 +15,7 @@
 
     <!--    //quy-->
     <!--    key map-->
-    <string name="key_map" translatable="false" templateMergeStrategy="preserve">AIzaSyCH8B5nvbZwslomTAn6u4-ZGG145XHCXLA</string>
+    <string name="key_map" templateMergeStrategy="preserve" translatable="false">AIzaSyCH8B5nvbZwslomTAn6u4-ZGG145XHCXLA</string>
     <!--    string other-->
     <string name="capture">Máy Ảnh</string>
     <string name="selectImg">Chọn Nguồn Ảnh</string>
@@ -86,7 +86,7 @@
     <string name="name">Họ và tên</string>
     <string name="logout">Đăng xuất</string>
     <string name="confirm_logout">Bạn chắc chắn muốn đăng xuất?</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Hủy</string>
     <string name="agree">Đồng ý</string>
     <string name="otp_verification">Xác thực OTP</string>
     <string name="send_otp_to_your_mail">Mã OTP sẽ gửi đến email của bạn</string>
@@ -101,7 +101,29 @@
     <string name="quantity">Số lượng</string>
     <string name="add_to_cart">Thêm vào giỏ hàng</string>
     <string name="total_price">Tổng tiền</string>
+    <string name="check_out">Đặt hàng</string>
 
     <string name="favorites_title">Yêu thích</string>
     <string name="cart_title">Giỏ hàng</string>
+
+    <string name="cart_delete_title">Bạn có đồng ý xóa sản phẩm này ra khỏi giỏ hàng ?</string>
+    <string name="add_cart_title">Thêm sản phẩm vào giỏ hàng thành công ?</string>
+    <string name="add_shoe_to_cart_button">Tiếp tục mua sắm</string>
+    <string name="cancel_dialog_shoe_to_cart_button">Ở lại</string>
+
+    <string name="shipping_address">Địa chỉ nhận hàng</string>
+    <string name="order_list">Sản phẩm</string>
+    <string name="choose_shipping">Phương thức vận chuyển</string>
+    <string name="choose_shipping_title">Chọn phương thức vận chuyển</string>
+    <string name="choose_address_title">Chọn địa chỉ nhận hàng</string>
+    <string name="promo_code">Mã giảm giá</string>
+    <string name="promo_code_title">Chọn mã giảm giá</string>
+
+    <string name="amount_text">Tổng tiền hàng</string>
+    <string name="shipping_text">Tổng phí vận chuyển</string>
+    <string name="discount_text">Giảm giá</string>
+    <string name="total_text">Tổng thanh toán</string>
+    <string name="check_out_button">Thanh toán</string>
+    <string name="add_address_checkout_title">Thêm địa chỉ</string>
+    <string name="default_text">Mặc định</string>
 </resources>

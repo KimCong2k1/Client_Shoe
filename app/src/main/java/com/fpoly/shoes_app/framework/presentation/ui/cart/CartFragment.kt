@@ -1,12 +1,16 @@
 package com.fpoly.shoes_app.framework.presentation.ui.cart
 
 import androidx.core.view.isVisible
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentCartBinding
 import com.fpoly.shoes_app.framework.domain.model.CheckoutArgs
+import com.fpoly.shoes_app.framework.domain.model.profile.address.Addresse
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
+import com.fpoly.shoes_app.utility.RequestKey
+import com.fpoly.shoes_app.utility.ResultKey
 import com.fpoly.shoes_app.utility.formatPriceShoe
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -29,6 +33,18 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(
             headerLayout.imgBack.isVisible = false
             headerLayout.tvTitle.text = getString(R.string.cart_title)
             rcvCart.adapter = cartAdapter
+        }
+
+        setFragmentResultListener(RequestKey.SHOW_ALERT_DIALOG_CHECKOUT_REQUEST_KEY) { _, bundle ->
+            val isEnable = bundle.getBoolean(ResultKey.SHOW_ALERT_DIALOG_CHECKOUT_RESULT_KEY)
+            if (isEnable) {
+                showAlertDialog(
+                    imgSuccess = true,
+                    title = getString(R.string.checkout_success),
+                    button = getString(R.string.checkout_success_button),
+                    onClick = { }
+                )
+            }
         }
     }
 

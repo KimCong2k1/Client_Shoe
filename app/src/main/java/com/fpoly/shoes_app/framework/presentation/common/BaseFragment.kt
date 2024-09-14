@@ -149,6 +149,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     }
 
     protected fun showAlertDialog(
+        imgSuccess: Boolean = false,
         title: String = "",
         description: String = "",
         button: String = "",
@@ -170,6 +171,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
             tvDescription.isVisible = description.isNotBlank()
             btnButton.root.isVisible = button.isNotBlank()
             tvCancel.isVisible = buttonCancel.isNotBlank()
+            img.isVisible = imgSuccess
 
             btnButton.root.setOnClickListener {
                 onClick()

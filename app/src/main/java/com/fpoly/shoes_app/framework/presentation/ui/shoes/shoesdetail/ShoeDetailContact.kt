@@ -3,6 +3,8 @@ package com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail
 import android.os.Parcelable
 import com.fpoly.shoes_app.framework.domain.model.CartRequest
 import com.fpoly.shoes_app.framework.domain.model.Color
+import com.fpoly.shoes_app.framework.domain.model.Rate
+import com.fpoly.shoes_app.framework.domain.model.ReviewArgs
 import com.fpoly.shoes_app.framework.domain.model.Shoes
 import com.fpoly.shoes_app.framework.domain.model.Size
 import com.fpoly.shoes_app.framework.domain.model.StorageShoe
@@ -38,6 +40,11 @@ fun ShoeDetailContact.addShoeToCart(): CartRequest = CartRequest(
     sizeId = this.sizeSelected?.first?.id.orEmpty(),
     colorId = this.colorSelected?.first?.id.orEmpty(),
     numberShoe = this.countShoe,
+)
+
+fun Rate?.reviewArgs(): ReviewArgs = ReviewArgs(
+    comments = this?.comments ?: emptyList(),
+    rate = this?.rate ?: 0F
 )
 
 private fun List<StorageShoe>?.checkShoes() =

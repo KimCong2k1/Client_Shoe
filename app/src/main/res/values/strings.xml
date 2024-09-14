@@ -102,13 +102,15 @@
     <string name="add_to_cart">Thêm vào giỏ hàng</string>
     <string name="total_price">Tổng tiền</string>
     <string name="check_out">Đặt hàng</string>
+    <string name="review">Đánh giá</string>
+    <string name="next">Tiếp theo</string>
 
     <string name="favorites_title">Yêu thích</string>
     <string name="cart_title">Giỏ hàng</string>
 
     <string name="cart_delete_title">Bạn có đồng ý xóa sản phẩm này ra khỏi giỏ hàng ?</string>
     <string name="add_cart_title">Thêm sản phẩm vào giỏ hàng thành công ?</string>
-    <string name="add_shoe_to_cart_button">Tiếp tục mua sắm</string>
+    <string name="add_shoe_to_cart_button">Xem các sản phẩm khác</string>
     <string name="cancel_dialog_shoe_to_cart_button">Ở lại</string>
 
     <string name="shipping_address">Địa chỉ nhận hàng</string>
@@ -116,6 +118,7 @@
     <string name="choose_shipping">Phương thức vận chuyển</string>
     <string name="choose_shipping_title">Chọn phương thức vận chuyển</string>
     <string name="choose_address_title">Chọn địa chỉ nhận hàng</string>
+    <string name="choose_payment_title">Chọn phương thức thanh toán</string>
     <string name="promo_code">Mã giảm giá</string>
     <string name="promo_code_title">Chọn mã giảm giá</string>
 
@@ -126,4 +129,10 @@
     <string name="check_out_button">Thanh toán</string>
     <string name="add_address_checkout_title">Thêm địa chỉ</string>
     <string name="default_text">Mặc định</string>
+    <string name="cod_text">Thanh toán khi nhận hàng</string>
+    <string name="zalo_pay_text">Thanh toán qua Zalo Pay</string>
+    <string name="checkout_success">Đặt hàng thành công</string>
+    <string name="checkout_success_button">Tiếp tục mua sắm</string>
+    <string name="checkout_error">Thanh toán thất bại</string>
+    <string name="checkout_error_button">Thanh toán lại</string>
 </resources>

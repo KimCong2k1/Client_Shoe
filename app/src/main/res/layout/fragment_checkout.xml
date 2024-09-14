@@ -478,7 +478,7 @@
             android:includeFontPadding="false"
             android:padding="@dimen/dimen_16dp"
             android:singleLine="true"
-            android:text="@string/check_out_button"
+            android:text="@string/next"
             android:textColor="@color/primary_white"
             android:textSize="@dimen/text_size_16sp" />
     </androidx.cardview.widget.CardView>

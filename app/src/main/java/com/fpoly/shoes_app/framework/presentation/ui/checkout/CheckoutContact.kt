@@ -33,7 +33,7 @@ data class CheckoutUiState(
         addressDefault?.phoneNumber.orEmpty()
     }
     val isAddressNull = detailAddress.isBlank() || nameAddress.isBlank() || phoneAddress.isBlank()
-    private val shipTotal = ship?.price ?: 0L
+    val shipTotal = ship?.price ?: 0L
     private val discountTotal =
         (discount?.discount ?: 0) * totalCart / IS_100
     val shipTotalString = if (shipTotal == 0L) IS_PRICE_NULL else shipTotal.formatPriceShoe()

@@ -120,6 +120,13 @@ dependencies {   // Firebase dependencies
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+
+    // implement ZaloPay
+    implementation(fileTree(mapOf(
+        "dir" to "C:\\Users\\DeLL\\OneDrive\\Máy tính\\zalo",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
 }
 
 // Allow references to generated code

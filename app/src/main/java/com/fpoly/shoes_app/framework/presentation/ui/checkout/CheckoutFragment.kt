@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentCheckoutBinding
 import com.fpoly.shoes_app.framework.domain.model.Discount
+import com.fpoly.shoes_app.framework.domain.model.PaymentArgs
 import com.fpoly.shoes_app.framework.domain.model.Ship
 import com.fpoly.shoes_app.framework.domain.model.ShippingCheckoutArgs
 import com.fpoly.shoes_app.framework.domain.model.profile.address.Addresse
@@ -173,9 +174,22 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding, CheckoutViewModel
 
         binding.layoutDiscount.setOnClickListener {
             navController?.navigate(
-                CheckoutFragmentDirections.actionSignUpFragmentToDiscountCheckoutFragment(
+                CheckoutFragmentDirections.actionCheckoutFragmentToDiscountCheckoutFragment(
                     viewModel.uiState.value.discount?.id.orEmpty(),
                 ),
+            )
+        }
+
+        binding.tvButton.setOnClickListener {
+            navController?.navigate(
+                CheckoutFragmentDirections.actionCheckoutFragmentToPaymentCheckoutFragment(
+                    PaymentArgs(
+                        idAddress = viewModel.uiState.value.addressArgs?.id.orEmpty(),
+                        shoesCart = viewModel.uiState.value.shoes,
+                        totalShip = viewModel.uiState.value.shipTotal,
+                        total = viewModel.uiState.value.totalCart,
+                    ),
+                )
             )
         }
     }

@@ -1,6 +1,7 @@
 package com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.doAfterTextChanged
@@ -178,6 +179,14 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
                     button = getString(R.string.add_shoe_to_cart_button),
                     buttonCancel = getString(R.string.cancel_dialog_shoe_to_cart_button),
                     onClick = { navController?.popBackStack() },
+                )
+            }
+
+            tvReviewShoe.setOnClickListener {
+                navController?.navigate(
+                    ShoeDetailFragmentDirections.actionShoeDetailFragmentToReviewFragment(
+                        viewModel.uiState.value.shoeDetail?.rate.reviewArgs()
+                    )
                 )
             }
         }

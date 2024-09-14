@@ -52,8 +52,12 @@
             app:destination="@id/shippingCheckoutFragment" />
 
         <action
-            android:id="@+id/action_signUpFragment_to_discountCheckoutFragment"
+            android:id="@+id/action_checkoutFragment_to_discountCheckoutFragment"
             app:destination="@id/discountCheckoutFragment" />
+
+        <action
+            android:id="@+id/action_checkoutFragment_to_paymentCheckoutFragment"
+            app:destination="@id/paymentCheckoutFragment" />
     </fragment>
 
     <fragment
@@ -257,6 +261,10 @@
         <argument
             android:name="idShoe"
             app:argType="string" />
+
+        <action
+            android:id="@+id/action_shoeDetailFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/bannerDetailFragment"
@@ -310,5 +318,25 @@
         <argument
             android:name="args"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.shoes.review.ReviewFragment"
+        android:label="ReviewFragment"
+        tools:layout="@layout/fragment_review">
+        <argument
+            android:name="args"
+            app:argType="com.fpoly.shoes_app.framework.domain.model.ReviewArgs" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentCheckoutFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.checkout.payment.PaymentCheckoutFragment"
+        android:label="PaymentCheckoutFragment"
+        tools:layout="@layout/fragment_payment_checkout">
+        <argument
+            android:name="args"
+            app:argType="com.fpoly.shoes_app.framework.domain.model.PaymentArgs" />
     </fragment>
 </navigation>

@@ -2,6 +2,7 @@ package com.fpoly.shoes_app.framework.presentation
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.media.AudioManager
@@ -24,6 +25,8 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
+import vn.zalopay.sdk.Environment
+import vn.zalopay.sdk.ZaloPaySDK
 import java.io.IOException
 
 @AndroidEntryPoint
@@ -66,6 +69,9 @@ class MainActivity : AppCompatActivity() {
         } catch (e: IOException) {
             Log.e("MainActivity", "Error in onCreate: ${e.message}", e)
         }
+
+        // ZaloPay SDK Init
+        ZaloPaySDK.init(2553, Environment.SANDBOX)
     }
 
     private fun hasPermissions(context: Context, vararg permissions: String): Boolean {
@@ -139,5 +145,10 @@ class MainActivity : AppCompatActivity() {
         currentFocus?.let {
             inputMethodManager?.hideSoftInputFromWindow(it.windowToken, 0)
         }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        ZaloPaySDK.getInstance().onResult(intent)
     }
 }

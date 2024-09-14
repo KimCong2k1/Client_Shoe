@@ -1,6 +1,6 @@
 package com.fpoly.shoes_app.utility
 
-const val BASE_URL = "http://192.168.1.251:3000/api/"
+const val BASE_URL = "http://192.168.1.250:3000/api/"
 const val SET_TIME_OUT_API = 0L
 
 const val ITEM_MORE = "Thêm"
@@ -26,6 +26,7 @@ object RequestKey {
     const val DISCOUNT_CHECKOUT_REQUEST_KEY = "discount_checkout_request_key"
     const val ADDRESS_CHECKOUT_REQUEST_KEY = "address_checkout_request_key"
     const val RELOAD_ADDRESS_CHECKOUT_REQUEST_KEY = "reload_address_checkout_request_key"
+    const val SHOW_ALERT_DIALOG_CHECKOUT_REQUEST_KEY = "show_alert_dialog_checkout_request_key"
 }
 
 object ResultKey {
@@ -33,4 +34,11 @@ object ResultKey {
     const val DISCOUNT_CHECKOUT_RESULT_KEY = "discount_checkout_result_key"
     const val ADDRESS_CHECKOUT_RESULT_KEY = "address_checkout_result_key"
     const val RELOAD_ADDRESS_CHECKOUT_RESULT_KEY = "reload_address_checkout_result_key"
+    const val SHOW_ALERT_DIALOG_CHECKOUT_RESULT_KEY = "show_alert_dialog_checkout_result_key"
+}
+
+object ZaloPay {
+    const val APP_ID: Int = 2553
+    const val MAC_KEY: String = "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL"
+    const val BASE_URL_ZALO_PAY = "https://sandbox.zalopay.com.vn/v001/tpe/createorder"
 }

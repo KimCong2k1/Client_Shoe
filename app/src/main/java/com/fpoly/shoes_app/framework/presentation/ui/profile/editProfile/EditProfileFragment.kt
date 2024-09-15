@@ -9,31 +9,31 @@ import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
-import androidx.fragment.app.FragmentManager
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentEditProfileBinding
-import com.fpoly.shoes_app.framework.data.module.CheckValidate
+import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate
 import com.fpoly.shoes_app.framework.domain.model.profile.ProfileResponse
+import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccountResponse
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.setUpAccount.SetUpAccountViewModel
 import com.fpoly.shoes_app.utility.Status
-import com.fpoly.shoes_app.utility.service.ServiceUtil
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.launch
 import java.util.Calendar
-
 @AndroidEntryPoint
 class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccountViewModel>(
     FragmentEditProfileBinding::inflate, SetUpAccountViewModel::class.java
 ) {
     private val gender = arrayOf("Nữ", "Nam")
     private var id = ""
-    private var type = 1
+    private var genderSelection = 1
+    private var originalProfile: ProfileResponse? = null
 
     private var originalFullName: String? = null
     private var originalPhoneNumber: String? = null
@@ -67,7 +67,6 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinner.adapter = adapter
 
-        // Add TextWatchers to track changes
         addTextWatchers()
     }
 
@@ -75,39 +74,10 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.setUpResult.collect { result ->
                 when (result.status) {
-                    Status.SUCCESS -> {
-                        showProgressbar(false)
-                        val setUpResponse = result.data
-                        if (setUpResponse?.success == true) {
-                            val navController = findNavController()
-                            binding.nameEditText.text?.clear()
-                            binding.mailEditText.text?.clear()
-                            binding.phoneEditText.text?.clear()
-                            fragmentManager?.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                            ServiceUtil.playNotificationSound(requireContext(), getString(R.string.app_name), getString(R.string.updateInfor))
-                            navController.navigate(
-                                R.id.profileFragment,
-                                null,
-                                NavOptions.Builder().setPopUpTo(
-                                    navController.currentDestination?.id ?: -1, true
-                                ).build()
-                            )
-                            StyleableToast.makeText(
-                                requireContext(),
-                                getString(R.string.success),
-                                R.style.success
-                            ).show()
-                        }
-                    }
-                    Status.ERROR -> {
-                        val errorMessage = result.message ?: "Unknown error"
-                        Log.e("EditProfileFragment", errorMessage)
-                        showProgressbar(false)
-                    }
-                    Status.LOADING -> {
-                        showProgressbar(true)
-                    }
-                    Status.INIT -> {}
+                    Status.SUCCESS -> handleSetUpSuccess(result.data)
+                    Status.ERROR -> handleError(result.message)
+                    Status.LOADING -> showProgressbar(true)
+                    Status.INIT -> Unit
                 }
             }
         }
@@ -117,10 +87,29 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
                 when (result.status) {
                     Status.SUCCESS -> handleSuccess(result.data)
                     Status.ERROR -> handleError(result.message)
-                    Status.LOADING -> handleLoading()
-                    Status.INIT -> {}
+                    Status.LOADING -> showProgressbar(true)
+                    Status.INIT -> Unit
                 }
             }
+        }
+    }
+
+    private fun handleSetUpSuccess(data: SetUpAccountResponse?) {
+        showProgressbar(false)
+        data?.let {
+            StyleableToast.makeText(
+                requireContext(),
+                getString(R.string.success),
+                R.style.success
+            ).show()
+
+            findNavController().navigate(
+                R.id.profileFragment,
+                null,
+                NavOptions.Builder().setPopUpTo(
+                    findNavController().currentDestination?.id ?: -1, true
+                ).build()
+            )
         }
     }
 
@@ -144,10 +133,6 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
     private fun handleError(errorMessage: String?) {
         showProgressbar(false)
         Log.e("EditProfileFragment", "Profile error: $errorMessage")
-    }
-
-    private fun handleLoading() {
-        showProgressbar(true)
     }
 
     private fun addTextWatchers() {
@@ -188,70 +173,103 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
 
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                type = position
+                genderSelection = position
                 checkIfAnyFieldChanged()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        binding.mailEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                CheckValidate.checkEmail(
-                    requireContext(),
-                    binding.mailEditText,
-                    binding.layoutInputMail,
-                    binding.layoutInputPhone
-                )
-                true
-            } else {
-                false
-            }
-        }
-
-        binding.phoneEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                CheckValidate.checkPhone(
-                    requireContext(),
-                    binding.phoneEditText,
-                    binding.layoutInputPhone,
-                    binding.btnNextPager
-                )
-                true
-            } else {
-                false
-            }
-        }
-
-        binding.nameEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                CheckValidate.checkStr(
-                    requireContext(),
-                    binding.phoneEditText,
-                    binding.layoutInputPhone,
-                    binding.layoutInputMail
-                )
-                true
-            } else {
-                false
-            }
-        }
 
         binding.dateEditText.setOnClickListener {
             showDatePickerDialog(binding.dateEditText, binding.layoutInputMail)
         }
 
         binding.btnNextPager.setOnClickListener {
-            val fullName = binding.nameEditText.text.toString().trim()
-            val phoneNumber = binding.phoneEditText.text.toString().trim()
-            val gmail = binding.mailEditText.text.toString().trim()
-            val birthDay = binding.dateEditText.text.toString().trim()
-            val grender = type.toString()
+            validateAndSubmit()
+        }
+        setUpEditTextListeners()
+    }
 
-            binding.btnNextPager.isEnabled = false
-            viewModel.setUp(
-                id, null, phoneNumber, fullName, gmail, birthDay, grender
-            )
+    private fun setUpEditTextListeners() {
+        binding.mailEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                validateField { CheckValidate.checkEmail(requireContext(), binding.mailEditText, binding.layoutInputMail,binding.layoutInputPhone) }
+            } else false
+        }
+
+        binding.phoneEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                validateField { CheckValidate.checkPhone(
+                    requireContext(),
+                    binding.phoneEditText,
+                    binding.layoutInputPhone,
+                    binding.btnNextPager
+                ) }
+            } else false
+        }
+
+        binding.nameEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                validateField { CheckValidate.checkStr(requireContext(), binding.nameEditText, binding.layoutInputPhone,binding.layoutInputMail) }
+            } else false
         }
     }
+    private fun validateField(validation: () -> Boolean): Boolean {
+        return if (validation()) {
+            true
+        } else {
+            Toast.makeText(requireContext(), R.string.inputFullInfo, Toast.LENGTH_SHORT).show()
+            false
+        }
+    }
+
+    private fun validateAndSubmit() {
+        val isPhoneValid = validateField {
+            CheckValidate.checkPhone(
+                requireContext(),
+                binding.phoneEditText,
+                binding.layoutInputPhone,binding.btnNextPager
+            )
+        }
+
+        val isEmailValid = validateField {
+            CheckValidate.checkEmail(
+                requireContext(),
+                binding.mailEditText,
+                binding.layoutInputMail,
+                binding.layoutInputPhone
+            )
+        }
+
+        val isNameValid = validateField {
+            CheckValidate.checkStr(
+                requireContext(),
+                binding.nameEditText,
+                binding.layoutInputPhone,
+                binding.layoutInputMail
+            )
+        }
+
+        if (isPhoneValid && isEmailValid && isNameValid) {
+            submitProfileChanges()
+        } else {
+            // Additional logging for debugging
+            Log.d("EditProfileFragment", "Validation failed. Phone: $isPhoneValid ${binding.phoneEditText.text}, Email: $isEmailValid, Name: $isNameValid")
+            Toast.makeText(requireContext(), R.string.inputFullInfo, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    private fun submitProfileChanges() {
+        val fullName = binding.nameEditText.text.toString().trim()
+        val phoneNumber = binding.phoneEditText.text.toString().trim()
+        val gmail = binding.mailEditText.text.toString().trim()
+        val birthDay = binding.dateEditText.text.toString().trim()
+        val gender = genderSelection.toString()
+
+        binding.btnNextPager.isEnabled = false
+        viewModel.setUp(id, null, phoneNumber, fullName, gmail, birthDay, gender)
+    }
 }
+

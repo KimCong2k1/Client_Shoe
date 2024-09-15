@@ -8,5 +8,6 @@ data class UpdateRate(
     val commentText: String,
     val rateNumber: Int,
     val shoeId: List<String>,
+    val oderId: String?,
     val userId: String
 ): Parcelable

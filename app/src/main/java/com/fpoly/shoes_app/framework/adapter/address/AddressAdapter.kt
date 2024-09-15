@@ -16,13 +16,17 @@ class AddressAdapter(
 ) : RecyclerView.Adapter<AddressAdapter.AddressViewHolder>() {
 
     inner class AddressViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameTextView: TextView = itemView.findViewById(R.id.nameAddress)
-        private val addressTextView: TextView = itemView.findViewById(R.id.Address)
+        private val nameUserTextView: TextView = itemView.findViewById(R.id.nameUser)
+        private val numberUserTextView: TextView = itemView.findViewById(R.id.numberPhoneUser)
+        private val nameAddresseTextView: TextView = itemView.findViewById(R.id.nameAddress)
+        private val detailAddressTextView: TextView = itemView.findViewById(R.id.detailAddress)
         private val imageEdit: ImageView = itemView.findViewById(R.id.imageEdit)
 
         fun bind(addressDetail: Addresse) {
-            nameTextView.text = addressDetail.nameAddress
-            addressTextView.text = addressDetail.detailAddress
+            nameUserTextView.text = addressDetail.fullName
+            numberUserTextView.text = addressDetail.phoneNumber.toString()
+            nameAddresseTextView.text = addressDetail.nameAddress
+            detailAddressTextView.text = addressDetail.detailAddress
             itemView.setOnClickListener {
                 onAddressClick(addressDetail)
             }

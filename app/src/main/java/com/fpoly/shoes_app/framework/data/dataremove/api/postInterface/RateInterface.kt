@@ -7,6 +7,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface RateInterface {
-    @POST("rateshoe")
+    @POST("updateOrderAndRateShoe")
     suspend fun rateOrder(@Body rate: UpdateRate): Response<UpdateRateResponse>
 }

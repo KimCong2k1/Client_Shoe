@@ -11,6 +11,8 @@ import android.util.Base64
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
@@ -34,6 +36,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 
 
+@Suppress("UNREACHABLE_CODE")
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewModel>(
     FragmentProfileBinding::inflate, SetUpAccountViewModel::class.java
@@ -44,6 +47,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
     private lateinit var idUser: String
     private var bmp: Bitmap? = null
+
     private val navOptions =
         NavOptions.Builder().setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
             .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right).build()
@@ -58,9 +62,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             sharedPreferences.setUserWait()
             sharedPreferences.removeUser()
             sharedPreferences.removeIdUser()
-            val navController = findNavController()
             childFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            navController.navigate(R.id.loginFragmentScreen)
+            navController?.navigate(R.id.loginFragmentScreen, null, NavOptions.Builder().setPopUpTo(
+                navController?.currentDestination?.id ?: -1, true).build())
             Log.e("userWait", sharedPreferences.getUserNameWait())
             Log.e("user", sharedPreferences.getUserName())
             bottomSheetDialog.dismiss()
@@ -78,6 +82,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
                 handleResult(uriPath)
             }
         }
+        binding.toolbar.navigationIcon?.setTint(ContextCompat.getColor(requireContext(), R.color.textColorPrimary))
 
         pickImageLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -177,19 +182,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
     }
 
     override fun setOnClick() {
-        binding.constraintLogout.setOnClickListener {
+        binding.apply {
+            constraintLogout.setOnClickListener {
             showBottomSheetDialog()
         }
-        binding.constraintEdt.setOnClickListener {
+            constraintEdt.setOnClickListener {
             navigateToFragment(R.id.editProfileFragment)
         }
-        binding.constraintAddess.setOnClickListener {
+            constraintAddess.setOnClickListener {
             navigateToFragment(R.id.addressFragment)
         }
-        binding.constraintNotification.setOnClickListener {
+            constraintNotification.setOnClickListener {
             navigateToFragment(R.id.generalSettingFragment)
         }
-        binding.relative.setOnClickListener {
+            relative.setOnClickListener {
                 AddImage.openImageDialog(imageShow,requireContext(), requireActivity()) { intent ->
                     when (intent.action) {
                         MediaStore.ACTION_IMAGE_CAPTURE -> captureImageLauncher.launch(intent)
@@ -198,8 +204,22 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
                 }
 
         }
+            switchDarkMode.isChecked = sharedPreferences.isDarkModeEnabled()
+            switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+                sharedPreferences.saveDarkModeState(isChecked) // Save preference
+                applyDarkMode(isChecked) // Apply theme
+            }
+        }
     }
 
+    private fun applyDarkMode(isDarkMode: Boolean) {
+        val nightMode = if (isDarkMode) {
+            AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+            AppCompatDelegate.MODE_NIGHT_NO
+        }
+        AppCompatDelegate.setDefaultNightMode(nightMode)
+    }
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //

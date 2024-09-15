@@ -10,6 +10,7 @@ data class OrderDetail(
     val amount: Int?,
     val codeColor: String?,
     val name: String?,
+    val shoeId: String?,
     val price: Int?,
     val quantity: Int?,
     val size: String?,

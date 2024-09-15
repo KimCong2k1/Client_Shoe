@@ -156,8 +156,10 @@ class DetailHistoryFragment : BaseFragment<FragmentDetailHistoryBinding, DetailH
                     commentText = dialogBinding.commentRate.text.toString(),
                     rateNumber = dialogBinding.ratingBar.rating.toInt(),
 //                    shoeId = "66b8dccae5663d624f47f105" ,
-                    shoeId = historyShoe.orderDetails?.map { it._id.toString() } ?: emptyList() ,
+                    shoeId = historyShoe.orderDetails?.map { it.shoeId.toString() } ?: emptyList() ,
+                    oderId = historyShoe._id,
                     userId = idUser
+
                 )
             )
             bottomSheetDialog.dismiss()

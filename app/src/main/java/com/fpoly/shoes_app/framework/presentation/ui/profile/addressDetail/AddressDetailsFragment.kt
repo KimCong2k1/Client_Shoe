@@ -48,6 +48,7 @@ class AddressDetailsFragment : BaseFragment<FragmentAddressDetailsBinding, Addre
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.0f))
         Log.d("AddressDetailsFragment", "Updated map with address: $address")
         binding.nameAddressEditText.hint = bundle?.nameAddress ?: ""
-        binding.addressDetailEditText.hint = address
+        binding.nameUserEditText.hint = bundle?.fullName ?: ""
+        binding.layoutInputPhone.text = bundle?.phoneNumber.toString()
     }
 }

@@ -1,6 +1,5 @@
 package com.fpoly.shoes_app.framework.domain.model.profile.address
 
-import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
@@ -13,5 +12,7 @@ data class Addresse(
     val latitude: Double,
     val longitude: Double,
     val nameAddress: String?,
-    val permission: String?
+    val permission: String?,
+    val fullName: String?,
+    val phoneNumber: Int?
 ): Parcelable

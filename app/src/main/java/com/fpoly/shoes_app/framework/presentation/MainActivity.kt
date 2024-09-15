@@ -7,7 +7,9 @@ import android.media.AudioManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -15,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.ActivityMainBinding
+import com.fpoly.shoes_app.framework.presentation.ui.login.LoginScreen
 import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -47,6 +50,11 @@ class MainActivity : AppCompatActivity() {
             if (!hasPermissions(this, *PERMISSIONS)) {
                 ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_REQUEST_CODE)
             }
+            val isDarkModeEnabled = SharedPreferencesManager.isDarkModeEnabled()
+            AppCompatDelegate.setDefaultNightMode(
+                if (isDarkModeEnabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+            )
+
             setupBottomNavigation()
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
@@ -58,6 +66,16 @@ class MainActivity : AppCompatActivity() {
                 val tokenFcm = task.result
                 SharedPreferencesManager.setToken(tokenFcm)
                 Log.d("TAG", tokenFcm)
+            })
+            onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (supportFragmentManager.findFragmentById(R.id.loginFragmentScreen) is LoginScreen) {
+                        finish() // Exit the app
+                    } else {
+                        isEnabled = false
+                        onBackPressed()
+                    }
+                }
             })
         } catch (e: IOException) {
             Log.e("MainActivity", "Error in onCreate: ${e.message}", e)

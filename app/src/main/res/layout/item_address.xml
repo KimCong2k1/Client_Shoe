@@ -21,34 +21,76 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_16dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageShow"
         app:layout_constraintStart_toEndOf="@+id/imageEdit"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/nameAddress"
+            android:id="@+id/nameUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/name"
             android:maxLines="1"
-            android:textSize="@dimen/text_size_16sp" />
+            android:textSize="@dimen/text_size_18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_margin="@dimen/dimen_3dp"
+            android:layout_width="@dimen/dimen_10dp"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/color_nav_primary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/numberPhoneUser"
+            app:layout_constraintStart_toEndOf="@id/nameUser" />
 
         <TextView
-            android:id="@+id/Address"
+            android:id="@+id/numberPhoneUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/address"
-            android:ellipsize="end"
+            android:hint="@string/phone_suggest"
             android:maxLines="1"
-            android:textSize="@dimen/text_size_16sp"/>
-    </LinearLayout>
+            app:layout_constraintStart_toEndOf="@id/view"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/text_size_16sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/nameAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="@string/address"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size_16sp"
+            app:layout_constraintBottom_toTopOf="@+id/detailAddress"
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageEdit"
+            app:layout_constraintTop_toBottomOf="@+id/layout" />
+
+    <TextView
+        android:id="@+id/detailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_16dp"
+        android:hint="@string/phone_suggest"
+        android:maxLines="1"
+        android:textSize="@dimen/text_size_16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageEdit"
+        app:layout_constraintTop_toBottomOf="@+id/nameAddress" />
 
     <ImageView
         android:id="@+id/imageShow"

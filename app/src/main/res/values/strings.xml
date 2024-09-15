@@ -105,6 +105,7 @@
     <string name="confirm">Xác nhận</string>
     <!--    <string name="profile">Cấu hình</string>-->
     <string name="phone_suggest">0123456789</string>
+    <string name="phone">Số điện thoại người nhận</string>
     <string name="birthDay">0000-00-00</string>
     <string name="edit_info">Sửa thông tin</string>
     <string name="address">Địa chỉ</string>
@@ -126,4 +127,6 @@
     <string name="titleShoeFbee">Thông báo mới từ ShoeFbee</string>
     <string name="messageShoeFbee">Nội dung mới từ ShoeFbee</string>
     <string name="msg_token_fmt">msg_token_fmt</string>
+    <string name="darkMode">Chế độ tối</string>
+    <string name="enterpPlace">Enter place</string>
 </resources>

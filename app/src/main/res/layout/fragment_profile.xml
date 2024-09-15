@@ -215,7 +215,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintAddess">
 
             <ImageView
-                android:id="@+id/noti"
+                android:id="@+id/notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:tint="@color/textColorPrimary"
@@ -234,7 +234,49 @@
                 android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/text_size_16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/noti"
+                app:layout_constraintStart_toEndOf="@+id/notification"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_navigate_next_24"
+                app:tint="@color/textColorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:importantForAccessibility="no" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintHelpCenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/dimen_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintNotification">
+
+            <ImageView
+                android:id="@+id/helpCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:tint="@color/textColorPrimary"
+                android:src="@drawable/baseline_help_center_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:id="@+id/textView4HelpCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/helpCenter"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_size_16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/helpCenter"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -248,50 +290,7 @@
                 android:importantForAccessibility="no" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Dark Mode Section -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintDarkMode"
-            android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/dimen_16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintNotification">
 
-            <ImageView
-                android:id="@+id/darkMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:importantForAccessibility="no"
-                android:src="@drawable/eyes_open"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/textColorPrimary" />
-
-            <TextView
-                android:id="@+id/textView4DarkMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_5dp"
-                android:text="@string/darkMode"
-                android:textColor="@color/textColorPrimary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/darkMode"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/switchDarkMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:thumbTint="@color/white"
-                app:trackTint="@color/background_color_field" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Logout Section -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -301,7 +300,7 @@
             android:paddingVertical="@dimen/dimen_16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintDarkMode">
+            app:layout_constraintTop_toBottomOf="@+id/constraintHelpCenter">
 
             <ImageView
                 android:id="@+id/logout"

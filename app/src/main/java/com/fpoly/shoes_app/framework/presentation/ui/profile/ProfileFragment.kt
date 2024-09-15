@@ -193,6 +193,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             constraintNotification.setOnClickListener {
             navigateToFragment(R.id.generalSettingFragment)
         }
+            constraintHelpCenter.setOnClickListener {
+            navigateToFragment(R.id.helpCenterFragment)
+        }
             relative.setOnClickListener {
                 AddImage.openImageDialog(imageShow,requireContext(), requireActivity()) { intent ->
                     when (intent.action) {

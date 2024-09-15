@@ -33,8 +33,6 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
     private val gender = arrayOf("Nữ", "Nam")
     private var id = ""
     private var genderSelection = 1
-    private var originalProfile: ProfileResponse? = null
-
     private var originalFullName: String? = null
     private var originalPhoneNumber: String? = null
     private var originalGmail: String? = null

@@ -177,4 +177,9 @@
         android:name="com.fpoly.shoes_app.framework.presentation.ui.orders.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/helpCenterFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.helpCenter.HelpCenterFragment"
+        android:label="fragment_help_center"
+        tools:layout="@layout/fragment_help_center" />
 </navigation>

@@ -18,7 +18,7 @@
 
     <!--    //quy-->
     <!--    key map-->
-    <string name="key_map" translatable="false" templateMergeStrategy="preserve">AIzaSyCH8B5nvbZwslomTAn6u4-ZGG145XHCXLA</string>
+    <string name="key_map" templateMergeStrategy="preserve" translatable="false">AIzaSyCH8B5nvbZwslomTAn6u4-ZGG145XHCXLA</string>
     <!--    string other-->
     <string name="capture">Máy Ảnh</string>
     <string name="selectImg">Chọn Nguồn Ảnh</string>
@@ -70,6 +70,7 @@
     <string name="create_your_password">Tạo mật khẩu mới của bạn</string>
     <string name="update">Cập nhật</string>
     <string name="general_notification">Thông báo</string>
+    <string name="helpCenter">Trung tâm hỗ trợ</string>
     <string name="sound">Âm thanh</string>
     <string name="vibrate">Rung</string>
     <string name="promo_vs_discount">Khuyến mại và Giảm giá</string>
@@ -106,6 +107,10 @@
     <!--    <string name="profile">Cấu hình</string>-->
     <string name="phone_suggest">0123456789</string>
     <string name="phone">Số điện thoại người nhận</string>
+    <string name="phoneHelp">Số điện thoại :</string>
+    <string name="phoneHelp1">097.567.1080</string>
+    <string name="store1Detail">57,Quan Hoa,Cầu Giấy</string>
+    <string name="store2Detail">29,Trần Đại Nghĩa,Hai Bà Trưng</string>
     <string name="birthDay">0000-00-00</string>
     <string name="edit_info">Sửa thông tin</string>
     <string name="address">Địa chỉ</string>
@@ -129,4 +134,7 @@
     <string name="msg_token_fmt">msg_token_fmt</string>
     <string name="darkMode">Chế độ tối</string>
     <string name="enterpPlace">Enter place</string>
+    <string name="contact">Thông tin liên hệ</string>
+    <string name="store1">Cửa hàng số 1:</string>
+    <string name="store2">Cửa hàng số 2:</string>
 </resources>

@@ -39,20 +39,9 @@
             android:textSize="@dimen/text_size_18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/view"
-            android:layout_margin="@dimen/dimen_3dp"
-            android:layout_width="@dimen/dimen_10dp"
-            android:layout_height="@dimen/dimen_1dp"
-            android:background="@color/color_nav_primary"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/numberPhoneUser"
-            app:layout_constraintStart_toEndOf="@id/nameUser" />
 
         <TextView
             android:id="@+id/numberPhoneUser"
@@ -60,10 +49,11 @@
             android:layout_height="wrap_content"
             android:hint="@string/phone_suggest"
             android:maxLines="1"
-            app:layout_constraintStart_toEndOf="@id/view"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="@dimen/text_size_16sp"
+            android:layout_marginStart="@dimen/dimen_10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textSize="@dimen/text_size_16sp" />
+            app:layout_constraintStart_toEndOf="@id/nameUser"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

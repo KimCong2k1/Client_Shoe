@@ -14,5 +14,5 @@ data class Addresse(
     val nameAddress: String?,
     val permission: String?,
     val fullName: String?,
-    val phoneNumber: Int?
+    val phoneNumber: String?
 ): Parcelable

@@ -252,6 +252,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintDarkMode"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/dimen_16dp"
             app:layout_constraintEnd_toEndOf="parent"

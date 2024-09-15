@@ -62,9 +62,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             sharedPreferences.setUserWait()
             sharedPreferences.removeUser()
             sharedPreferences.removeIdUser()
-            childFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            navController?.navigate(R.id.loginFragmentScreen, null, NavOptions.Builder().setPopUpTo(
-                navController?.currentDestination?.id ?: -1, true).build())
+            childFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            navController?.navigate(R.id.loginFragmentScreen, null,null)
             Log.e("userWait", sharedPreferences.getUserNameWait())
             Log.e("user", sharedPreferences.getUserName())
             bottomSheetDialog.dismiss()
@@ -204,11 +203,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
                 }
 
         }
-            switchDarkMode.isChecked = sharedPreferences.isDarkModeEnabled()
-            switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-                sharedPreferences.saveDarkModeState(isChecked) // Save preference
-                applyDarkMode(isChecked) // Apply theme
-            }
+//            switchDarkMode.isChecked = sharedPreferences.isDarkModeEnabled()
+//            switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+//                sharedPreferences.saveDarkModeState(isChecked) // Save preference
+//                applyDarkMode(isChecked) // Apply theme
+//            }
         }
     }
 
@@ -220,24 +219,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
         }
         AppCompatDelegate.setDefaultNightMode(nightMode)
     }
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (resultCode == Activity.RESULT_OK) {
-//            uriPath = AddImage.handleImageSelectionResult( data)
-//            val imagePath = uriPath?.let { File(Imagesss.getPathFromUri(it, requireContext())) }
-//            uriPath?.let {
-//                Glide.with(requireContext())
-//                    .load(it)
-//                    .placeholder(R.drawable.baseline_account_circle_24)
-//                    .error(R.drawable.baseline_account_circle_24)
-//                    .circleCrop() // Bo tròn ảnh
-//                    .into(binding.idAvatar);
-////                binding.idAvatar.setImageURI(it) // Set the image URI to the ImageView
-//            }
-//            viewModel.setUp(idUser,imagePath, null, null, null, null,null)
-//        }
-//    }
+
 private fun navigateToFragment(fragmentId: Int) {
     val navController = findNavController()
     val currentDestination = navController.currentDestination

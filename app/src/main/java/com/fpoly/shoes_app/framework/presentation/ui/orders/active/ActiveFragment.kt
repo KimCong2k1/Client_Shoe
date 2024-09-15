@@ -53,7 +53,10 @@ class ActiveFragment : BaseFragment<FragmentActiveBinding, OrdersViewModel>(
         } else {
             activeAdapter.updateHistoryShoes(viewModel.uiState.value.historyShoes)
         }
-    }    override fun bindViewModel() {
+        clearListAndFetchData()
+
+    }
+    override fun bindViewModel() {
         lifecycleScope.launch {
             viewModel.uiState.collect { state ->
                 binding.swipeRefreshLayout.isRefreshing = state.isLoading
@@ -68,5 +71,9 @@ class ActiveFragment : BaseFragment<FragmentActiveBinding, OrdersViewModel>(
     }
 
     override fun setOnClick() {
+    }
+    private fun clearListAndFetchData() {
+        activeAdapter.updateHistoryShoes(emptyList())
+        viewModel.getActiveOrders(idUser)
     }
 }

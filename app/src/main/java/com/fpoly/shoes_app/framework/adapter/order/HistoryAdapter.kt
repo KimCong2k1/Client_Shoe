@@ -25,6 +25,8 @@ class HistoryAdapter(
         private val imageShoeItemImageView: ImageView = itemView.findViewById(R.id.imageShoeItem)
         private val nameShoeTextView: TextView = itemView.findViewById(R.id.nameShoeItem)
         private val contentShoeTextView: TextView = itemView.findViewById(R.id.contentShoeItem)
+        private val addressShoeTextView: TextView = itemView.findViewById(R.id.addressShoeItem)
+        private val phoneShoeTextView: TextView = itemView.findViewById(R.id.phoneShoeItem)
         private val colorShoeTextView: TextView = itemView.findViewById(R.id.colorShoeItem)
         private val colorShoeItemView: CardView = itemView.findViewById(R.id.colorShoeItemView)
         private val sizeShoeTextView: TextView = itemView.findViewById(R.id.sizeShoeItem)
@@ -34,6 +36,8 @@ class HistoryAdapter(
         @SuppressLint("SetTextI18n")
         fun bind(historyShoe: HistoryShoe) {
             contentShoeTextView.text = historyShoe.dateOrder
+            phoneShoeTextView.text = historyShoe.phoneNumber
+            addressShoeTextView.text = historyShoe.addressOrder
             nameShoeTextView.text = historyShoe.nameOrder
             rateOrTrackShoe.text = itemView.context.getString(
                 when(historyShoe.status){

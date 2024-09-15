@@ -108,7 +108,8 @@ class DetailActiveFragment: BaseFragment<FragmentDetailActiveBinding, DetailActi
                 findNavController().popBackStack()
             }
             comfirmTake.setOnClickListener {
-                viewModel.confirmTakeDetailVM(historyShoe?._id.toString())
+
+                historyShoe?._id?.let { it1 -> viewModel.confirmTakeDetailVM(it1) }
             }
         }
 

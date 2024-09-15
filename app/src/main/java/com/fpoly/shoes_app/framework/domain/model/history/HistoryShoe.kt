@@ -13,7 +13,7 @@ data class HistoryShoe(
     val orderDetails: List<OrderDetail>?,
     val orderStatusDetails: List<OrderStatusDetail>?,
     val pay: String?,
-    val phoneNumber: Int?,
+    val phoneNumber: String?,
     val promo: Int?,
     val status: String?,
     val thumbnail: String?,

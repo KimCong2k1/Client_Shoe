@@ -35,7 +35,8 @@ class HistoryAdapter(
         private val wait: TextView = itemView.findViewById(R.id.wait)
         @SuppressLint("SetTextI18n")
         fun bind(historyShoe: HistoryShoe) {
-            contentShoeTextView.text = historyShoe.dateOrder
+            val formattedDate = historyShoe.dateOrder?.substring(9, 19)
+            contentShoeTextView.text = formattedDate
             phoneShoeTextView.text = historyShoe.phoneNumber
             addressShoeTextView.text = historyShoe.addressOrder
             nameShoeTextView.text = historyShoe.nameOrder

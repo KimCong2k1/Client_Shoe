@@ -39,7 +39,7 @@ class HistoryAdapter(
             contentShoeTextView.text = formattedDate
             phoneShoeTextView.text = historyShoe.phoneNumber
             addressShoeTextView.text = historyShoe.addressOrder
-            nameShoeTextView.text = historyShoe.nameOrder
+            nameShoeTextView.text = historyShoe.orderDetails?.get(0)?.name ?: "Order"
             rateOrTrackShoe.text = itemView.context.getString(
                 when(historyShoe.status){
                 "completed"->R.string.leaveReview

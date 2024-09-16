@@ -38,6 +38,9 @@ class DetailActiveFragment: BaseFragment<FragmentDetailActiveBinding, DetailActi
             orderActiveDetailShoes = historyShoe!!.orderStatusDetails
         )
         binding.apply {
+            nameUser.text = historyShoe!!.orderDetails?.get(0)?.name ?: "Oder"
+            numberPhoneUser.text = historyShoe!!.phoneNumber
+            nameAddress.text = historyShoe!!.addressOrder
             recycProduct.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = detailHistoryAdapter

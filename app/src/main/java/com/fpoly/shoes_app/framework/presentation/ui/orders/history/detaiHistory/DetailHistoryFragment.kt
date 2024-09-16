@@ -68,7 +68,9 @@ class DetailHistoryFragment : BaseFragment<FragmentDetailHistoryBinding, DetailH
 
                 }
             }
-
+            nameUser.text = historyShoe.orderDetails?.get(0)?.name ?: "Oder"
+            numberPhoneUser.text = historyShoe.phoneNumber
+            nameAddress.text = historyShoe.addressOrder
             priceDemoOriginal.text = historyShoe.totalPre.toString().formatToVND()
             priceDemoSell.text = historyShoe.promo.toString().formatToVND()
             totalDemo.text = historyShoe.total.toString().formatToVND()

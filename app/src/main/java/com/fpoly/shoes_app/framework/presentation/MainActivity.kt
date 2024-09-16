@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 // Get new FCM registration token
                 val tokenFcm = task.result
                 SharedPreferencesManager.setToken(tokenFcm)
-                Log.d("TAG", tokenFcm)
+                Log.d("tokenFcm", tokenFcm)
             })
             onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {

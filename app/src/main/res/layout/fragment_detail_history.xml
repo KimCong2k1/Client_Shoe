@@ -27,13 +27,82 @@
         android:layout_marginVertical="@dimen/dimen_10dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
-<androidx.recyclerview.widget.RecyclerView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/inforDetail"
+        android:layout_width="match_parent"
+        android:background="@drawable/bg_sold_shoe_view"
+        app:layout_constraintTop_toBottomOf="@+id/barcodeImageView"
+        android:layout_margin="@dimen/dimen_16dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_edit_location_alt_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageEdit"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/nameUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/name"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/numberPhoneUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone_suggest"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_16sp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/nameUser"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/nameAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:ellipsize="end"
+            android:hint="@string/address"
+            android:maxLines="1"
+            android:textStyle="bold|italic"
+            android:textSize="@dimen/text_size_16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageEdit"
+            app:layout_constraintTop_toBottomOf="@+id/layout" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/recycComplete"
     android:layout_marginTop="@dimen/dimen_20dp"
     android:layout_marginHorizontal="@dimen/dimen_16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/barcodeImageView"
+    app:layout_constraintTop_toBottomOf="@+id/inforDetail"
     android:layout_width="@dimen/dimen_0dp"
     android:layout_height="wrap_content"/>
 

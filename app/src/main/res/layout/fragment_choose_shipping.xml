@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="Choose Shipping"
+            android:text="Chọn phương thức giao hàng"
             android:textColor="#000000"
             android:textSize="20sp" />
     </LinearLayout>
@@ -41,7 +41,7 @@
         android:layout_gravity="center"
         android:backgroundTint="#000000"
         android:fontFamily="@font/poppins_medium"
-        android:text="Apply"
+        android:text="Xác nhận"
         android:textColor="#FFFFFF"
         android:textSize="16sp" />
 </LinearLayout>

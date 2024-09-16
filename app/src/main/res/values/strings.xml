@@ -48,7 +48,7 @@
     <string name="create_acc">Tạo tài khoản</string>
     <string name="quick_create">Tạo tài khoản nhanh</string>
     <string name="full_name">Nhập vào tên đầy đủ của bạn</string>
-    <string name="date">Ngày tháng</string>
+    <string name="date">Ngày tháng năm</string>
     <string name="trackOrder">Đặt Ngay</string>
     <string name="orderAgain">Đặt Lại</string>
     <string name="email">you.@gmail.com</string>

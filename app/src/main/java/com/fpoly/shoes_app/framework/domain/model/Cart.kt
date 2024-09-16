@@ -29,7 +29,7 @@ data class ShoeData(
     @SerializedName("thumbnail")
     val thumbnail: String? = null,
     @SerializedName("size")
-    val size: String? = null,
+    val size: Size? = null,
     @SerializedName("color")
     val color: ColorCart? = null,
     @SerializedName("numberShoe")
@@ -38,6 +38,8 @@ data class ShoeData(
 
 @Parcelize
 data class ColorCart(
+    @SerializedName("colorId")
+    val id: String? = null,
     @SerializedName("textColor")
     val textColor: String? = null,
     @SerializedName("codeColor")

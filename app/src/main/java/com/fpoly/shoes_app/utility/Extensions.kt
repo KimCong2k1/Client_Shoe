@@ -10,6 +10,7 @@ import com.fpoly.shoes_app.R
 import java.security.MessageDigest
 import java.text.Normalizer
 
+
 fun ImageView.loadImage(imgResource: Int? = null) {
     this.load(imgResource) {
         placeholder(R.color.primary_white)
@@ -76,3 +77,12 @@ fun String.normalizeString(): String {
 fun Int.formatDiscountTitle(): String = "Phiếu giảm giá $this%"
 
 fun String.formatDiscountDescription(): String = "Có hiệu lực đến $this"
+
+fun String.formatTextSearch(): String =
+    if (this.isBlank()) "Hiển thị tất cả sản phẩm" else "Kết quả cho '$this'"
+
+fun Int.formatSizeSearch(): String = "$this sản phẩm"
+
+fun Int.formatReview(): String = "Đánh giá ($this lượt)"
+
+fun Int.formatRating(): String = if (this == RatingText.RATING_ALL) "Tất cả" else this.toString()

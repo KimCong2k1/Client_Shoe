@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fpoly.shoes_app.framework.domain.model.OrderRequest
 import com.fpoly.shoes_app.framework.domain.usecase.AddOrderUseCase
-import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -22,11 +21,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class PaymentCheckoutViewModel @Inject constructor(
     private val addOrderUseCase: AddOrderUseCase,
-    private val sharedPreferences: SharedPreferencesManager,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(PaymentCheckoutUiState())
@@ -50,11 +47,10 @@ class PaymentCheckoutViewModel @Inject constructor(
             emit(
                 addOrderUseCase.invoke(
                     OrderRequest(
-                        userId = sharedPreferences.getIdUser(),
                         addressId = _uiState.value.args?.idAddress,
                         totalShip = _uiState.value.args?.totalShip ?: 0L,
                         total = _uiState.value.args?.total ?: 0L,
-                        pay = "",
+                        pay = type,
                         items = _uiState.value.shoeOrder,
                     )
                 )

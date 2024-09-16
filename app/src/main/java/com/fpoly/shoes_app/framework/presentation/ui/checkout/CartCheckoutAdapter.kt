@@ -50,7 +50,7 @@ class CartViewHolder(
                 ignoreCase = true
             ) ?: false
             tvColor.text = shoes.shoe?.color?.textColor
-            tvSize.text = shoes.shoe?.size
+            tvSize.text = shoes.shoe?.size?.size
             tvPrice.text = shoes.shoe?.numberShoe?.toTotal(shoes.shoe.price)?.formatPriceShoe()
             tvNumberQuantity.text = shoes.shoe?.numberShoe.toString()
 

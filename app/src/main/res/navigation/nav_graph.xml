@@ -70,6 +70,10 @@
             app:destination="@id/notificationHomeFragment" />
 
         <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+
+        <action
             android:id="@+id/action_homeFragment_to_bannerDetailFragment"
             app:destination="@id/bannerDetailFragment">
             <argument
@@ -114,6 +118,10 @@
                 android:name="idShoe"
                 app:argType="string" />
         </action>
+
+        <action
+            android:id="@+id/action_shoesFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
 
     <fragment
@@ -327,7 +335,7 @@
         tools:layout="@layout/fragment_review">
         <argument
             android:name="args"
-            app:argType="com.fpoly.shoes_app.framework.domain.model.ReviewArgs" />
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -338,5 +346,28 @@
         <argument
             android:name="args"
             app:argType="com.fpoly.shoes_app.framework.domain.model.PaymentArgs" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment" />
+
+        <action
+            android:id="@+id/action_searchFragment_to_filterFragment"
+            app:destination="@id/filterFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.search.filter.FilterFragment"
+        android:label="FilterFragment"
+        tools:layout="@layout/fragment_filter" >
+        <argument
+            android:name="args"
+            app:argType="com.fpoly.shoes_app.framework.domain.model.FilterArgs" />
     </fragment>
 </navigation>

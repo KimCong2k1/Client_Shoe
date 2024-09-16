@@ -95,6 +95,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             if (it.second) viewModel.deleteFavorite(it.first.id.orEmpty())
             else viewModel.addFavorite(it.first.id.orEmpty())
         }
+
+        binding.layoutSearch.setOnClickListener {
+            navController?.navigate(
+                HomeFragmentDirections.actionHomeFragmentToSearchFragment()
+            )
+        }
     }
 
     private fun initHandleUiState() {

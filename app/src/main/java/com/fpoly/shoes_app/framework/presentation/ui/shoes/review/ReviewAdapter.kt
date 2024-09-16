@@ -1,26 +1,31 @@
-package com.fpoly.shoes_app.framework.presentation.ui.checkout.discount
+package com.fpoly.shoes_app.framework.presentation.ui.shoes.review
 
-import android.util.Log
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.fpoly.shoes_app.databinding.ItemDiscountCheckoutBinding
-import com.fpoly.shoes_app.framework.domain.model.Comment
+import com.bumptech.glide.Glide
+import com.fpoly.shoes_app.R
+import com.fpoly.shoes_app.databinding.ItemReviewViewBinding
+import com.fpoly.shoes_app.framework.domain.model.ReviewDetail
 import javax.inject.Inject
 
-private val diff = object : DiffUtil.ItemCallback<Comment>() {
-    override fun areItemsTheSame(oldItem: Comment, newItem: Comment) = oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: Comment, newItem: Comment) = oldItem == newItem
+private val diff = object : DiffUtil.ItemCallback<ReviewDetail>() {
+    override fun areItemsTheSame(oldItem: ReviewDetail, newItem: ReviewDetail) =
+        oldItem.id == newItem.id
+
+    override fun areContentsTheSame(oldItem: ReviewDetail, newItem: ReviewDetail) =
+        oldItem == newItem
 }
 
-class ReviewAdapter @Inject constructor() :
-    ListAdapter<Comment, ReviewViewHolder>(diff) {
-
+class ReviewAdapter @Inject constructor() : ListAdapter<ReviewDetail, ReviewViewHolder>(diff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ReviewViewHolder(
-        ItemDiscountCheckoutBinding.inflate(
+        ItemReviewViewBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
     )
@@ -31,11 +36,25 @@ class ReviewAdapter @Inject constructor() :
 }
 
 class ReviewViewHolder(
-    private val binding: ItemDiscountCheckoutBinding,
+    private val binding: ItemReviewViewBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(review: Comment) {
+    fun bind(review: ReviewDetail) {
         binding.run {
-            Log.d("123123", "bind: $review")
+            tvName.text = review.userName?.fullName
+            tvDescription.text = review.comment
+            tvDescription.isVisible = review.comment.isNullOrBlank().not()
+            tvRate.text = review.rateNumber.toString()
+            tvDate.text = review.date
+            val decodeDataImg =
+                Base64.decode(
+                    review.userName?.imageAccount?.`$binary`?.base64.toString(),
+                    Base64.DEFAULT,
+                )
+            val image = BitmapFactory.decodeByteArray(decodeDataImg, 0, decodeDataImg.size)
+            Glide.with(root.context)
+                .load(image)
+                .error(R.drawable.baseline_account_circle_24)
+                .into(imgAvatar)
         }
     }
 }

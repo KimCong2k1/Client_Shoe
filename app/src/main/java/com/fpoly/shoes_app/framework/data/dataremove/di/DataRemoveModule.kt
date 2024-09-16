@@ -6,6 +6,7 @@ import com.fpoly.shoes_app.framework.data.dataremove.api.CategoriesApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.DiscountApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.FavoriteApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.OrderApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.ReviewApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.ShoesApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.deleteInterface.DeleteaddressInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.AlladdressInterface
@@ -122,6 +123,11 @@ object DataRemoveModule {
     @Singleton
     fun provideOrderApi(retrofit: Retrofit): OrderApi =
         retrofit.create(OrderApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideReviewApi(retrofit: Retrofit): ReviewApi =
+        retrofit.create(ReviewApi::class.java)
 
     @Provides
     @Singleton

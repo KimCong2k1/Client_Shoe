@@ -1,5 +1,6 @@
 package com.fpoly.shoes_app.framework.presentation.ui.checkout
 
+import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
@@ -32,6 +33,15 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding, CheckoutViewModel
 ) {
     @Inject
     lateinit var cartCheckoutAdapter: CartCheckoutAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener(RequestKey.SHIPPING_CHECKOUT_REQUEST_KEY) { _, _ -> }
+
+        setFragmentResultListener(RequestKey.DISCOUNT_CHECKOUT_REQUEST_KEY) { _, _ -> }
+
+        setFragmentResultListener(RequestKey.ADDRESS_CHECKOUT_REQUEST_KEY) { _, _ -> }
+    }
 
     override fun setupViews() {
         (requireActivity() as? MainActivity)?.showBottomNavigation(true)

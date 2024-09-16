@@ -8,6 +8,7 @@
     <string name="profile">Thông tin</string>
     <string name="hello">Xin chào !</string>
     <string name="search">Tìm kiếm</string>
+    <string name="filter">Sắp xếp và lọc</string>
     <string name="special_programs">Chương trình đặc biệt</string>
     <string name="tittle_Address">Address Detail</string>
     <string name="most_popular">Phổ biến nhất</string>
@@ -135,4 +136,12 @@
     <string name="checkout_success_button">Tiếp tục mua sắm</string>
     <string name="checkout_error">Thanh toán thất bại</string>
     <string name="checkout_error_button">Thanh toán lại</string>
+    <string name="reset_button">Làm mới</string>
+    <string name="apply_button">Áp dụng</string>
+    <string name="category_text">Thể loại</string>
+    <string name="price_range_text">Phạm vi giá</string>
+    <string name="sort_by_text">Lọc theo</string>
+    <string name="rating_text">Xếp hạng</string>
+    <string name="min_text">Giá thấp</string>
+    <string name="max_text">Giá cao</string>
 </resources>

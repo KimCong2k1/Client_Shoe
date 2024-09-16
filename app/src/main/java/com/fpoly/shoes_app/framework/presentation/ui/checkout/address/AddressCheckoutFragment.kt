@@ -26,6 +26,11 @@ class AddressCheckoutFragment :
     @Inject
     lateinit var addressCheckoutAdapter: AddressCheckoutAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener(RequestKey.RELOAD_ADDRESS_CHECKOUT_REQUEST_KEY) { _, _ -> }
+    }
+
     override fun setupViews() {
         (requireActivity() as? MainActivity)?.showBottomNavigation(true)
         binding.run {

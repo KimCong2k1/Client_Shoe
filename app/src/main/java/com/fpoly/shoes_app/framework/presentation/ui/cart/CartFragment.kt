@@ -6,7 +6,6 @@ import androidx.lifecycle.lifecycleScope
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentCartBinding
 import com.fpoly.shoes_app.framework.domain.model.CheckoutArgs
-import com.fpoly.shoes_app.framework.domain.model.profile.address.Addresse
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.RequestKey
@@ -38,6 +37,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(
         setFragmentResultListener(RequestKey.SHOW_ALERT_DIALOG_CHECKOUT_REQUEST_KEY) { _, bundle ->
             val isEnable = bundle.getBoolean(ResultKey.SHOW_ALERT_DIALOG_CHECKOUT_RESULT_KEY)
             if (isEnable) {
+                viewModel.getDataCart()
                 showAlertDialog(
                     imgSuccess = true,
                     title = getString(R.string.checkout_success),

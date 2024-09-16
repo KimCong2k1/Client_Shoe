@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ReviewArgs(
-    val comments: List<Comment> = emptyList(),
-    val rate: Float = 0F,
+data class Sort(
+    val id: Int? = 0,
+    val text: String? = null,
 ) : Parcelable

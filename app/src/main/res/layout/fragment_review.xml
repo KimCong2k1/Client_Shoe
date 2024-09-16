@@ -30,6 +30,6 @@
             android:overScrollMode="never"
             android:paddingBottom="@dimen/dimen_32dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_discount_checkout" />
+            tools:listitem="@layout/item_review_view" />
     </androidx.core.widget.NestedScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>

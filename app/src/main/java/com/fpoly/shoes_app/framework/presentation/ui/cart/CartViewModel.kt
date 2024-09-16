@@ -35,7 +35,7 @@ class CartViewModel @Inject constructor(
         getDataCart()
     }
 
-    private fun getDataCart() {
+    fun getDataCart() {
         flow {
             emit(getCartUseCase.invoke(sharedPreferences.getIdUser()))
         }.onEach { resource ->

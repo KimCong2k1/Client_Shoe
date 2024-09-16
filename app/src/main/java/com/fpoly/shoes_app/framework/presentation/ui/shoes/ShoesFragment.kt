@@ -30,12 +30,12 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getDataShoes(type = args.titleShoes)
+        navController?.popBackStack()
     }
 
     override fun setupViews() {
         binding.headerLayout.run {
             tvTitle.text = args.titleShoes
-            imgFilter.isVisible = true
             imgSearch.isVisible = true
         }
         setupRecyclerView()
@@ -67,6 +67,10 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
         shoesAdapter.setOnClickFavorite {
             if (it.second) viewModel.deleteFavorite(it.first.id.orEmpty())
             else viewModel.addFavorite(it.first.id.orEmpty())
+        }
+
+        binding.headerLayout.imgSearch.setOnClickListener {
+            navController?.navigate(ShoesFragmentDirections.actionShoesFragmentToSearchFragment())
         }
     }
 

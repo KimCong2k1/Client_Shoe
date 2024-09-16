@@ -44,7 +44,7 @@ class ForGotEmailFragment : BaseFragment<FragmentForGotBinding, ForGotEmailViewM
                                     navController.currentDestination?.id ?: -1, true
                                 ).build()
                             )
-                            sharedPreferences.setIdUser(forgotMailResponse.idAccount)
+                            sharedPreferences.setIdUser(forgotMailResponse.userId)
                             StyleableToast.makeText(
                                 requireContext(), getString(R.string.success), R.style.success
                             ).show()
@@ -77,11 +77,16 @@ class ForGotEmailFragment : BaseFragment<FragmentForGotBinding, ForGotEmailViewM
     }
 
     override fun setOnClick() {
-        binding.btnNextPager.setOnClickListener {
-            if (!binding.emailEditText.text.toString().trim().isNullOrEmpty()){
-            binding.btnNextPager.isEnabled= false
-            viewModel.forgotMail(ForgotMail( binding.emailEditText.text.toString().trim()))}else
-                Toast.makeText(requireContext(),getString(R.string.inputFullInfo),Toast.LENGTH_SHORT).show()
+        binding.apply {
+            btnNextPager.setOnClickListener {
+                if (!binding.emailEditText.text.toString().trim().isNullOrEmpty()){
+                    binding.btnNextPager.isEnabled= false
+                    viewModel.forgotMail(ForgotMail( binding.emailEditText.text.toString().trim()))}else
+                    Toast.makeText(requireContext(),getString(R.string.inputFullInfo),Toast.LENGTH_SHORT).show()
+            }
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
     }

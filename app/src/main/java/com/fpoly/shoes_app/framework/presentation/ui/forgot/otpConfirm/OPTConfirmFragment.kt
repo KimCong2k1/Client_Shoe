@@ -27,7 +27,6 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
 ) {
     private val forGotEmailViewModel: ForGotEmailViewModel by activityViewModels()
     private var countDownTimer: CountDownTimer? = null
-    private var idUser: String = ""
     private lateinit var email: String
 
     private fun startCountdownTimer() {
@@ -59,7 +58,6 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
 
 
     override fun setupPreViews() {
-        idUser = sharedPreferences.getIdUser()
         email = arguments?.getString("email").toString()
 
     }
@@ -134,15 +132,20 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
     }
 
     override fun setOnClick() {
-        binding.btnSelect.setOnClickListener {
-            if (!binding.edtOPT.text.toString().trim().isNullOrEmpty())
-            viewModel.otpConfirm(idUser, binding.edtOPT.text.toString().trim())
-            else
-                Toast.makeText(requireContext(),getString(R.string.pleaseOTP), Toast.LENGTH_SHORT).show()
+        binding.apply {
+            btnSelect.setOnClickListener {
+                if (binding.edtOPT.text.toString().trim().isNotEmpty())
+                    viewModel.otpConfirm(email, binding.edtOPT.text.toString().trim())
+                else
+                    Toast.makeText(requireContext(),getString(R.string.pleaseOTP), Toast.LENGTH_SHORT).show()
+            }
+            countdownTimerTextView.setOnClickListener {
+                forGotEmailViewModel.forgotMail(ForgotMail( email))
+            }
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
 
-        }
-        binding.countdownTimerTextView.setOnClickListener {
-            forGotEmailViewModel.forgotMail(ForgotMail( email))
-        }
     }
 }

@@ -15,10 +15,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/color_background_toolbar"
+        android:background="@color/background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/textColorPrimary"
         app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
         app:title="Address" />
 
@@ -35,7 +36,7 @@
     <TextView
         android:id="@+id/textNoData"
         android:visibility="gone"
-        android:textColor="@color/black"
+        android:textColor="@color/color_nav_primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/noData"

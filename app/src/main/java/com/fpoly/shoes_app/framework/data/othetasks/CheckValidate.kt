@@ -12,17 +12,22 @@ import java.io.File
 
 object CheckValidate {
     fun checkPhone(
-        context: Context, edtData: TextInputEditText, layoutData: TextInputLayout, button: Button
+        context: Context, edtData: TextInputEditText, layoutData: TextInputLayout,button: Button
     ): Boolean {
+        // Check if the phone number length is less than 10 characters
         return if ((edtData.text?.length ?: 0) < 10) {
+            // Set an error message if the phone number is invalid
             layoutData.error = context.getString(R.string.is_number_phone)
+            // Return false indicating the validation failed
             false
         } else {
+            // Clear the error message if the phone number is valid
             layoutData.error = null
-            true
             button.requestFocus()
+            true
         }
     }
+
 
     fun checkEmail(
         context: Context,

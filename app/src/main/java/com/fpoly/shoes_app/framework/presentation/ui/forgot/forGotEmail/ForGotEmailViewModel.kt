@@ -31,7 +31,7 @@ class ForGotEmailViewModel
                     val setUpResponse = response.body()
                     if (setUpResponse != null) {
                         _forgotMailResult.value = Resource.success(setUpResponse)
-                        Log.e("idUser",setUpResponse.idAccount.toString())
+                        Log.e("idUser", setUpResponse.userId!!)
                     } else {
                         _forgotMailResult.value = Resource.error(null, "Set-up response is null")
                     }

@@ -20,8 +20,13 @@ object SharedPreferencesManager {
     private const val passWord = "password"
     private const val idUser = "idUser"
     private const val tokenKey = "tokenKey"
+    private const val DARK_MODE_KEY = "dark_mode"
 
     fun isSplashScreenSkipped(): Boolean = getBooleanDataByKey(SPLASH_SCREEN_NOT_SHOW)
+    fun isDarkModeEnabled(): Boolean = getBooleanDataByKey(DARK_MODE_KEY)
+    fun saveDarkModeState(isDarkMode: Boolean) {
+        saveBooleanDataByKey(DARK_MODE_KEY, isDarkMode)
+    }
 
     fun setSplashScreenSkipped(isSkipped: Boolean) {
         saveBooleanDataByKey(SPLASH_SCREEN_NOT_SHOW, isSkipped)

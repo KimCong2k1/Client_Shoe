@@ -8,6 +8,8 @@ import androidx.core.content.ContextCompat
 import coil.load
 import com.fpoly.shoes_app.R
 import java.security.MessageDigest
+import java.text.NumberFormat
+import java.util.Locale
 import java.text.Normalizer
 
 
@@ -61,6 +63,11 @@ fun String.toMD5(): String {
     return digest.joinToString("") { "%02x".format(it) }
 }
 
+fun String.formatToVND(): String {
+    val number = this.toLongOrNull() ?: return "Invalid number"
+    val format = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
+    return format.format(number)
+}
 fun Int?.toTotal(price: Long?): Long = this?.times(price ?: 0L) ?: 0L
 
 fun String.toDiscount(): String = "-$this"

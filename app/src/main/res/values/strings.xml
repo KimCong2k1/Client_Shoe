@@ -54,7 +54,6 @@
     <string name="trackOrder">Đặt Ngay</string>
     <string name="orderAgain">Đặt Lại</string>
     <string name="email">you.@gmail.com</string>
-    <string name="description">Chi tiết</string>
     <string name="phone_config">Nhập vào số điện thoại</string>
     <string name="text_continue">Tiếp tục</string>
     <string name="new_address">Tạo Địa Chỉ Mới</string>
@@ -86,9 +85,6 @@
     <string name="sent_otp_code">Mã đã gửi đến bạn</string>
     <string name="resend_code_otp">Gửi lại mã</string>
     <string name="send">Gửi</string>
-    <string name="quantity">Số lượng</string>
-    <string name="total_price">Tổng tiền</string>
-    <string name="add_to_cart">Thêm vào giỏ hàng</string>
     <string name="procedureOrder">Quy trình đơn hàng</string>
     <string name="price_original">Giá Gốc</string>
     <string name="dateDemo">0000/00/00</string>
@@ -118,8 +114,6 @@
     <string name="edit_info">Sửa thông tin</string>
     <string name="address">Địa chỉ</string>
     <string name="name">Họ và tên</string>
-    <string name="size">Kích cỡ :</string>
-    <string name="color">Màu sắc</string>
     <string name="White">Trắng</string>
     <string name="Black">Đen</string>
     <string name="Red">Đỏ</string>

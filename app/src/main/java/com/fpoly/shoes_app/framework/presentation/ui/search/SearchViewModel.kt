@@ -128,10 +128,24 @@ class SearchViewModel @Inject constructor(
                 this
             }
 
-            else -> {
+            RatingText.RATING_5 -> {
                 this.filter { shoe ->
                     (shoe.rate?.rate ?: 0F) <= rating
-                            && (shoe.rate?.rate ?: 0F) > (rating - 1)
+                            && (shoe.rate?.rate ?: 0F) >= (rating - 0.5)
+                }
+            }
+
+            RatingText.RATING_1 -> {
+                this.filter { shoe ->
+                    (shoe.rate?.rate ?: 0F) < (rating + 0.5)
+                            && (shoe.rate?.rate ?: 0F) >= 0
+                }
+            }
+
+            else -> {
+                this.filter { shoe ->
+                    (shoe.rate?.rate ?: 0F) < (rating + 0.5)
+                            && (shoe.rate?.rate ?: 0F) >= (rating - 0.5)
                 }
             }
         }

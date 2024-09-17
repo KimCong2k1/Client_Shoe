@@ -3,13 +3,10 @@ package com.fpoly.shoes_app.framework.presentation.ui.setUpAccount
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fpoly.shoes_app.framework.data.repository.ForgotMailRepository
+import com.fpoly.shoes_app.framework.data.repository.ProfileRepository
 import com.fpoly.shoes_app.framework.domain.model.forgotMail.ForgotMail
 import com.fpoly.shoes_app.framework.domain.model.forgotMail.ForgotMailResponse
-import com.fpoly.shoes_app.framework.domain.model.profile.ProfileResponse
-import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccountResponse
-import com.fpoly.shoes_app.framework.repository.ForgotMailRepository
-import com.fpoly.shoes_app.framework.repository.ProfileRepository
-import com.fpoly.shoes_app.framework.data.repository.ProfileRepository
 import com.fpoly.shoes_app.framework.domain.model.profile.ProfileResponse
 import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccountResponse
 import com.fpoly.shoes_app.framework.repository.SetUpAccountRepository

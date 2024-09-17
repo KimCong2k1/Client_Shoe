@@ -3,9 +3,6 @@ package com.fpoly.shoes_app.framework.presentation.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fpoly.shoes_app.framework.domain.model.login.Login
-import com.fpoly.shoes_app.framework.domain.model.login.LoginResponse
-import com.fpoly.shoes_app.framework.repository.LoginRepository
 import com.fpoly.shoes_app.framework.data.repository.LoginRepository
 import com.fpoly.shoes_app.framework.domain.model.login.Login
 import com.fpoly.shoes_app.framework.domain.model.login.LoginResponse

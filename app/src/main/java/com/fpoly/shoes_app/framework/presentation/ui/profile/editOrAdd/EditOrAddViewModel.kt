@@ -2,14 +2,15 @@ package com.fpoly.shoes_app.framework.presentation.ui.profile.editOrAdd
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fpoly.shoes_app.framework.domain.model.profile.ProfileResponse
-import com.fpoly.shoes_app.framework.domain.model.profile.address.Addresse
+import com.fpoly.shoes_app.framework.data.repository.AddAddressRepository
+import com.fpoly.shoes_app.framework.data.repository.UpdateAddressRepository
 import com.fpoly.shoes_app.framework.domain.model.profile.address.AllAddressResponse
 import com.fpoly.shoes_app.framework.domain.model.profile.address.addAddress.AddAddress
 import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccount
 import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccountResponse
 import com.fpoly.shoes_app.framework.repository.AddAddressRepository
 import com.fpoly.shoes_app.framework.repository.UpdateAddressRepository
+
 
 import com.fpoly.shoes_app.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject
+
 @HiltViewModel
 class EditOrAddViewModel  @Inject constructor(
     private val addAddressRepository: AddAddressRepository,

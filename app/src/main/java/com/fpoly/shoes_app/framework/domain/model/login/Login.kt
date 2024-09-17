@@ -12,8 +12,8 @@ data class Login(
     @SerializedName("namePassword") val namePassword: String,
 ): Parcelable
 class LoginResponse(
-      @SerializedName("user") val user: User?,
-      success: Boolean,
-      message: String?
+    @SerializedName("user") val user: User?,
+    success: Boolean,
+    message: String?
      ): BaseErrResponse(success, message)
 

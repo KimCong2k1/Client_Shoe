@@ -3,6 +3,11 @@ package com.fpoly.shoes_app.utility
 const val BASE_URL = "http://192.168.1.250:3000/api/"
 const val SET_TIME_OUT_API = 0L
 
+class Constants {
+    companion object {
+        const val BASE_URL = "http://192.168.88.153:3000/api/"
+        const val SET_TIME_OUT_API = 100L
+    }
 const val ITEM_MORE = "Thêm"
 const val GET_ALL_POPULAR_SHOES = "Phổ biến nhất"
 const val GET_POPULAR_SHOES_ALL = "Tất cả"

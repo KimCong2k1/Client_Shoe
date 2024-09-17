@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
@@ -22,6 +23,8 @@ import com.fpoly.shoes_app.databinding.FragmentProfileBinding
 import com.fpoly.shoes_app.databinding.LayoutDialogBinding
 import com.fpoly.shoes_app.framework.data.othetasks.AddImage
 import com.fpoly.shoes_app.framework.data.othetasks.AddImage.Glides
+import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate.strNullOrEmpty
+import com.fpoly.shoes_app.framework.domain.model.forgotMail.ForgotMail
 import com.fpoly.shoes_app.framework.domain.model.profile.ProfileResponse
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
@@ -30,6 +33,7 @@ import com.fpoly.shoes_app.utility.Imagesss
 import com.fpoly.shoes_app.utility.Status
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,6 +47,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
 ) {
     private var uriPath :Uri?=null
     private var imageShow :String?=null
+    private var email :String?=null
     private lateinit var captureImageLauncher: ActivityResultLauncher<Intent>
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
     private lateinit var idUser: String
@@ -101,7 +106,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
     @SuppressLint("SuspiciousIndentation")
     override fun bindViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.setUpResult.collect { result ->
+            viewModel.setUpResult.collect  { result ->
                 when (result.status) {
                     Status.SUCCESS -> {
                         val signUpResponse = result.data
@@ -131,6 +136,45 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             return@launch
         }
         viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.forgotMailResult.collect {
+                    result ->
+                when (result.status) {
+                    Status.SUCCESS -> {
+                        showProgressbar(false)
+                        val forgotMailResponse = result.data
+                        val bundle = Bundle().apply {
+                            putString("email",email)
+                        }
+                        if (forgotMailResponse?.success == true) {
+                            findNavController().navigate(R.id.OPTFragment, bundle)
+                            StyleableToast.makeText(
+                                requireContext(), getString(R.string.success), R.style.success
+                            ).show()
+                            return@collect
+                        }
+
+                    }
+
+                    Status.ERROR -> {
+
+                        val errorMessage = strNullOrEmpty(result.message)
+                        StyleableToast.makeText(
+                            requireContext(), strNullOrEmpty(errorMessage), R.style.fail
+                        ).show()
+                    }
+
+                    Status.LOADING -> {
+                        showProgressbar(true)
+                    }
+
+                    Status.INIT -> {
+
+                    }
+                }
+            }
+
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.findProfileResult.collect { result ->
                 when (result.status) {
                     Status.SUCCESS -> handleSuccess(result.data)
@@ -139,8 +183,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
                     Status.INIT -> {}
                 }
             }
-
         }
+
     }
 
     private fun handleResult(uri: Uri?) {
@@ -164,6 +208,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             bmp?.let { Glides(it,requireContext(),binding.idAvatar) }
             binding.nameProfile.text = user.fullName ?: getString(R.string.name)
             binding.phoneProfile.text = user.phoneNumber ?: getString(R.string.phone_suggest)
+            email = user.nameAccount
         }
     }
 
@@ -189,6 +234,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
         }
             constraintAddess.setOnClickListener {
             navigateToFragment(R.id.addressFragment)
+        }
+            constraintForgot.setOnClickListener {
+
+                viewModel.forgotMail(ForgotMail(email))
+
         }
             constraintNotification.setOnClickListener {
             navigateToFragment(R.id.generalSettingFragment)

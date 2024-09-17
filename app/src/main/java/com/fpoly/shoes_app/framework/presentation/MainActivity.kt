@@ -69,9 +69,10 @@ class MainActivity : AppCompatActivity() {
                     Log.w("TAG", "Fetching FCM registration token failed", task.exception)
                     return@OnCompleteListener
                 }
+
+                // Get new FCM registration token
                 val tokenFcm = task.result
                 SharedPreferencesManager.setToken(tokenFcm)
-
                 Log.d("tokenFcm", tokenFcm)
             })
             onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {

@@ -203,48 +203,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:importantForAccessibility="no" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintForgot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/dimen_16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintAddess">
-
-            <ImageView
-                android:id="@+id/edtForgot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:tint="@color/textColorPrimary"
-                android:src="@drawable/baseline_key_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:importantForAccessibility="no" />
-
-            <TextView
-                android:id="@+id/textView4Forgot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/forgot_password"
-                android:layout_marginStart="@dimen/dimen_5dp"
-                android:textColor="@color/textColorPrimary"
-                android:textSize="@dimen/text_size_16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/edtForgot"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:tint="@color/textColorPrimary"
-                android:src="@drawable/baseline_navigate_next_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:importantForAccessibility="no" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Notification Section -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -254,7 +212,7 @@
             android:paddingVertical="@dimen/dimen_16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintForgot">
+            app:layout_constraintTop_toBottomOf="@+id/constraintAddess">
 
             <ImageView
                 android:id="@+id/notification"

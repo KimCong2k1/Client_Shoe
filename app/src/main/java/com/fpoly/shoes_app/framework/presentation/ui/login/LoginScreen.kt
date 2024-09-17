@@ -42,9 +42,12 @@ class LoginScreen : BaseFragment<FragmentLoginScreenBinding, LoginViewModel>(
         with(sharedPreferences) {
             val userName = getUserName()
             val passWord = getPassWord()
+            val token = getToken()
             if (userName.isNotEmpty() && passWord.isNotEmpty()) {
                 check = true
-                viewModel.signIn(userName, passWord)
+                Log.e("tokenFCM",token)
+                viewModel.signIn(userName, passWord,token)
+
             }
             val userNameWait = getUserNameWait()
             if (userNameWait.isNotEmpty()) {
@@ -166,11 +169,12 @@ class LoginScreen : BaseFragment<FragmentLoginScreenBinding, LoginViewModel>(
                 findNavController().navigate(R.id.signUpFragment, null, navOptions)
             }
             btnLogin.setOnClickListener {
+                val token = sharedPreferences.getToken()
+
                 username = userNameEditTextLogin.text?.trim().toString()
                 password = passwordEditTextLogin.text?.trim().toString()
                 if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) viewModel.signIn(
-                    username,
-                    password.toMD5()
+                    username, password.toMD5(), token
                 ) else Toast.makeText(requireContext(), R.string.inputFullInfo, Toast.LENGTH_SHORT)
                     .show()
             }

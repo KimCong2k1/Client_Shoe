@@ -10,8 +10,6 @@ import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccount
 import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccountResponse
 import com.fpoly.shoes_app.framework.repository.AddAddressRepository
 import com.fpoly.shoes_app.framework.repository.UpdateAddressRepository
-
-
 import com.fpoly.shoes_app.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

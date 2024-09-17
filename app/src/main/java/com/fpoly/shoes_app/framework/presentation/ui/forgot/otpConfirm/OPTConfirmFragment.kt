@@ -28,6 +28,7 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
     private val forGotEmailViewModel: ForGotEmailViewModel by activityViewModels()
     private var countDownTimer: CountDownTimer? = null
     private lateinit var email: String
+    private  var check: Int = 0
 
     private fun startCountdownTimer() {
         binding.countdownTimerTextView.isEnabled = false
@@ -59,6 +60,7 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
 
     override fun setupPreViews() {
         email = arguments?.getString("email").toString()
+        check = arguments?.getInt("check") ?: 0
 
     }
     override fun setupViews() {
@@ -74,12 +76,16 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
                         val otpConfirmResponse = result.data
                         if (otpConfirmResponse?.success == true) {
                             val navController = findNavController()
+                            if (check==1){
                             fragmentManager?.popBackStackImmediate(R.id.loginFragmentScreen, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                             navController.navigate(
                                 R.id.createNewPassFragment, null, NavOptions.Builder().setPopUpTo(
                                     navController.currentDestination?.id ?: -1, true
                                 ).build()
-                            )
+                            )}else{
+                                navController.navigate(R.id.createNewPassFragment,null)
+                            }
+
                             StyleableToast.makeText(
                                 requireContext(), getString(R.string.success), R.style.success
                             ).show()

@@ -1,18 +1,20 @@
 <resources>
     <string name="app_name">shoes_app</string>
     <string name="nameApp">ShoeFbee</string>
+    <string name="home">Trang chủ</string>
+    <string name="favorites">Yêu thích</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="orders">Đơn hàng</string>
+    <string name="profile">Thông tin</string>
+    <string name="hello">Xin chào !</string>
     <string name="updateInfor">Thông tin cá nhân vưừa được cập nhật</string>
-    <string name="home">Home</string>
-    <string name="favorites">Favorites</string>
-    <string name="cart">Cart</string>
-    <string name="orders">Orders</string>
-    <string name="profile">Profile</string>
     <string name="leaveReview">Đánh giá</string>
     <string name="leaveRate">Viết nhận xét về sản phẩm 🤩</string>
     <string name="detailHistory">Chi tiết lịch sử đơn hàng</string>
     <string name="search">Tìm kiếm</string>
+    <string name="filter">Sắp xếp và lọc</string>
+    <string name="special_programs">Chương trình đặc biệt</string>
     <string name="tittle_Address">Address Detail</string>
-    <string name="special_offers">Ưu đãi đặc biệt</string>
     <string name="most_popular">Phổ biến nhất</string>
     <string name="see_all">Tất cả</string>
 
@@ -48,11 +50,10 @@
     <string name="create_acc">Tạo tài khoản</string>
     <string name="quick_create">Tạo tài khoản nhanh</string>
     <string name="full_name">Nhập vào tên đầy đủ của bạn</string>
-    <string name="date">Ngày tháng</string>
+    <string name="date">Ngày tháng năm</string>
     <string name="trackOrder">Đặt Ngay</string>
     <string name="orderAgain">Đặt Lại</string>
     <string name="email">you.@gmail.com</string>
-    <string name="description">Chi tiết</string>
     <string name="phone_config">Nhập vào số điện thoại</string>
     <string name="text_continue">Tiếp tục</string>
     <string name="new_address">Tạo Địa Chỉ Mới</string>
@@ -72,6 +73,7 @@
     <string name="general_notification">Thông báo</string>
     <string name="helpCenter">Trung tâm hỗ trợ</string>
     <string name="sound">Âm thanh</string>
+    <string name="special_offers">Ưu đãi đặc biệt</string>
     <string name="vibrate">Rung</string>
     <string name="promo_vs_discount">Khuyến mại và Giảm giá</string>
     <string name="payments">Thanh toán</string>
@@ -83,9 +85,6 @@
     <string name="sent_otp_code">Mã đã gửi đến bạn</string>
     <string name="resend_code_otp">Gửi lại mã</string>
     <string name="send">Gửi</string>
-    <string name="quantity">Số lượng</string>
-    <string name="total_price">Tổng tiền</string>
-    <string name="add_to_cart">Thêm vào giỏ hàng</string>
     <string name="procedureOrder">Quy trình đơn hàng</string>
     <string name="price_original">Giá Gốc</string>
     <string name="dateDemo">0000/00/00</string>
@@ -115,8 +114,6 @@
     <string name="edit_info">Sửa thông tin</string>
     <string name="address">Địa chỉ</string>
     <string name="name">Họ và tên</string>
-    <string name="size">Kích cỡ :</string>
-    <string name="color">Màu sắc</string>
     <string name="White">Trắng</string>
     <string name="Black">Đen</string>
     <string name="Red">Đỏ</string>
@@ -124,7 +121,7 @@
     <string name="noData">Không có dữ liệu</string>
     <string name="logout">Đăng xuất</string>
     <string name="confirm_logout">Bạn chắc chắn muốn đăng xuất?</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Hủy</string>
     <string name="agree">Đồng ý</string>
     <string name="otp_verification">Xác thực OTP</string>
     <string name="send_otp_to_your_mail">Mã OTP sẽ gửi đến email của bạn</string>
@@ -137,4 +134,52 @@
     <string name="contact">Thông tin liên hệ</string>
     <string name="store1">Cửa hàng số 1:</string>
     <string name="store2">Cửa hàng số 2:</string>
+    <string name="description">Chi tiết</string>
+    <string name="size">Kích cỡ</string>
+    <string name="color">Màu sắc</string>
+    <string name="quantity">Số lượng</string>
+    <string name="add_to_cart">Thêm vào giỏ hàng</string>
+    <string name="total_price">Tổng tiền</string>
+    <string name="check_out">Đặt hàng</string>
+    <string name="review">Đánh giá</string>
+    <string name="next">Tiếp theo</string>
+
+    <string name="favorites_title">Yêu thích</string>
+    <string name="cart_title">Giỏ hàng</string>
+
+    <string name="cart_delete_title">Bạn có đồng ý xóa sản phẩm này ra khỏi giỏ hàng ?</string>
+    <string name="add_cart_title">Thêm sản phẩm vào giỏ hàng thành công ?</string>
+    <string name="add_shoe_to_cart_button">Xem các sản phẩm khác</string>
+    <string name="cancel_dialog_shoe_to_cart_button">Ở lại</string>
+
+    <string name="shipping_address">Địa chỉ nhận hàng</string>
+    <string name="order_list">Sản phẩm</string>
+    <string name="choose_shipping">Phương thức vận chuyển</string>
+    <string name="choose_shipping_title">Chọn phương thức vận chuyển</string>
+    <string name="choose_address_title">Chọn địa chỉ nhận hàng</string>
+    <string name="choose_payment_title">Chọn phương thức thanh toán</string>
+    <string name="promo_code">Mã giảm giá</string>
+    <string name="promo_code_title">Chọn mã giảm giá</string>
+
+    <string name="amount_text">Tổng tiền hàng</string>
+    <string name="shipping_text">Tổng phí vận chuyển</string>
+    <string name="discount_text">Giảm giá</string>
+    <string name="total_text">Tổng thanh toán</string>
+    <string name="check_out_button">Thanh toán</string>
+    <string name="add_address_checkout_title">Thêm địa chỉ</string>
+    <string name="default_text">Mặc định</string>
+    <string name="cod_text">Thanh toán khi nhận hàng</string>
+    <string name="zalo_pay_text">Thanh toán qua Zalo Pay</string>
+    <string name="checkout_success">Đặt hàng thành công</string>
+    <string name="checkout_success_button">Tiếp tục mua sắm</string>
+    <string name="checkout_error">Thanh toán thất bại</string>
+    <string name="checkout_error_button">Thanh toán lại</string>
+    <string name="reset_button">Làm mới</string>
+    <string name="apply_button">Áp dụng</string>
+    <string name="category_text">Thể loại</string>
+    <string name="price_range_text">Phạm vi giá</string>
+    <string name="sort_by_text">Lọc theo</string>
+    <string name="rating_text">Xếp hạng</string>
+    <string name="min_text">Giá thấp</string>
+    <string name="max_text">Giá cao</string>
 </resources>

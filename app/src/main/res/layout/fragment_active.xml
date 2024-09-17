@@ -13,8 +13,7 @@
         <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycViewHistory"
         android:layout_width="@dimen/dimen_0dp"
-        android:layout_height="@dimen/dimen_0dp"
-            tools:listitem="@layout/item_history"
+        android:layout_height="@dimen/dimen_0dp" tools:listitem="@layout/item_history"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

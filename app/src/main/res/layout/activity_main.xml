@@ -23,12 +23,12 @@
         style="@style/Widget.MaterialComponents.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorOnPrimary"
+        android:background="@color/primary_white"
         app:itemIconSize="@dimen/dimen_22dp"
-        app:itemIconTint="@color/color_nav_primary"
+        app:itemIconTint="@color/ic_bottom_nav_color"
         app:itemTextAppearanceActive="@style/TextStyleBottomNavActive"
         app:itemTextAppearanceInactive="@style/TextStyleBottomNavInactive"
-        app:itemTextColor="@color/color_nav_primary"
+        app:itemTextColor="@color/text_bottom_nav_color"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/nav_menu" />
 </androidx.appcompat.widget.LinearLayoutCompat>

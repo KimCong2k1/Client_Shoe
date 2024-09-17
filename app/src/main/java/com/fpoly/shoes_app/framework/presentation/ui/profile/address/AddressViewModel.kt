@@ -2,9 +2,9 @@ package com.fpoly.shoes_app.framework.presentation.ui.profile.address
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fpoly.shoes_app.framework.data.repository.AllAddressRepository
+import com.fpoly.shoes_app.framework.data.repository.DeleteAddressRepository
 import com.fpoly.shoes_app.framework.domain.model.profile.address.AllAddressResponse
-import com.fpoly.shoes_app.framework.repository.AllAddressRepository
-import com.fpoly.shoes_app.framework.repository.DeleteAddressRepository
 import com.fpoly.shoes_app.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

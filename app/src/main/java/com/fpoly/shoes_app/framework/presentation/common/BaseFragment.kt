@@ -69,15 +69,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         Log.v(TAG, "onCreateView: $this")
-        return try {
-            _navController = requireActivity().findNavController(R.id.nav_host_fragment_content_main)
-            _binding = bindingInflater.invoke(layoutInflater, container, false)
-            setupPreViews()
-            _binding?.root
-        } catch (e: Exception) {
-            Log.e(TAG, "Error in onCreateView: ${e.message}", e)
-            null
-        }
         _navController = findNavController()
         _binding = bindingInflater.invoke(layoutInflater, container, false)
         setupPreViews()

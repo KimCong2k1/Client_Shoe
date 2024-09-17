@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Background colors -->
+    <color name="background_color">#FFFFFF</color> <!-- Light background -->
+    <color name="header_background">#F0F0F0</color> <!-- Light header background -->
+
+    <!-- Text colors -->
+    <color name="text_color_primary">#000000</color> <!-- Light text color -->
+    <color name="text_color_secondary">#FFFFFF</color> <!-- Light secondary text color -->
+
+    <color name="color_nav_primary">#000000</color> <!-- Light text color -->
+    <color name="color_nav_secondary">#FFFFFF</color> <!-- Light secondary text color -->
+    <color name="check_color">#FF5722</color> <!-- Orange for Light Mode -->
+
+    <!-- Primary color -->
+    <color name="colorPrimary">#FFFFFF</color> <!-- Light primary color -->
+    <color name="colorPrimaryDark">#000000</color> <!-- Darker shade of primary color -->
+
+    <!-- Other colors -->
+    <color name="card_background">#F5F5F5</color> <!-- Light card background -->
+    <color name="border_color">#E0E0E0</color>
+    <color name="colorPrimaryVariant">#3700B3</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+    <!-- Text Colors -->
+    <color name="textColorPrimary">#000000</color>
+    <color name="textColorSecondary">#FFFFFF</color>
+
+    <!-- Background and Surface Colors -->
+    <color name="backgroundColor">#FFFFFF</color>
+    <color name="surfaceColor">#FFFFFF</color>
+
+    <!-- Switch Colors -->
+    <color name="colorControlActivated">#6200EE</color>
+    <color name="colorControlNormal">#BDBDBD</color>
+    <!-- Màu chính của ứng dụng -->
+    <!-- Màu tối hơn của màu chính -->
+    <!-- Màu nổi bật cho các phần tử UI -->
+    <color name="colorAccent">#03DAC5</color>
+    <!-- Màu nền của cửa sổ -->
+    <color name="windowBackground">#FFFFFF</color>
+    <!-- Màu chữ mặc định cho ứng dụng -->
+    <color name="textColor">#000000</color>
+    <!-- Màu nền thanh công cụ cho chế độ sáng -->
+    <color name="toolbarBackground">#FFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary_black">#000000</color>

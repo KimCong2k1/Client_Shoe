@@ -63,6 +63,7 @@
     <string name="pleaseOTP">Vui lòng nhập mã OTP</string>
     <string name="create_your_password">Tạo mật khẩu mới của bạn</string>
     <string name="update">Cập nhật</string>
+    <string name="phone">Số điện thoại người nhận</string>
     <string name="general_notification">Thông báo</string>
     <string name="sound">Âm thanh</string>
     <string name="vibrate">Rung</string>
@@ -94,4 +95,5 @@
     <string name="titleShoeFbee">Thông báo mới từ ShoeFbee</string>
     <string name="messageShoeFbee">Nội dung mới từ ShoeFbee</string>
     <string name="msg_token_fmt">msg_token_fmt</string>
+    <string name="enterpPlace">Enter place</string>
 </resources>

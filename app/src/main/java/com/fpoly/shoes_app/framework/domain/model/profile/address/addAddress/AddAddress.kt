@@ -10,4 +10,7 @@ data class AddAddress(
     private val latitude: Double?,
     private val longitude: Double?,
     private val userId: String?,
+    private val phoneNumber: String?,
+    private val fullName: String?,
+    private val permission: String?,
 ): Parcelable

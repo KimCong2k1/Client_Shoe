@@ -13,5 +13,7 @@ data class Addresse(
     val latitude: Double,
     val longitude: Double,
     val nameAddress: String?,
-    val permission: String?
+    val permission: String?,
+    val phoneNumber: String?,
+    val fullName: String?
 ): Parcelable

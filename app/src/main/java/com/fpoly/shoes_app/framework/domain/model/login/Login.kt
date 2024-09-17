@@ -10,7 +10,6 @@ import kotlinx.parcelize.Parcelize
 data class Login(
     @SerializedName("nameAccount") val nameAccount: String,
     @SerializedName("namePassword") val namePassword: String,
-    @SerializedName("fcmToken") val fcmToken: String,
 ): Parcelable
 class LoginResponse(
     @SerializedName("user") val user: User?,

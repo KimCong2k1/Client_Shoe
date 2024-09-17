@@ -88,11 +88,6 @@ dependencies {   // Firebase dependencies
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5")
     implementation("androidx.fragment:fragment-ktx:1.8.3")
     implementation("com.google.android.libraries.places:places:3.5.0")
-    implementation(fileTree(mapOf(
-        "dir" to "/Users/quylh/Documents",
-        "include" to listOf("*.aar", "*.jar"),
-        "exclude" to listOf("")
-    )))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
@@ -128,7 +123,8 @@ dependencies {   // Firebase dependencies
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
     // implement ZaloPay
-
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+    implementation(files("/libs/zalo/zpdk-release-v3.1.aar"))
 }
 
 // Allow references to generated code

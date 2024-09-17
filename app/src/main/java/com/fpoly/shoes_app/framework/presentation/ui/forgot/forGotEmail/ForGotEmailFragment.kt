@@ -28,6 +28,7 @@ class ForGotEmailFragment : BaseFragment<FragmentForGotBinding, ForGotEmailViewM
     override fun bindViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.forgotMailResult.collect {
+
                 result ->
                 when (result.status) {
                     Status.SUCCESS -> {
@@ -35,7 +36,6 @@ class ForGotEmailFragment : BaseFragment<FragmentForGotBinding, ForGotEmailViewM
                         val forgotMailResponse = result.data
                         val bundle = Bundle().apply {
                             putString("email",binding.emailEditText.text.toString())
-                            putInt("check",1)
                         }
                         if (forgotMailResponse?.success == true) {
                             val navController = findNavController()
@@ -79,7 +79,7 @@ class ForGotEmailFragment : BaseFragment<FragmentForGotBinding, ForGotEmailViewM
     override fun setOnClick() {
         binding.apply {
             btnNextPager.setOnClickListener {
-                if (binding.emailEditText.text.toString().trim().isNotEmpty()){
+                if (!binding.emailEditText.text.toString().trim().isNullOrEmpty()){
                     binding.btnNextPager.isEnabled= false
                     viewModel.forgotMail(ForgotMail( binding.emailEditText.text.toString().trim()))}else
                     Toast.makeText(requireContext(),getString(R.string.inputFullInfo),Toast.LENGTH_SHORT).show()

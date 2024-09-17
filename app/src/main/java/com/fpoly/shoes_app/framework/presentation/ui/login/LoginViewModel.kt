@@ -21,11 +21,11 @@ class LoginViewModel @Inject constructor(
     private val _loginResult = MutableStateFlow<Resource<LoginResponse>>(Resource.init(null))
     val loginResult: StateFlow<Resource<LoginResponse>> = _loginResult
 
-    fun signIn(username: String, password: String,token:String) {
+    fun signIn(username: String, password: String) {
         viewModelScope.launch {
             _loginResult.value = Resource.loading(null)
             try {
-                val response = loginRepository.signIn(Login(username, password,token))
+                val response = loginRepository.signIn(Login(username, password))
                 if (response.isSuccessful) {
                     val signUpResponse = response.body()
                     if (signUpResponse != null) {

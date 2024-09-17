@@ -91,7 +91,6 @@
                 android:text="@string/history"
                 android:textSize="@dimen/text_size_14sp" />
 
-
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/addressShoeItem"
@@ -194,9 +193,5 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpUsage" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

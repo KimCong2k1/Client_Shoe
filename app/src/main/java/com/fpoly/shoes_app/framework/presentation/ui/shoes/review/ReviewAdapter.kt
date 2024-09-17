@@ -53,7 +53,7 @@ class ReviewViewHolder(
             val image = BitmapFactory.decodeByteArray(decodeDataImg, 0, decodeDataImg.size)
             Glide.with(root.context)
                 .load(image)
-                .error(R.drawable.baseline_account_circle_24)
+                .error(R.drawable.ic_user_image)
                 .into(imgAvatar)
         }
     }

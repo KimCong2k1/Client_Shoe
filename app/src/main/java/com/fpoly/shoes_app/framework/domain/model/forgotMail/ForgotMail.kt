@@ -7,11 +7,11 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ForgotMail(
-    @SerializedName("nameAccount") val nameAccount: String,
+    @SerializedName("nameAccount") val nameAccount: String?,
 ): Parcelable
 
  class ForgotMailResponse(
-    @SerializedName("idAccount") val idAccount: String?,
+    @SerializedName("userId") val userId: String?,
      success: Boolean,
      message: String?
 ) : BaseErrResponse(success, message)

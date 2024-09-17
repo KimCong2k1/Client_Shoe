@@ -3,9 +3,9 @@ package com.fpoly.shoes_app.framework.presentation.ui.forgot.forGotEmail
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fpoly.shoes_app.framework.data.repository.ForgotMailRepository
 import com.fpoly.shoes_app.framework.domain.model.forgotMail.ForgotMail
 import com.fpoly.shoes_app.framework.domain.model.forgotMail.ForgotMailResponse
-import com.fpoly.shoes_app.framework.repository.ForgotMailRepository
 import com.fpoly.shoes_app.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +31,7 @@ class ForGotEmailViewModel
                     val setUpResponse = response.body()
                     if (setUpResponse != null) {
                         _forgotMailResult.value = Resource.success(setUpResponse)
-                        Log.e("idUser",setUpResponse.idAccount.toString())
+                        Log.e("idUser", setUpResponse.userId!!)
                     } else {
                         _forgotMailResult.value = Resource.error(null, "Set-up response is null")
                     }

@@ -1,19 +1,32 @@
 package com.fpoly.shoes_app.framework.data.dataremove.di
 
+import com.fpoly.shoes_app.framework.data.dataremove.api.BannerApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.CartApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.CategoriesApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.DiscountApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.FavoriteApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.OrderApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.ReviewApi
+import com.fpoly.shoes_app.framework.data.dataremove.api.ShoesApi
 import com.fpoly.shoes_app.framework.data.dataremove.api.deleteInterface.DeleteaddressInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.AlladdressInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.NotificationsInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.OrderApiService
+import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.OrderRepository
 import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.ProfileInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.AddAddressInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.ConfirmTakeInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.CreateNewPassInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.ForgotMailInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.LoginInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.OTPConfirmInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.RateInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.SetUpInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.SignUpInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.UpdateAddressInterface
-import com.fpoly.shoes_app.utility.Constants.Companion.BASE_URL
-import com.fpoly.shoes_app.utility.Constants.Companion.SET_TIME_OUT_API
+import com.fpoly.shoes_app.utility.BASE_URL
+import com.fpoly.shoes_app.utility.SET_TIME_OUT_API
+import com.fpoly.shoes_app.framework.repository.OrderRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,19 +51,34 @@ object DataRemoveModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): Retrofit =
-        Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL)
+        Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
             .client(
-                OkHttpClient.Builder().connectTimeout(SET_TIME_OUT_API, TimeUnit.SECONDS)
+                OkHttpClient.Builder()
+                    .connectTimeout(SET_TIME_OUT_API, TimeUnit.SECONDS)
                     .writeTimeout(SET_TIME_OUT_API, TimeUnit.SECONDS)
                     .readTimeout(SET_TIME_OUT_API, TimeUnit.SECONDS)
                     .connectionPool(ConnectionPool(0, 5, TimeUnit.MINUTES))
-                    .addInterceptor(httpLoggingInterceptor).build()
-            ).build()
+                    .addInterceptor(httpLoggingInterceptor)
+                    .build()
+            )
+            .build()
 
     @Provides
     @Singleton
     fun provideCategoriesApi(retrofit: Retrofit): CategoriesApi =
         retrofit.create(CategoriesApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideShoesApi(retrofit: Retrofit): ShoesApi =
+        retrofit.create(ShoesApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideBannerApi(retrofit: Retrofit): BannerApi =
+        retrofit.create(BannerApi::class.java)
 
     @Provides
     @Singleton
@@ -84,6 +112,31 @@ object DataRemoveModule {
 
     @Provides
     @Singleton
+    fun provideFavoriteApi(retrofit: Retrofit): FavoriteApi =
+        retrofit.create(FavoriteApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideCartApi(retrofit: Retrofit): CartApi =
+        retrofit.create(CartApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideDiscountApi(retrofit: Retrofit): DiscountApi =
+        retrofit.create(DiscountApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideOrderApi(retrofit: Retrofit): OrderApi =
+        retrofit.create(OrderApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideReviewApi(retrofit: Retrofit): ReviewApi =
+        retrofit.create(ReviewApi::class.java)
+
+    @Provides
+    @Singleton
     fun provideProfileApi(retrofit: Retrofit): ProfileInterface =
         retrofit.create(ProfileInterface::class.java)
 
@@ -91,17 +144,44 @@ object DataRemoveModule {
     @Singleton
     fun provideAddressApi(retrofit: Retrofit): AlladdressInterface =
         retrofit.create(AlladdressInterface::class.java)
- @Provides
+
+    @Provides
     @Singleton
     fun proviDedeleteAddressApi(retrofit: Retrofit): DeleteaddressInterface =
         retrofit.create(DeleteaddressInterface::class.java)
-@Provides
+
+    @Provides
     @Singleton
     fun provideAddAddressApi(retrofit: Retrofit): AddAddressInterface =
         retrofit.create(AddAddressInterface::class.java)
-@Provides
+
+    @Provides
     @Singleton
     fun provideUpdateAddressApi(retrofit: Retrofit): UpdateAddressInterface =
         retrofit.create(UpdateAddressInterface::class.java)
+    @Provides
+    @Singleton
+    fun provideActiveApi(retrofit: Retrofit): OrderApiService =
+        retrofit.create(OrderApiService::class.java)
+
+
+    @Provides
+    fun provideActiveRepository(orderApiService: OrderApiService): OrderRepository =
+        OrderRepositoryImpl(orderApiService)
+
+    @Provides
+    @Singleton
+    fun provideRateApi(retrofit: Retrofit): RateInterface =
+        retrofit.create(RateInterface::class.java)
+    @Provides
+    @Singleton
+    fun provideConfirmTakeApi(retrofit: Retrofit): ConfirmTakeInterface =
+        retrofit.create(ConfirmTakeInterface::class.java)
+
+    @Provides
+    @Singleton
+    fun provideNotificationApi(retrofit: Retrofit): NotificationsInterface =
+        retrofit.create(NotificationsInterface::class.java)
+
 
 }

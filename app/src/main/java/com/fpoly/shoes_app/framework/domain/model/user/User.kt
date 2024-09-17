@@ -1,10 +1,13 @@
 package com.fpoly.shoes_app.framework.domain.model.user
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-data class User (
+@Parcelize
+data class User(
     @SerializedName("__v") val v: Int?,
-    @SerializedName("_id")val id: String?,
+    @SerializedName("_id") val id: String?,
     val birthday: String?,
     val fullName: String?,
     val gmail: String?,
@@ -16,4 +19,4 @@ data class User (
     val otp: String?,
     val phoneNumber: String?,
     val role: Int?
-)
+) : Parcelable

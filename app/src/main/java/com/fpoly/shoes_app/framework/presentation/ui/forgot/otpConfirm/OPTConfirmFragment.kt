@@ -11,7 +11,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentOtpBinding
-import com.fpoly.shoes_app.framework.data.module.CheckValidate.strNullOrEmpty
+import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate.strNullOrEmpty
 import com.fpoly.shoes_app.framework.domain.model.forgotMail.ForgotMail
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.forgot.forGotEmail.ForGotEmailViewModel
@@ -27,8 +27,8 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
 ) {
     private val forGotEmailViewModel: ForGotEmailViewModel by activityViewModels()
     private var countDownTimer: CountDownTimer? = null
-    private var idUser: String = ""
     private lateinit var email: String
+    private  var check: Int = 0
 
     private fun startCountdownTimer() {
         binding.countdownTimerTextView.isEnabled = false
@@ -59,8 +59,8 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
 
 
     override fun setupPreViews() {
-        idUser = sharedPreferences.getIdUser()
         email = arguments?.getString("email").toString()
+        check = arguments?.getInt("check") ?: 0
 
     }
     override fun setupViews() {
@@ -76,12 +76,16 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
                         val otpConfirmResponse = result.data
                         if (otpConfirmResponse?.success == true) {
                             val navController = findNavController()
+                            if (check==1){
                             fragmentManager?.popBackStackImmediate(R.id.loginFragmentScreen, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                             navController.navigate(
                                 R.id.createNewPassFragment, null, NavOptions.Builder().setPopUpTo(
                                     navController.currentDestination?.id ?: -1, true
                                 ).build()
-                            )
+                            )}else{
+                                navController.navigate(R.id.createNewPassFragment,null)
+                            }
+
                             StyleableToast.makeText(
                                 requireContext(), getString(R.string.success), R.style.success
                             ).show()
@@ -134,15 +138,20 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
     }
 
     override fun setOnClick() {
-        binding.btnSelect.setOnClickListener {
-            if (!binding.edtOPT.text.toString().trim().isNullOrEmpty())
-            viewModel.otpConfirm(idUser, binding.edtOPT.text.toString().trim())
-            else
-                Toast.makeText(requireContext(),getString(R.string.pleaseOTP), Toast.LENGTH_SHORT).show()
+        binding.apply {
+            btnSelect.setOnClickListener {
+                if (binding.edtOPT.text.toString().trim().isNotEmpty())
+                    viewModel.otpConfirm(email, binding.edtOPT.text.toString().trim())
+                else
+                    Toast.makeText(requireContext(),getString(R.string.pleaseOTP), Toast.LENGTH_SHORT).show()
+            }
+            countdownTimerTextView.setOnClickListener {
+                forGotEmailViewModel.forgotMail(ForgotMail( email))
+            }
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
 
-        }
-        binding.countdownTimerTextView.setOnClickListener {
-            forGotEmailViewModel.forgotMail(ForgotMail( email))
-        }
     }
 }

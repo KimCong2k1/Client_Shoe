@@ -7,7 +7,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentForGotBinding
-import com.fpoly.shoes_app.framework.data.module.CheckValidate.strNullOrEmpty
+import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate.strNullOrEmpty
 import com.fpoly.shoes_app.framework.domain.model.forgotMail.ForgotMail
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.Status
@@ -28,7 +28,6 @@ class ForGotEmailFragment : BaseFragment<FragmentForGotBinding, ForGotEmailViewM
     override fun bindViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.forgotMailResult.collect {
-
                 result ->
                 when (result.status) {
                     Status.SUCCESS -> {
@@ -36,6 +35,7 @@ class ForGotEmailFragment : BaseFragment<FragmentForGotBinding, ForGotEmailViewM
                         val forgotMailResponse = result.data
                         val bundle = Bundle().apply {
                             putString("email",binding.emailEditText.text.toString())
+                            putInt("check",1)
                         }
                         if (forgotMailResponse?.success == true) {
                             val navController = findNavController()
@@ -44,7 +44,7 @@ class ForGotEmailFragment : BaseFragment<FragmentForGotBinding, ForGotEmailViewM
                                     navController.currentDestination?.id ?: -1, true
                                 ).build()
                             )
-                            sharedPreferences.setIdUser(forgotMailResponse.idAccount)
+                            sharedPreferences.setIdUser(forgotMailResponse.userId)
                             StyleableToast.makeText(
                                 requireContext(), getString(R.string.success), R.style.success
                             ).show()
@@ -77,11 +77,16 @@ class ForGotEmailFragment : BaseFragment<FragmentForGotBinding, ForGotEmailViewM
     }
 
     override fun setOnClick() {
-        binding.btnNextPager.setOnClickListener {
-            if (!binding.emailEditText.text.toString().trim().isNullOrEmpty()){
-            binding.btnNextPager.isEnabled= false
-            viewModel.forgotMail(ForgotMail( binding.emailEditText.text.toString().trim()))}else
-                Toast.makeText(requireContext(),getString(R.string.inputFullInfo),Toast.LENGTH_SHORT).show()
+        binding.apply {
+            btnNextPager.setOnClickListener {
+                if (binding.emailEditText.text.toString().trim().isNotEmpty()){
+                    binding.btnNextPager.isEnabled= false
+                    viewModel.forgotMail(ForgotMail( binding.emailEditText.text.toString().trim()))}else
+                    Toast.makeText(requireContext(),getString(R.string.inputFullInfo),Toast.LENGTH_SHORT).show()
+            }
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
     }

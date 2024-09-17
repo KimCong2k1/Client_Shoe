@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_white"
+    android:background="@color/colorOnPrimary"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".framework.presentation.MainActivity">
@@ -23,12 +23,12 @@
         style="@style/Widget.MaterialComponents.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary_white"
+        android:background="@color/colorOnPrimary"
         app:itemIconSize="@dimen/dimen_22dp"
-        app:itemIconTint="@color/ic_bottom_nav_color"
+        app:itemIconTint="@color/color_nav_primary"
         app:itemTextAppearanceActive="@style/TextStyleBottomNavActive"
         app:itemTextAppearanceInactive="@style/TextStyleBottomNavInactive"
-        app:itemTextColor="@color/text_bottom_nav_color"
+        app:itemTextColor="@color/color_nav_primary"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/nav_menu" />
 </androidx.appcompat.widget.LinearLayoutCompat>

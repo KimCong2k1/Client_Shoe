@@ -11,6 +11,8 @@ import android.util.Base64
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
@@ -34,6 +36,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 
 
+@Suppress("UNREACHABLE_CODE")
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewModel>(
     FragmentProfileBinding::inflate, SetUpAccountViewModel::class.java
@@ -58,9 +61,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             sharedPreferences.setUserWait()
             sharedPreferences.removeUser()
             sharedPreferences.removeIdUser()
-            val navController = findNavController()
-            childFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            navController.navigate(R.id.loginFragmentScreen)
+            childFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            navController?.navigate(R.id.loginFragmentScreen, null,null)
             Log.e("userWait", sharedPreferences.getUserNameWait())
             Log.e("user", sharedPreferences.getUserName())
             bottomSheetDialog.dismiss()
@@ -78,6 +80,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
                 handleResult(uriPath)
             }
         }
+        binding.toolbar.navigationIcon?.setTint(ContextCompat.getColor(requireContext(), R.color.textColorPrimary))
 
         pickImageLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -177,19 +180,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
     }
 
     override fun setOnClick() {
-        binding.constraintLogout.setOnClickListener {
+        binding.apply {
+            constraintLogout.setOnClickListener {
             showBottomSheetDialog()
         }
-        binding.constraintEdt.setOnClickListener {
+            constraintEdt.setOnClickListener {
             navigateToFragment(R.id.editProfileFragment)
         }
-        binding.constraintAddess.setOnClickListener {
+            constraintAddess.setOnClickListener {
             navigateToFragment(R.id.addressFragment)
         }
-        binding.constraintNotification.setOnClickListener {
+            constraintNotification.setOnClickListener {
             navigateToFragment(R.id.generalSettingFragment)
         }
-        binding.relative.setOnClickListener {
+            constraintHelpCenter.setOnClickListener {
+            navigateToFragment(R.id.helpCenterFragment)
+        }
+            relative.setOnClickListener {
                 AddImage.openImageDialog(imageShow,requireContext(), requireActivity()) { intent ->
                     when (intent.action) {
                         MediaStore.ACTION_IMAGE_CAPTURE -> captureImageLauncher.launch(intent)
@@ -198,26 +205,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
                 }
 
         }
+//            switchDarkMode.isChecked = sharedPreferences.isDarkModeEnabled()
+//            switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+//                sharedPreferences.saveDarkModeState(isChecked) // Save preference
+//                applyDarkMode(isChecked) // Apply theme
+//            }
+        }
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (resultCode == Activity.RESULT_OK) {
-//            uriPath = AddImage.handleImageSelectionResult( data)
-//            val imagePath = uriPath?.let { File(Imagesss.getPathFromUri(it, requireContext())) }
-//            uriPath?.let {
-//                Glide.with(requireContext())
-//                    .load(it)
-//                    .placeholder(R.drawable.baseline_account_circle_24)
-//                    .error(R.drawable.baseline_account_circle_24)
-//                    .circleCrop() // Bo tròn ảnh
-//                    .into(binding.idAvatar);
-////                binding.idAvatar.setImageURI(it) // Set the image URI to the ImageView
-//            }
-//            viewModel.setUp(idUser,imagePath, null, null, null, null,null)
-//        }
-//    }
+    private fun applyDarkMode(isDarkMode: Boolean) {
+        val nightMode = if (isDarkMode) {
+            AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+            AppCompatDelegate.MODE_NIGHT_NO
+        }
+        AppCompatDelegate.setDefaultNightMode(nightMode)
+    }
+
 private fun navigateToFragment(fragmentId: Int) {
     val navController = findNavController()
     val currentDestination = navController.currentDestination

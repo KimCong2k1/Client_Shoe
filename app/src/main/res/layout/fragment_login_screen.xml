@@ -38,6 +38,7 @@ tools:ignore="SpUsage">
     android:layout_width="match_parent"
     android:layout_height="@dimen/dimen_0dp"
     android:background="@drawable/border_card_login"
+    android:backgroundTint="@color/color_background_toolbar"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +62,7 @@ tools:ignore="SpUsage">
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/congratulation"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color_primary"
             android:textSize="@dimen/text_size_25sp"
             />
 
@@ -71,7 +72,7 @@ tools:ignore="SpUsage">
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/sign_in_to_your_account"
-            android:textColor="@color/gray_600"
+            android:textColor="@color/text_color_primary"
             android:textSize="@dimen/text_size_15sp"
             />
     </LinearLayout>
@@ -90,6 +91,9 @@ tools:ignore="SpUsage">
             android:layout_height="@dimen/dimen_0dp"
             android:layout_marginHorizontal="@dimen/dimen_16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:boxStrokeColor="@color/text_color_primary"
+            app:boxStrokeErrorColor="@color/red"
+            app:hintTextColor="@color/color_nav_primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="DuplicateIds,MissingConstraints">
@@ -98,6 +102,7 @@ tools:ignore="SpUsage">
                 android:id="@+id/userNameEditTextLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/border_edt_config_info"
                 android:drawableStart="@drawable/baseline_contact_mail_24"
                 android:drawablePadding="@dimen/dimen_10dp"
                 android:textColor="@color/black"
@@ -118,6 +123,9 @@ tools:ignore="SpUsage">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutInputUserNameLogin"
             app:passwordToggleEnabled="true"
+            app:boxStrokeColor="@color/text_color_primary"
+            app:boxStrokeErrorColor="@color/red"
+            app:hintTextColor="@color/color_nav_primary"
             app:passwordToggleTint="@color/black"
             tools:ignore="DuplicateIds,MissingConstraints">
 
@@ -127,13 +135,13 @@ tools:ignore="SpUsage">
                 android:layout_height="match_parent"
                 android:drawableStart="@drawable/baseline_lock_24"
                 android:drawablePadding="@dimen/dimen_10dp"
+                android:background="@drawable/border_edt_config_info"
                 android:textColor="@color/black"
                 android:hint="@string/password"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
                 android:padding="@dimen/dimen_17dp"
                 android:textSize="@dimen/text_size_15sp" />
-
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -188,9 +196,9 @@ tools:ignore="SpUsage">
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_16dp"
         android:layout_marginVertical="@dimen/dimen_17dp"
-        android:background="@drawable/custom_button_login"
         android:text="@string/login"
-        android:textColor="@color/white"
+        android:textColor="@color/backgroundColor"
+        android:backgroundTint="@color/color_nav_primary"
         android:textSize="@dimen/text_size_15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -217,7 +225,7 @@ tools:ignore="SpUsage">
             android:layout_height="wrap_content"
             android:text="@string/sign_in"
             android:textSize="@dimen/text_size_15sp"
-            android:textColor="@color/black"
+            android:textColor="@color/color_nav_primary"
             android:textStyle="bold" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

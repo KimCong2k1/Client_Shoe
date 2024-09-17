@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/name"
             android:maxLines="1"
-            android:textSize="@dimen/text_size_20sp"
+            android:textSize="@dimen/text_size_18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,18 +57,18 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-        android:id="@+id/nameAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:hint="@string/address"
-        android:maxLines="1"
-        android:textSize="@dimen/text_size_16sp"
-        app:layout_constraintBottom_toTopOf="@+id/detailAddress"
-        android:layout_marginHorizontal="@dimen/dimen_16dp"
-        app:layout_constraintStart_toEndOf="@+id/imageEdit"
-        app:layout_constraintTop_toBottomOf="@+id/layout" />
+        <TextView
+            android:id="@+id/nameAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="@string/address"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size_16sp"
+            app:layout_constraintBottom_toTopOf="@+id/detailAddress"
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            app:layout_constraintStart_toEndOf="@+id/imageEdit"
+            app:layout_constraintTop_toBottomOf="@+id/layout" />
 
     <TextView
         android:id="@+id/detailAddress"

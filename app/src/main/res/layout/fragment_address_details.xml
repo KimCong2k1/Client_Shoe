@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border_card_login"
+        android:backgroundTint="@color/color_background_toolbar"
         android:paddingVertical="@dimen/dimen_10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,13 +77,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_16dp"
                 android:text="@string/point_name"
-                android:textColor="@color/black"
+                android:textColor="@color/color_nav_primary"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutInputUserName"
+                android:id="@+id/layoutInputNameAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_16dp"
@@ -113,14 +114,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_16dp"
-                android:text="@string/detail_address"
-                android:textColor="@color/black"
+                android:text="@string/name"
+                android:textColor="@color/color_nav_primary"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutInputUserName" />
+                app:layout_constraintTop_toBottomOf="@+id/layoutInputNameAddress" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutInputPassword"
+                android:id="@+id/layoutInputUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_16dp"
@@ -129,62 +130,48 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt2">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/addressDetailEditText"
+                    android:id="@+id/nameUserEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/border_edt_config_info"
-                    android:drawableEnd="@drawable/baseline_add_location_alt_24"
                     android:drawablePadding="@dimen/dimen_10dp"
-                    android:ellipsize="end"
-                    android:enabled="false"
                     android:imeOptions="actionNext"
+                    android:enabled="false"
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="@dimen/dimen_17dp"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/black_overlay"
                     android:textSize="@dimen/text_size_15sp"
                     tools:ignore="SpeakableTextPresentCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:id="@+id/addressDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraint2">
-
-            <CheckBox
-                android:id="@+id/checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
             <TextView
+                android:id="@+id/txt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/dimen_16dp"
-                android:text="@string/default_address"
-                android:textColor="@color/black" />
-        </LinearLayout>
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:text="@string/phone"
+                android:textColor="@color/color_nav_primary"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutInputUserName" />
 
-        <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_16dp"
-            android:background="@drawable/custom_button_login"
-            android:backgroundTint="@color/black"
-            android:text="@string/update"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addressDetail" />
+            <TextView
+                android:id="@+id/layoutInputPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:text="@string/phone_suggest"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt3"
+                app:layout_constraintTop_toBottomOf="@+id/layoutInputUserName" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -192,6 +179,8 @@
         android:id="@+id/constraintView"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="@dimen/dimen_0dp"
+        android:layout_marginTop="@dimen/dimen_32dp"
+        android:textColor="@color/color_nav_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cardViewLogin"
         app:layout_constraintStart_toStartOf="parent"

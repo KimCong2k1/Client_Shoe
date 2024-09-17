@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.framework.domain.model.profile.notification.Notification
+import com.google.android.material.materialswitch.MaterialSwitch
 
 class NotificationAdapter (
     private val notifications: List<Notification>,
@@ -18,7 +18,7 @@ class NotificationAdapter (
         class NotificationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val textViewTitle: TextView = view.findViewById(R.id.textViewTitle)
             @SuppressLint("UseSwitchCompatOrMaterialCode")
-            val switchControl: Switch = view.findViewById(R.id.switchControl)
+            val switchControl: MaterialSwitch = view.findViewById(R.id.switchControl)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {

@@ -2,15 +2,16 @@
 <resources>
     <!-- Background colors -->
     <color name="background_color">#FFFFFF</color> <!-- Light background -->
+    <color name="color_background_toolbar">#FFFFFF</color> <!-- Light background -->
     <color name="header_background">#F0F0F0</color> <!-- Light header background -->
 
     <!-- Text colors -->
     <color name="text_color_primary">#000000</color> <!-- Light text color -->
     <color name="text_color_secondary">#FFFFFF</color> <!-- Light secondary text color -->
 
-    <color name="color_nav_primary">#000000</color> <!-- Light text color -->
+ <color name="color_nav_primary">#000000</color> <!-- Light text color -->
     <color name="color_nav_secondary">#FFFFFF</color> <!-- Light secondary text color -->
-    <color name="check_color">#FF5722</color> <!-- Orange for Light Mode -->
+   <color name="check_color">#FF5722</color> <!-- Orange for Light Mode -->
 
     <!-- Primary color -->
     <color name="colorPrimary">#FFFFFF</color> <!-- Light primary color -->
@@ -43,6 +44,8 @@
     <color name="textColor">#000000</color>
     <!-- Màu nền thanh công cụ cho chế độ sáng -->
     <color name="toolbarBackground">#FFFFFF</color>
+
+    <!-- Các màu bổ sung -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary_black">#000000</color>
@@ -51,13 +54,18 @@
     <color name="gray_300">#CDCDCD</color>
     <color name="gray_200">#ECECEC</color>
     <color name="gray_100">#F6F6F6</color>
-<!--    my color quy-->
+
+
+
+    <!-- Dark theme specific colors -->
+    <color name="colorBackgroundDark">#000000</color> <!-- True black -->
+    <color name="colorTextDark">#FFFFFF</color>
+    <!--    my color quy-->
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
-    <color name="color_background_toolbar">#00D0BCFF</color>
     <color name="background_color_field">#ACACAE</color>
     <color name="color_text_action">#5D81C5</color>
     <color name="red">#F44336</color>

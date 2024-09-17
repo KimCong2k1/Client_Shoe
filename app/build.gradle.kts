@@ -45,9 +45,10 @@ android {
 dependencies {   // Firebase dependencies
     implementation ("com.google.zxing:core:3.4.1")
     implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
-    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation ("androidx.datastore:datastore-preferences:1.1.1")
 
     // Shimmer effect
     implementation("com.facebook.shimmer:shimmer:0.5.0")

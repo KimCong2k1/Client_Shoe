@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_background_toolbar"
         app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
-        app:title="Fragment Title"
+        app:title="@string/general_notification"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

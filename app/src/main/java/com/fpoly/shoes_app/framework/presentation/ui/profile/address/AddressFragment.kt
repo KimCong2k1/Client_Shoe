@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentAddressBinding
 import com.fpoly.shoes_app.framework.adapter.address.AddressAdapter
-import com.fpoly.shoes_app.framework.data.module.CheckValidate.strNullOrEmpty
+import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate.strNullOrEmpty
 import com.fpoly.shoes_app.framework.domain.model.profile.address.Addresse
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.Status

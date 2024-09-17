@@ -123,11 +123,8 @@ dependencies {   // Firebase dependencies
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
     // implement ZaloPay
-    implementation(fileTree(mapOf(
-        "dir" to "C:\\Users\\DeLL\\OneDrive\\Máy tính\\zalo",
-        "include" to listOf("*.aar", "*.jar"),
-        "exclude" to listOf("")
-    )))
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+    implementation(files("/libs/zalo/zpdk-release-v3.1.aar"))
 }
 
 // Allow references to generated code

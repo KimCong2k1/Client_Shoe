@@ -6,11 +6,6 @@ import com.fpoly.shoes_app.framework.data.repository.AddAddressRepository
 import com.fpoly.shoes_app.framework.data.repository.UpdateAddressRepository
 import com.fpoly.shoes_app.framework.domain.model.profile.address.AllAddressResponse
 import com.fpoly.shoes_app.framework.domain.model.profile.address.addAddress.AddAddress
-import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccount
-import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccountResponse
-import com.fpoly.shoes_app.framework.repository.AddAddressRepository
-import com.fpoly.shoes_app.framework.repository.UpdateAddressRepository
-
 
 import com.fpoly.shoes_app.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

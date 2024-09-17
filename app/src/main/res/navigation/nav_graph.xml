@@ -11,10 +11,8 @@
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_slashFragment_to_loginFragmentScreen"
-            app:destination="@id/loginFragmentScreen"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            android:id="@+id/action_SlashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
             app:popUpTo="@id/slashFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -23,23 +21,122 @@
         android:id="@+id/cartFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.cart.CartFragment"
         android:label="CartFragment"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment">
+            <argument
+                android:name="idShoe"
+                app:argType="string" />
+        </action>
+
+        <action
+            android:id="@+id/action_cartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.checkout.CheckoutFragment"
+        tools:layout="@layout/fragment_checkout">
+        <argument
+            android:name="args"
+            app:argType="com.fpoly.shoes_app.framework.domain.model.CheckoutArgs" />
+
+        <action
+            android:id="@+id/action_checkoutFragment_to_addressCheckoutFragment"
+            app:destination="@id/addressCheckoutFragment" />
+
+        <action
+            android:id="@+id/action_checkoutFragment_to_shippingCheckoutFragment"
+            app:destination="@id/shippingCheckoutFragment" />
+
+        <action
+            android:id="@+id/action_checkoutFragment_to_discountCheckoutFragment"
+            app:destination="@id/discountCheckoutFragment" />
+
+        <action
+            android:id="@+id/action_checkoutFragment_to_paymentCheckoutFragment"
+            app:destination="@id/paymentCheckoutFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_notificationHomeFragment"
             app:destination="@id/notificationHomeFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_bannerDetailFragment"
+            app:destination="@id/bannerDetailFragment">
+            <argument
+                android:name="banner"
+                app:argType="com.fpoly.shoes_app.framework.domain.model.Banners" />
+        </action>
+
+        <action
+            android:id="@+id/action_homeFragment_to_shoesFragment"
+            app:destination="@id/shoesFragment">
+            <argument
+                android:name="titleShoes"
+                app:argType="string" />
+        </action>
+
+        <action
+            android:id="@+id/action_homeFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment">
+            <argument
+                android:name="idShoe"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/shoesFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.shoes.ShoesFragment"
+        android:label="ShoesFragment"
+        tools:layout="@layout/fragment_shoes">
+        <argument
+            android:name="titleShoes"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_shoesFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment">
+            <argument
+                android:name="idShoe"
+                app:argType="string" />
+        </action>
+
+        <action
+            android:id="@+id/action_shoesFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.favorites.FavoritesFragment"
         android:label="FavoritesFragment"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favoritesFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment">
+            <argument
+                android:name="idShoe"
+                app:argType="string" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/ordersFragment"
@@ -61,21 +158,22 @@
         <action
             android:id="@+id/action_profileFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_resetPassFragment"
-            app:destination="@id/resetPassFragment" />
     </fragment>
     <fragment
         android:id="@+id/addressFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.address.AddressFragment"
         android:label="fragment_address"
         tools:layout="@layout/fragment_address">
+        <argument
+            android:name="args"
+            app:argType="boolean" />
+
         <action
             android:id="@+id/action_addressFragment_to_addressDetailsFragment"
             app:destination="@id/addressDetailsFragment" />
-        <action
-            android:id="@+id/action_addressFragment_to_blankFragment"
-            app:destination="@id/editoraddFragment" />
+        <!--        <action-->
+        <!--            android:id="@+id/action_addressFragment_to_blankFragment"-->
+        <!--            app:destination="@id/editoraddFragment" />-->
     </fragment>
     <fragment
         android:id="@+id/addressDetailsFragment"
@@ -151,10 +249,45 @@
             app:destination="@id/setUpAccountFragment" />
     </fragment>
     <fragment
-        android:id="@+id/editoraddFragment"
-        android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.editOrAdd.EditOrAddFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_editoradd" />
+        android:id="@+id/categoriesFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.categories.CategoriesFragment"
+        android:label="CategoriesFragment"
+        tools:layout="@layout/fragment_categories">
+        <action
+            android:id="@+id/action_categoriesFragment_to_shoesFragment"
+            app:destination="@id/shoesFragment">
+            <argument
+                android:name="titleShoes"
+                app:argType="string" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/shoeDetailFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment"
+        android:label="ShoeDetailFragment"
+        tools:layout="@layout/fragment_shoe_detail">
+        <argument
+            android:name="idShoe"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_shoeDetailFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bannerDetailFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.banner.BannerDetailFragment"
+        android:label="BannerDetailFragment"
+        tools:layout="@layout/fragment_banner_detail">
+        <argument
+            android:name="banner"
+            app:argType="com.fpoly.shoes_app.framework.domain.model.Banners" />
+    </fragment>
+    <!--    <fragment-->
+    <!--        android:id="@+id/editoraddFragment"-->
+    <!--        android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.editOrAdd.EditOrAddFragment"-->
+    <!--        android:label="fragment_blank"-->
+    <!--        tools:layout="@layout/fragment_editoradd" />-->
     <fragment
         android:id="@+id/notificationHomeFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.home.notification.NotificationHomeFragment"
@@ -185,9 +318,81 @@
         android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.helpCenter.HelpCenterFragment"
         android:label="fragment_help_center"
         tools:layout="@layout/fragment_help_center" />
+
     <fragment
-        android:id="@+id/resetPassFragment"
-        android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.resetPass.ResetPassFragment"
-        android:label="fragment_reset_pass"
-        tools:layout="@layout/fragment_reset_pass" />
+        android:id="@+id/addressCheckoutFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.checkout.address.AddressCheckoutFragment"
+        android:label="AddressCheckoutFragment"
+        tools:layout="@layout/fragment_address_checkout">
+        <argument
+            android:name="args"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_addressCheckoutFragment_to_addressFragment"
+            app:destination="@id/addressFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/shippingCheckoutFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.checkout.shipping.ShippingCheckoutFragment"
+        android:label="ShippingCheckoutFragment"
+        tools:layout="@layout/fragment_shipping_checkout">
+        <argument
+            android:name="args"
+            app:argType="com.fpoly.shoes_app.framework.domain.model.ShippingCheckoutArgs" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/discountCheckoutFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.checkout.discount.DiscountCheckoutFragment"
+        android:label="DiscountCheckoutFragment"
+        tools:layout="@layout/fragment_discount_checkout">
+        <argument
+            android:name="args"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.shoes.review.ReviewFragment"
+        android:label="ReviewFragment"
+        tools:layout="@layout/fragment_review">
+        <argument
+            android:name="args"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/paymentCheckoutFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.checkout.payment.PaymentCheckoutFragment"
+        android:label="PaymentCheckoutFragment"
+        tools:layout="@layout/fragment_payment_checkout">
+        <argument
+            android:name="args"
+            app:argType="com.fpoly.shoes_app.framework.domain.model.PaymentArgs" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_shoeDetailFragment"
+            app:destination="@id/shoeDetailFragment" />
+
+        <action
+            android:id="@+id/action_searchFragment_to_filterFragment"
+            app:destination="@id/filterFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.search.filter.FilterFragment"
+        android:label="FilterFragment"
+        tools:layout="@layout/fragment_filter" >
+        <argument
+            android:name="args"
+            app:argType="com.fpoly.shoes_app.framework.domain.model.FilterArgs" />
+    </fragment>
 </navigation>

@@ -6,13 +6,15 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Addresse(
-    @SerializedName("__v")  val v: Int,
-    @SerializedName("_id")val id: String,
+    @SerializedName("__v") val v: Int,
+    @SerializedName("_id") val id: String,
     val detailAddress: String,
     val latitude: Double,
     val longitude: Double,
     val nameAddress: String?,
     val permission: String?,
-    val fullName: String?,
-    val phoneNumber: String?
-): Parcelable
+    @SerializedName("phoneNumber")
+    val phoneNumber: String? = null,
+    @SerializedName("fullName")
+    val fullName: String? = null,
+) : Parcelable

@@ -13,8 +13,8 @@ data class Login(
     @SerializedName("fcmToken") val fcmToken: String,
 ): Parcelable
 class LoginResponse(
-      @SerializedName("user") val user: User?,
-      success: Boolean,
-      message: String?
+    @SerializedName("user") val user: User?,
+    success: Boolean,
+    message: String?
      ): BaseErrResponse(success, message)
 

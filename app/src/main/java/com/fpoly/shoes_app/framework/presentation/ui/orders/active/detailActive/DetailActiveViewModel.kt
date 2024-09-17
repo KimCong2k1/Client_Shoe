@@ -3,10 +3,7 @@ package com.fpoly.shoes_app.framework.presentation.ui.orders.active.detailActive
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fpoly.shoes_app.framework.domain.model.history.confirmTake.ConfirmTakeModel
-import com.fpoly.shoes_app.framework.domain.model.signUp.SignUp
-import com.fpoly.shoes_app.framework.domain.model.signUp.SignUpResponse
 import com.fpoly.shoes_app.framework.repository.ConfirmTakeRepository
-import com.fpoly.shoes_app.framework.repository.SignUpRepository
 import com.fpoly.shoes_app.utility.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

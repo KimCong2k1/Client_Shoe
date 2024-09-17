@@ -19,7 +19,7 @@
         app:titleTextColor="@color/color_nav_primary"
         app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
         app:navigationIconTint="@color/color_nav_primary"
-        app:title="Fragment Title" />
+        app:title="Chỉnh sửa thông tin cá nhân" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/relative"
@@ -65,7 +65,7 @@
         app:boxStrokeColor="@color/text_color_primary"
         app:boxStrokeErrorColor="@color/red"
         app:hintTextColor="@color/color_nav_primary"
-        android:layout_marginVertical="@dimen/dimen_8dp"
+        android:layout_marginVertical="@dimen/dimen_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relative"
@@ -77,7 +77,6 @@
             android:layout_height="match_parent"
             android:drawablePadding="@dimen/dimen_10dp"
             android:background="@drawable/border_edt_config_info"
-
             android:hint="@string/full_name"
             android:imeOptions="actionNext"
             android:inputType="text"
@@ -91,7 +90,7 @@
         android:id="@+id/layoutInputDate"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0dp"
-        android:layout_marginVertical="@dimen/dimen_8dp"
+        android:layout_marginVertical="@dimen/dimen_16dp"
         app:endIconDrawable="@drawable/baseline_date_range_24"
         app:endIconMode="custom"
         app:boxStrokeColor="@color/text_color_primary"
@@ -123,7 +122,7 @@
         android:id="@+id/layoutInputMail"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0dp"
-        android:layout_marginVertical="@dimen/dimen_8dp"
+        android:layout_marginVertical="@dimen/dimen_16dp"
         app:endIconDrawable="@drawable/baseline_attach_email_24"
         app:endIconMode="custom"
         app:boxStrokeColor="@color/text_color_primary"
@@ -155,7 +154,7 @@
         android:id="@+id/layoutInputPhone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0dp"
-        android:layout_marginVertical="@dimen/dimen_8dp"
+        android:layout_marginVertical="@dimen/dimen_16dp"
         app:boxStrokeColor="@color/text_color_primary"
         app:boxStrokeErrorColor="@color/red"
         app:hintTextColor="@color/color_nav_primary"
@@ -186,7 +185,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_16dp"
-        android:layout_marginVertical="@dimen/dimen_8dp"
+        android:layout_marginVertical="@dimen/dimen_16dp"
         android:background="@drawable/border_edt_config_info"
         android:padding="@dimen/dimen_17dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -199,13 +198,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_16dp"
-        android:layout_marginBottom="@dimen/dimen_45dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="@color/color_nav_primary"
         android:text="@string/text_continue"
         android:textColor="@color/color_nav_secondary"
         android:textSize="@dimen/dimen_15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

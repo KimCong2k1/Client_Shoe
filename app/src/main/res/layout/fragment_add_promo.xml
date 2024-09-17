@@ -26,7 +26,7 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:fontFamily="@font/poppins_medium"
-            android:text="Add Promo"
+            android:text="Thêm mã khuyến mãi"
             android:textColor="#000000"
             android:textSize="20sp" />
 
@@ -50,7 +50,7 @@
         android:layout_gravity="center"
         android:backgroundTint="#000000"
         android:fontFamily="@font/poppins_medium"
-        android:text="Apply"
+        android:text="Xác nhận"
         android:textColor="#FFFFFF"
         android:textSize="16sp" />
 </LinearLayout>

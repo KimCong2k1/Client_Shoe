@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".framework.presentation.ui.forgot.createNewPass.CreateNewPassFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -47,6 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:ignore="MissingConstraints">
 <TextView
+    android:textStyle="bold"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="@dimen/dimen_20dp"
@@ -61,6 +63,7 @@
             app:passwordToggleEnabled="true"
             tools:ignore="DuplicateIds,MissingConstraints">
             <com.google.android.material.textfield.TextInputEditText
+                android:background="@drawable/bg_edt_search"
                 android:id="@+id/passWordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -86,6 +89,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/rePassWordEditText"
+                android:background="@drawable/bg_edt_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableStart="@drawable/baseline_lock_reset_24"
@@ -100,6 +104,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
+                android:layout_gravity="left"
                 android:id="@+id/checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

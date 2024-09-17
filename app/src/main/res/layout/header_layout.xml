@@ -34,20 +34,6 @@
         toosl:text="Home" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dimen_20dp"
-        android:adjustViewBounds="true"
-        android:visibility="gone"
-        android:background="?actionBarItemBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/imgSearch"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_filter"
-        app:tint="@color/primary_black" />
-
-    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

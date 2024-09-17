@@ -3,7 +3,6 @@ package com.fpoly.shoes_app.framework.presentation.common
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
-import android.os.VibratorManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -69,10 +68,15 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         Log.v(TAG, "onCreateView: $this")
-        _navController = requireActivity().findNavController(R.id.nav_host_fragment_content_main)
-        _binding = bindingInflater.invoke(layoutInflater, container, false)
-        setupPreViews()
-        return _binding?.root
+        return try {
+            _navController = requireActivity().findNavController(R.id.nav_host_fragment_content_main)
+            _binding = bindingInflater.invoke(layoutInflater, container, false)
+            setupPreViews()
+            _binding?.root
+        } catch (e: Exception) {
+            Log.e(TAG, "Error in onCreateView: ${e.message}", e)
+            null
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

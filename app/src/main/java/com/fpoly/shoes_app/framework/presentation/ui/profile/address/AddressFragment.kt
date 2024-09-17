@@ -185,7 +185,7 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, AddressViewModel>(
             val bundle = Bundle().apply {
                 putInt("check", 0)
             }
-//            findNavController().navigate(R.id.editoraddFragment, bundle)
+            findNavController().navigate(R.id.editoraddFragment, bundle)
         }
 
     }

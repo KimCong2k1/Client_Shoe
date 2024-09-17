@@ -8,9 +8,9 @@ import androidx.core.content.ContextCompat
 import coil.load
 import com.fpoly.shoes_app.R
 import java.security.MessageDigest
+import java.text.Normalizer
 import java.text.NumberFormat
 import java.util.Locale
-import java.text.Normalizer
 
 
 fun ImageView.loadImage(imgResource: Int? = null) {
@@ -41,7 +41,9 @@ fun Context.getBitmapFromDrawable(drawableResId: Int): Bitmap {
 }
 
 fun Long.formatPriceShoe(): String {
-    return "${this}đ"
+    val number = this
+    val format = NumberFormat.getCurrencyInstance(Locale("vi", "VN"))
+    return format.format(number)
 }
 
 fun Int.formatSoldShoe(): String {

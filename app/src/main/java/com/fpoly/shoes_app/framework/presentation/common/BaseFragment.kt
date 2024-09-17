@@ -14,10 +14,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.AlertDialogViewBinding
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.ViewModelActivity
@@ -32,15 +30,14 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     private val viewModelClass: Class<VM>
 ) : Fragment() {
 
-    private var _binding: VB? = null
-    protected val binding: VB get() = _binding as VB
+    private lateinit var _binding: VB
+    protected val binding: VB get() = _binding
 
     protected val viewModelActivity: ViewModelActivity by activityViewModels()
 
     protected val viewModel: VM by lazy {
         ViewModelProvider(this)[viewModelClass]
     }
-
 
     private var _navController: NavController? = null
 
@@ -74,7 +71,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         _navController = findNavController()
         _binding = bindingInflater.invoke(layoutInflater, container, false)
         setupPreViews()
-        return _binding?.root
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -109,7 +106,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     override fun onDestroyView() {
         super.onDestroyView()
         Log.v(TAG, "onDestroyView: $this")
-        _binding = null
         _navController = null
     }
 

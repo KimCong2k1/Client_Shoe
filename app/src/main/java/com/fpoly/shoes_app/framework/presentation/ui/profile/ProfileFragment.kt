@@ -188,7 +188,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             navigateToFragment(R.id.editProfileFragment)
         }
             constraintAddess.setOnClickListener {
-            navigateToFragment(R.id.addressFragment)
+            navController?.navigate(
+                ProfileFragmentDirections.actionProfileFragmentToAddressFragment(false)
+            )
         }
             constraintNotification.setOnClickListener {
             navigateToFragment(R.id.generalSettingFragment)

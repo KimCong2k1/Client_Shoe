@@ -59,7 +59,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
 
         favoriteAdapter.setOnClick {
             navController?.navigate(
-                FavoritesFragmentDirections.actionFavoritesFragmentToShoeDetailFragment(it.id.orEmpty(), )
+                FavoritesFragmentDirections.actionFavoritesFragmentToShoeDetailFragment(it.id.orEmpty())
             )
         }
 

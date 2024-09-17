@@ -171,9 +171,9 @@
         <action
             android:id="@+id/action_addressFragment_to_addressDetailsFragment"
             app:destination="@id/addressDetailsFragment" />
-        <!--        <action-->
-        <!--            android:id="@+id/action_addressFragment_to_blankFragment"-->
-        <!--            app:destination="@id/editoraddFragment" />-->
+        <action
+            android:id="@+id/action_addressFragment_to_blankFragment"
+            app:destination="@id/editoraddFragment" />
     </fragment>
     <fragment
         android:id="@+id/addressDetailsFragment"
@@ -283,11 +283,11 @@
             android:name="banner"
             app:argType="com.fpoly.shoes_app.framework.domain.model.Banners" />
     </fragment>
-    <!--    <fragment-->
-    <!--        android:id="@+id/editoraddFragment"-->
-    <!--        android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.editOrAdd.EditOrAddFragment"-->
-    <!--        android:label="fragment_blank"-->
-    <!--        tools:layout="@layout/fragment_editoradd" />-->
+    <fragment
+        android:id="@+id/editoraddFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.editOrAdd.EditOrAddFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_editoradd" />
     <fragment
         android:id="@+id/notificationHomeFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.home.notification.NotificationHomeFragment"
@@ -390,7 +390,7 @@
         android:id="@+id/filterFragment"
         android:name="com.fpoly.shoes_app.framework.presentation.ui.search.filter.FilterFragment"
         android:label="FilterFragment"
-        tools:layout="@layout/fragment_filter" >
+        tools:layout="@layout/fragment_filter">
         <argument
             android:name="args"
             app:argType="com.fpoly.shoes_app.framework.domain.model.FilterArgs" />

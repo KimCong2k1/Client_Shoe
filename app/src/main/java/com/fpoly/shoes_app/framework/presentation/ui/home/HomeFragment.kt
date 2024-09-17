@@ -140,7 +140,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
                 binding.run {
                     tvName.text = state.nameUser
                     Glide.with(requireContext())
-                        .load(state.imageUser ?: R.drawable.baseline_account_circle_24)
+                        .load(state.imageUser)
+                        .error(R.drawable.ic_user_image)
                         .into(imgAvatar)
                 }
             }

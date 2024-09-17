@@ -34,7 +34,7 @@ data class Shoes(
     val storageShoe: List<StorageShoe>? = emptyList(),
     @SerializedName("importQuanlityAll")
     val quantity: Int? = 0,
-    @SerializedName("sellQuanlityAll")
+    @SerializedName("soldQuanlityAll")
     val sell: Int? = 0,
     @SerializedName("createDate")
     val created: String? = null,

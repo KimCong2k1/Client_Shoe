@@ -12,6 +12,6 @@ data class StorageShoe(
     val sizeShoe: Size? = null,
     @SerializedName("importQuanlity")
     val quantity: Int? = 0,
-    @SerializedName("sellQuanlity")
+    @SerializedName("soldQuanlity")
     val sell: Int? = 0,
 ) : Parcelable

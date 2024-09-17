@@ -136,45 +136,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             return@launch
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.forgotMailResult.collect {
-                    result ->
-                when (result.status) {
-                    Status.SUCCESS -> {
-                        showProgressbar(false)
-                        val forgotMailResponse = result.data
-                        val bundle = Bundle().apply {
-                            putString("email",email)
-                        }
-                        if (forgotMailResponse?.success == true) {
-                            findNavController().navigate(R.id.OPTFragment, bundle)
-                            StyleableToast.makeText(
-                                requireContext(), getString(R.string.success), R.style.success
-                            ).show()
-                            return@collect
-                        }
-
-                    }
-
-                    Status.ERROR -> {
-
-                        val errorMessage = strNullOrEmpty(result.message)
-                        StyleableToast.makeText(
-                            requireContext(), strNullOrEmpty(errorMessage), R.style.fail
-                        ).show()
-                    }
-
-                    Status.LOADING -> {
-                        showProgressbar(true)
-                    }
-
-                    Status.INIT -> {
-
-                    }
-                }
-            }
-
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.findProfileResult.collect { result ->
                 when (result.status) {
                     Status.SUCCESS -> handleSuccess(result.data)
@@ -236,10 +197,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             navigateToFragment(R.id.addressFragment)
         }
             constraintForgot.setOnClickListener {
+                navigateToFragment(R.id.resetPassFragment)
 
-                viewModel.forgotMail(ForgotMail(email))
-
-        }
+            }
             constraintNotification.setOnClickListener {
             navigateToFragment(R.id.generalSettingFragment)
         }

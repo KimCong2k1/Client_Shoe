@@ -138,6 +138,7 @@
             android:id="@+id/mailEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:enabled="false"
             android:layout_marginHorizontal="@dimen/dimen_16dp"
             android:drawablePadding="@dimen/dimen_10dp"
             android:hint="@string/your_email"

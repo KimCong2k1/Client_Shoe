@@ -9,6 +9,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentSignUpBinding
+import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.Status
 import com.fpoly.shoes_app.utility.service.ServiceUtil.playNotificationSound
@@ -36,8 +37,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>(
                         showProgressbar(false)
                         val signUpResponse = result.data
                         if (signUpResponse?.success == true) {
-                            val bundle = Bundle()
-                                bundle.putString("id", signUpResponse.user?.id)
+                            val bundle = Bundle().apply {
+                                putString("id", signUpResponse.user?.id)
+                                putString("username", signUpResponse.user?.nameAccount) // Add another string
+                            }
                             val navController = findNavController()
                             binding.userNameEditText.text?.clear()
                             binding.passwordEditText.text?.clear()
@@ -90,8 +93,14 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>(
         binding.btnSignUp.setOnClickListener {
             val password = binding.passwordEditText.text?.toString()?.trim()
             val rePassword = binding.rePasswordEditText.text?.toString()?.trim()
-
-            if (!password.isNullOrEmpty() && !rePassword.isNullOrEmpty()) {
+            binding.apply {
+                if (!password.isNullOrEmpty() && !rePassword.isNullOrEmpty() && CheckValidate.checkEmail(
+                        requireContext(),
+                        userNameEditText,
+                        layoutInputUserName,
+                        layoutInputPassword
+                    )
+                ) {
                 if (password == rePassword) {
                     viewModel.signUp(binding.userNameEditText.text.toString().trim(), password.toMD5())
                 } else {
@@ -104,5 +113,6 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>(
             }
 
         }
+    }
     }
 }

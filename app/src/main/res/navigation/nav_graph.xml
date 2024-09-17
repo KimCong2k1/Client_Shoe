@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_profileFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_resetPassFragment"
+            app:destination="@id/resetPassFragment" />
     </fragment>
     <fragment
         android:id="@+id/addressFragment"
@@ -182,4 +185,9 @@
         android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.helpCenter.HelpCenterFragment"
         android:label="fragment_help_center"
         tools:layout="@layout/fragment_help_center" />
+    <fragment
+        android:id="@+id/resetPassFragment"
+        android:name="com.fpoly.shoes_app.framework.presentation.ui.profile.resetPass.ResetPassFragment"
+        android:label="fragment_reset_pass"
+        tools:layout="@layout/fragment_reset_pass" />
 </navigation>

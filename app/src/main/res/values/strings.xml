@@ -33,6 +33,7 @@
     <string name="error_format_email">Vui lòng nhập đúng dạng email</string>
     <string name="sign_in_to_your_account">Đăng nhập vào tài khoản của bạn</string>
     <string name="name_login">Email Đăng Nhập</string>
+    <string name="passwordOld">Nhập mật khẩu cũ</string>
     <string name="password">Nhập mật khẩu</string>
     <string name="passwordIncorrect">Nhập mật khẩu không trùng khớp</string>
     <string name="remember">Ghi nhớ</string>

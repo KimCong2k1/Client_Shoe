@@ -41,6 +41,7 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
     private val gender = arrayOf("Nữ", "Nam")
     private var uriPath: Uri? = null
     private var id: String = ""
+    private var mail: String = ""
 
     private fun showDatePickerDialog(dateEditText: EditText) {
         val calendar = Calendar.getInstance()
@@ -83,6 +84,8 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
 
     override fun setupViews() {
         id = arguments?.getString("id") ?: sharedPreferences.getIdUser()
+        mail = arguments?.getString("username")!!
+        binding.mailEditText.setText( mail)
 
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, gender)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -94,7 +97,6 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
     private fun addTextWatchers() {
         binding.nameEditText.addTextChangedListener(createTextWatcher())
         binding.phoneEditText.addTextChangedListener(createTextWatcher())
-        binding.mailEditText.addTextChangedListener(createTextWatcher())
         binding.dateEditText.addTextChangedListener(createTextWatcher())
     }
 
@@ -110,11 +112,10 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
     private fun checkIfAnyFieldChanged() {
         val name = binding.nameEditText.text.toString().trim()
         val phone = binding.phoneEditText.text.toString().trim()
-        val email = binding.mailEditText.text.toString().trim()
         val birth = binding.dateEditText.text.toString().trim()
         val gender = binding.spinner.selectedItem.toString()
 
-        binding.btnNextPager.isEnabled = name.isNotEmpty() || phone.isNotEmpty() || email.isNotEmpty() || birth.isNotEmpty() || gender.isNotEmpty()
+        binding.btnNextPager.isEnabled = name.isNotEmpty() || phone.isNotEmpty() || birth.isNotEmpty() || gender.isNotEmpty()
     }
 
     override fun bindViewModel() {
@@ -215,13 +216,8 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
             binding.btnNextPager
         )
 
-        val isEmailValid = CheckValidate.checkEmail(
-            requireContext(),
-            binding.mailEditText,
-            binding.layoutInputMail,
-            binding.layoutInputPhone
-        )
-        if (isPhoneValid && isEmailValid) {
+
+        if (isPhoneValid ) {
             submitProfileChanges()
         } else {
             Toast.makeText(requireContext(), R.string.inputFullInfo, Toast.LENGTH_SHORT).show()
@@ -231,11 +227,10 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
     private fun submitProfileChanges() {
         val name = binding.nameEditText.text.toString().trim()
         val phone = binding.phoneEditText.text.toString().trim()
-        val email = binding.mailEditText.text.toString().trim()
         val birth = binding.dateEditText.text.toString().trim()
         val gender = binding.spinner.selectedItem.toString()
 
         binding.btnNextPager.isEnabled = false
-        viewModel.setUp(id, uriPath?.let { File(Imagesss.getPathFromUri(it, requireContext())) }, phone, name, email, birth, gender)
+        viewModel.setUp(id, uriPath?.let { File(Imagesss.getPathFromUri(it, requireContext())) }, phone, name, mail, birth, gender)
     }
 }

@@ -23,39 +23,13 @@ import javax.inject.Inject
 class SetUpAccountViewModel @Inject constructor(
     private val profileRepository: ProfileRepository,
     private val setUpAccountRepository: SetUpAccountRepository,
-    private val forgotMailRepository: ForgotMailRepository
 
 ) : ViewModel() {
     private val _setUpResult = MutableStateFlow<Resource<SetUpAccountResponse>>(Resource.init(null))
     val setUpResult: StateFlow<Resource<SetUpAccountResponse>> = _setUpResult
     private val _findProfileResult = MutableStateFlow<Resource<ProfileResponse>>(Resource.loading(null))
     val findProfileResult: StateFlow<Resource<ProfileResponse>> = _findProfileResult
-    private val _forgotMailResult = MutableStateFlow<Resource<ForgotMailResponse>>(Resource.init(null))
-    val forgotMailResult: StateFlow<Resource<ForgotMailResponse>> = _forgotMailResult
 
-    fun forgotMail(username: ForgotMail) {
-        viewModelScope.launch {
-            _forgotMailResult.value = Resource.loading(null)
-            try {
-                val response = forgotMailRepository.forgotMail(username)
-                if (response.isSuccessful) {
-                    val setUpResponse = response.body()
-                    if (setUpResponse != null) {
-                        _forgotMailResult.value = Resource.success(setUpResponse)
-                        Log.e("idUser", setUpResponse.userId!!)
-                    } else {
-                        _forgotMailResult.value = Resource.error(null, "Set-up response is null")
-                    }
-                } else {
-                    _forgotMailResult.value = Resource.error(null, "Set-up failed")
-                }
-            } catch (e: HttpException) {
-                _forgotMailResult.value = Resource.error(null, "HTTP Error: ${e.message()}")
-            } catch (e: Exception) {
-                _forgotMailResult.value = Resource.error(null, "Network error: ${e.message}")
-            }
-        }
-    }
     fun setUp(id: String, imageFile: File?, phoneNumber: String?, fullName: String?, nameAccount: String?, birthday: String?, grender: String?) {
         viewModelScope.launch {
             _setUpResult.value = Resource.loading(null)

@@ -68,6 +68,7 @@ class DetailHistoryFragment : BaseFragment<FragmentDetailHistoryBinding, DetailH
 
                 }
             }
+            headerLayout.tvTitle.text = getString(R.string.detailHistory)
             nameUser.text = historyShoe.orderDetails?.get(0)?.name ?: "Oder"
             numberPhoneUser.text = historyShoe.phoneNumber
             nameAddress.text = historyShoe.addressOrder
@@ -171,8 +172,8 @@ class DetailHistoryFragment : BaseFragment<FragmentDetailHistoryBinding, DetailH
     }
 
     override fun setOnClick() {
-        binding.toolbar.setOnClickListener {
-            findNavController().popBackStack()
+        binding.headerLayout.imgBack.setOnClickListener {
+            navController?.popBackStack()
         }
     }
 

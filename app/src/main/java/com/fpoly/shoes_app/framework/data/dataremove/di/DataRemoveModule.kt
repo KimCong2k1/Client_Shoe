@@ -15,6 +15,7 @@ import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.OrderApiSe
 import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.OrderRepository
 import com.fpoly.shoes_app.framework.data.dataremove.api.getInterface.ProfileInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.AddAddressInterface
+import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.CancleInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.ConfirmTakeInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.CreateNewPassInterface
 import com.fpoly.shoes_app.framework.data.dataremove.api.postInterface.ForgotMailInterface
@@ -182,6 +183,11 @@ object DataRemoveModule {
     @Singleton
     fun provideNotificationApi(retrofit: Retrofit): NotificationsInterface =
         retrofit.create(NotificationsInterface::class.java)
+
+ @Provides
+    @Singleton
+    fun provideCancleApi(retrofit: Retrofit): CancleInterface =
+        retrofit.create(CancleInterface::class.java)
 
 
 }

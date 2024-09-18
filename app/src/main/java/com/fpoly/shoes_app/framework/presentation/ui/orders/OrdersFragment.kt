@@ -1,6 +1,7 @@
 package com.fpoly.shoes_app.framework.presentation.ui.orders
 
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentOrdersBinding
 import com.fpoly.shoes_app.framework.adapter.order.ViewPagerAdapter
@@ -23,13 +24,13 @@ class OrdersFragment : BaseFragment<FragmentOrdersBinding, OrdersViewModel>(
         val adapter = ViewPagerAdapter(this)
         (requireActivity() as MainActivity).showBottomNavigation(true)
         binding.apply { viewPager.adapter = adapter
+            headerLayout.tvTitle.text = getString(R.string.myOder)
+            headerLayout.imgBack.isVisible = false
             tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    tab?.view?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black_overlay))
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
-                    tab?.view?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
                 }
 
                 override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -39,8 +40,8 @@ class OrdersFragment : BaseFragment<FragmentOrdersBinding, OrdersViewModel>(
         }
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "Active"
-                1 -> "Completed"
+                0 -> "Đang hoạt động"
+                1 -> "Đã hoàn thành"
                 else -> throw IllegalStateException("Unexpected position $position")
             }        }.attach()
 

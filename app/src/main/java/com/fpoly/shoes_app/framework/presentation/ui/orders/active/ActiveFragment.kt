@@ -73,7 +73,6 @@ class ActiveFragment : BaseFragment<FragmentActiveBinding, OrdersViewModel>(
     override fun setOnClick() {
     }
     private fun clearListAndFetchData() {
-        activeAdapter.updateHistoryShoes(emptyList())
         viewModel.getActiveOrders(idUser)
     }
 }

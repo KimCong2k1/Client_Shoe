@@ -59,7 +59,6 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding, OrdersViewModel>(
         }
     }
     private fun clearListAndFetchData() {
-        historyAdapter.updateHistoryShoes(emptyList())
         viewModel.getCompletedOrders(idUser)
     }
     override fun setOnClick() {

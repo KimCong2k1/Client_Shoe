@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentNotificationHomeBinding
 import com.fpoly.shoes_app.framework.adapter.notification.NotificationsHomeAdapter
 import com.fpoly.shoes_app.framework.adapter.notification.NotificationsItem
@@ -39,6 +40,7 @@ class NotificationHomeFragment : BaseFragment<FragmentNotificationHomeBinding, N
                 notificationsAdapter.submitList(emptyList()) // Clear the list before loading new data
                 viewModel.fetchNotifications(idUser)
             }
+            headerLayout.tvTitle.text = getString(R.string.general_notification)
             recycViewNotifications.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = notificationsAdapter
@@ -84,7 +86,7 @@ class NotificationHomeFragment : BaseFragment<FragmentNotificationHomeBinding, N
     }
 
     override fun setOnClick() {
-        binding.toolbar.setNavigationOnClickListener {
+        binding.headerLayout.imgBack.setOnClickListener {
             findNavController().popBackStack()
         }
     }
@@ -130,6 +132,7 @@ class NotificationHomeFragment : BaseFragment<FragmentNotificationHomeBinding, N
     }
 
     private fun showError(message: String) {
+        showProgressbar(false)
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 }

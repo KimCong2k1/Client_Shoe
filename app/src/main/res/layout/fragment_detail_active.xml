@@ -16,14 +16,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+            <include
+                android:id="@+id/headerLayout"
+                layout="@layout/header_layout"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@drawable/border_edt_config_info"
-                app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
-                app:title="@string/detailHistory" />
-        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:background="@drawable/bg_sold_shoe_view"
             android:layout_margin="@dimen/dimen_16dp"

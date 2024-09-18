@@ -16,6 +16,7 @@ data class HistoryShoe(
     val phoneNumber: String?,
     val promo: Int?,
     val status: String?,
+    val statusNumber: Int?,
     val thumbnail: String?,
     val total: Int?,
     val totalPre: Int?,

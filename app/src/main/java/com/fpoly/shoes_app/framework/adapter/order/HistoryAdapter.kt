@@ -1,14 +1,11 @@
 package com.fpoly.shoes_app.framework.adapter.order
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fpoly.shoes_app.R
@@ -24,44 +21,31 @@ class HistoryAdapter(
     inner class HistoryShoeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageShoeItemImageView: ImageView = itemView.findViewById(R.id.imageShoeItem)
         private val nameShoeTextView: TextView = itemView.findViewById(R.id.nameShoeItem)
-        private val contentShoeTextView: TextView = itemView.findViewById(R.id.contentShoeItem)
-        private val addressShoeTextView: TextView = itemView.findViewById(R.id.addressShoeItem)
-        private val phoneShoeTextView: TextView = itemView.findViewById(R.id.phoneShoeItem)
-        private val colorShoeTextView: TextView = itemView.findViewById(R.id.colorShoeItem)
-        private val colorShoeItemView: CardView = itemView.findViewById(R.id.colorShoeItemView)
-        private val sizeShoeTextView: TextView = itemView.findViewById(R.id.sizeShoeItem)
+
         private val priceShoeTextView: TextView = itemView.findViewById(R.id.priceShoeItem)
         private val rateOrTrackShoe: TextView = itemView.findViewById(R.id.rateOrTrack)
         private val wait: TextView = itemView.findViewById(R.id.wait)
         @SuppressLint("SetTextI18n")
         fun bind(historyShoe: HistoryShoe) {
-            val formattedDate = historyShoe.dateOrder?.substring(9, 19)
-            contentShoeTextView.text = formattedDate
-            phoneShoeTextView.text = historyShoe.phoneNumber
-            addressShoeTextView.text = historyShoe.addressOrder
+            wait.text = historyShoe.orderStatusDetails?.last()?.status.orEmpty()
             nameShoeTextView.text = historyShoe.orderDetails?.get(0)?.name ?: "Order"
             rateOrTrackShoe.text = itemView.context.getString(
                 when(historyShoe.status){
-                "completed"->R.string.leaveReview
-                "rateCompleted"-> R.string.orderAgain
+                    "completed" -> R.string.leaveReview
                 else -> R.string.description
             })
-            wait.visibility = View.GONE
-            if (historyShoe.orderStatusDetails?.size==5 && historyShoe.status=="active")
-                wait.visibility = View.VISIBLE
 
+            if (historyShoe.statusNumber == 5)
+                wait.visibility = View.VISIBLE
+            if (historyShoe.statusNumber == 6) {
+                rateOrTrackShoe.text = itemView.context.getString(R.string.saveCancel)
+                rateOrTrackShoe.isEnabled = false
+            }
             priceShoeTextView.text = historyShoe.total.toString().formatToVND()
             Glide.with(itemView.context)
                 .load(historyShoe.thumbnail)
-                .placeholder(R.drawable.download) // Placeholder image
-                .error(R.drawable.download) // Error image
                 .into(imageShoeItemImageView)
-            if (historyShoe.orderDetails?.isNotEmpty() == true) {
-                val firstOrderDetail = historyShoe.orderDetails[0]
-                sizeShoeTextView.text =  itemView.context.getString(R.string.size) +firstOrderDetail.size
-                colorShoeItemView.backgroundTintList =  ColorStateList.valueOf(Color.parseColor(firstOrderDetail.codeColor))
-                colorShoeTextView.text = firstOrderDetail.textColor
-            }
+
 
             rateOrTrackShoe.setOnClickListener {
                 onClickComplete?.invoke(historyShoe)

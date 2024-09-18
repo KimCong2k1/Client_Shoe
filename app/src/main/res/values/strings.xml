@@ -10,7 +10,7 @@
     <string name="updateInfor">Thông tin cá nhân vưừa được cập nhật</string>
     <string name="leaveReview">Đánh giá</string>
     <string name="leaveRate">Viết nhận xét về sản phẩm 🤩</string>
-    <string name="detailHistory">Chi tiết lịch sử đơn hàng</string>
+    <string name="detailHistory">Chi tiết đơn hàng</string>
     <string name="search">Tìm kiếm</string>
     <string name="filter">Sắp xếp và lọc</string>
     <string name="special_programs">Chương trình đặc biệt</string>
@@ -89,7 +89,7 @@
     <string name="price_original">Giá Gốc</string>
     <string name="dateDemo">0000/00/00</string>
     <string name="status">Trạng thái</string>
-    <string name="myOder">Đơn hàng của tôi</string>
+    <string name="myOder">Đơn hàng</string>
     <string name="waitAccept">Chờ Xác Nhận</string>
     <string name="history">Lịch Sử</string>
     <string name="one">1</string>
@@ -122,6 +122,8 @@
     <string name="logout">Đăng xuất</string>
     <string name="confirm_logout">Bạn chắc chắn muốn đăng xuất?</string>
     <string name="cancel">Hủy</string>
+    <string name="saveCancel">Đã Hủy</string>
+    <string name="becauseCancel">Lý do hủy</string>
     <string name="agree">Đồng ý</string>
     <string name="otp_verification">Xác thực OTP</string>
     <string name="send_otp_to_your_mail">Mã OTP sẽ gửi đến email của bạn</string>

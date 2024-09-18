@@ -27,8 +27,6 @@ class DetailHistoryAdapter(private var orderDetailShoes: List<OrderDetail>?): Re
             priceShoeTextView.text = historyShoe.price.toString().formatToVND()
             Glide.with(itemView.context)
                 .load(historyShoe.thumbnail)
-                .placeholder(R.drawable.download) // Placeholder image
-                .error(R.drawable.download) // Error image
                 .into(imageShoeItemImageView)
                 colorShoeTextView.text = historyShoe.textColor
                 sizeShoeTextView.text = historyShoe.size

@@ -9,6 +9,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentSignUpBinding
+import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.Status
 import com.fpoly.shoes_app.utility.service.ServiceUtil.playNotificationSound
@@ -25,6 +26,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>(
 
     }
     override fun setupViews() {
+        (requireActivity() as? MainActivity)?.showBottomNavigation(false)
     }
 
     @SuppressLint("SuspiciousIndentation")

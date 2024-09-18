@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentLoginScreenBinding
 import com.fpoly.shoes_app.framework.domain.model.login.LoginResponse
+import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.Status
@@ -70,7 +71,7 @@ class LoginScreen : BaseFragment<FragmentLoginScreenBinding, LoginViewModel>(
         enableInputs()
         binding.progressBar.visibility = View.GONE
         if (loginResponse?.success == true) {
-            playNotificationSound(requireContext(),"Shoe_Fbee","Login Success")
+            playNotificationSound(requireContext(), "Shoe_Fbee", "Login Success")
             Log.e("token", SharedPreferencesManager.getToken())
             loginResponse.user?.let { sharePre(it.id.toString()) }
             navigateToHome()
@@ -157,6 +158,7 @@ class LoginScreen : BaseFragment<FragmentLoginScreenBinding, LoginViewModel>(
     }
 
     override fun setupViews() {
+        (requireActivity() as? MainActivity)?.showBottomNavigation(false)
         setupListeners()
     }
 

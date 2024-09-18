@@ -8,38 +8,36 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="false"
-        android:scaleType="centerCrop"
+        android:layout_height="@dimen/dimen_0dp"
+        android:layout_marginTop="@dimen/dimen_50dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@id/tvTitle"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/ic_launcher_background" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_59dp"
-        android:fontFamily="@font/poppins_bold"
-        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/dimen_24dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:fontFamily="@font/poppins_medium"
         android:includeFontPadding="false"
         android:textColor="@color/primary_black"
-        android:textSize="@dimen/text_size_30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="@dimen/dimen_24dp"
+        app:layout_constraintBottom_toTopOf="@id/tvContent"
         tools:text="Get Discounts \n On All Products" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvContent"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_17dp"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/dimen_24dp"
+        android:layout_marginBottom="@dimen/dimen_187dp"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
         android:textColor="@color/gray_600"
-        android:textSize="@dimen/text_size_15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        android:textSize="@dimen/dimen_14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:text="Lorem ipsum dolor sit amet, consetetur \n sadipscing elitr, sed diam nonumy" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

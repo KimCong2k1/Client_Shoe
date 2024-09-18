@@ -9,5 +9,6 @@ data class SplashUiState(
 )
 
 sealed class SplashSingleEvent {
-    data object NavigateToNextScreen : SplashSingleEvent()
+    data object GoToHome : SplashSingleEvent()
+    data object GoToSignIn : SplashSingleEvent()
 }

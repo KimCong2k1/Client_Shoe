@@ -2,8 +2,8 @@ package com.fpoly.shoes_app.framework.presentation.ui.splash
 
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentSplashBinding
+import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -20,7 +20,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(
     override fun setupPreViews() {
 
     }
+
     override fun setupViews() {
+        (requireActivity() as? MainActivity)?.showBottomNavigation(false)
         binding.viewPagerSplash.adapter = splashAdapter
         binding.dotsIndicator.attachTo(binding.viewPagerSplash)
         setOnChangeViewPager2()
@@ -28,7 +30,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(
 
     override fun bindViewModel() {
         lifecycleScope.launch {
-            viewModel.uiState.collect {state ->
+            viewModel.uiState.collect { state ->
                 splashAdapter.submitList(state.pagesSplash)
                 binding.apply {
                     viewPagerSplash.currentItem = state.page
@@ -40,8 +42,15 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(
         lifecycleScope.launch {
             viewModel.singleEvent.collect { event ->
                 when (event) {
-                    is SplashSingleEvent.NavigateToNextScreen ->
-                        navController?.navigate(R.id.action_SlashFragment_to_homeFragment)
+                    is SplashSingleEvent.GoToHome ->
+                        navController?.navigate(
+                            SplashFragmentDirections.actionSlashFragmentToHomeFragment()
+                        )
+
+                    is SplashSingleEvent.GoToSignIn ->
+                        navController?.navigate(
+                            SplashFragmentDirections.actionSlashFragmentToLoginFragmentScreen()
+                        )
                 }
             }
         }

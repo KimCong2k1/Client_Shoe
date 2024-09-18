@@ -55,9 +55,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             sharedPreferences.removeUser()
             sharedPreferences.removeIdUser()
             childFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            navController?.navigate(R.id.loginFragmentScreen, null, null)
-            Log.e("userWait", sharedPreferences.getUserNameWait())
-            Log.e("user", sharedPreferences.getUserName())
+            navController?.navigate(
+                ProfileFragmentDirections.actionProfileFragmentToLoginFragmentScreen()
+            )
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.setContentView(dialogBinding.root)

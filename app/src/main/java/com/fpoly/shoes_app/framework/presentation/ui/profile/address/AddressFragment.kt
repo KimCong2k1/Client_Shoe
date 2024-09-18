@@ -87,9 +87,12 @@ class AddressFragment : BaseFragment<FragmentAddressBinding, AddressViewModel>(
     }
 
     override fun setupViews() {
+        binding.run {
+            headerLayout.tvTitle.text = getString(R.string.address)
+        }
         setupRecyclerView()
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+        binding.headerLayout.imgBack.setOnClickListener {
+            navController?.popBackStack()
         }
         binding.swipeRefreshLayout.setOnRefreshListener {
             loadAgain()

@@ -1,7 +1,6 @@
 package com.fpoly.shoes_app.framework.presentation.ui.profile.addressDetail
 
 import android.util.Log
-import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentAddressDetailsBinding
 import com.fpoly.shoes_app.framework.domain.model.profile.address.Addresse
@@ -21,20 +20,27 @@ class AddressDetailsFragment : BaseFragment<FragmentAddressDetailsBinding, Addre
     private lateinit var mMap: GoogleMap
     private var bundle: Addresse? = null
     override fun setupViews() {
+        binding.run {
+            headerLayout.tvTitle.text = getString(R.string.address_detail)
+        }
         bundle = arguments?.getParcelable("address")
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
+
     override fun setupPreViews() {
     }
+
     override fun bindViewModel() {
     }
+
     override fun setOnClick() {
 
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+        binding.headerLayout.imgBack.setOnClickListener {
+            navController?.popBackStack()
         }
     }
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         bundle?.let {
@@ -42,6 +48,7 @@ class AddressDetailsFragment : BaseFragment<FragmentAddressDetailsBinding, Addre
             updateMapAndAddress(latLng, it.detailAddress)
         }
     }
+
     private fun updateMapAndAddress(latLng: LatLng, address: String) {
         mMap.clear()
         mMap.addMarker(MarkerOptions().position(latLng).title(address))

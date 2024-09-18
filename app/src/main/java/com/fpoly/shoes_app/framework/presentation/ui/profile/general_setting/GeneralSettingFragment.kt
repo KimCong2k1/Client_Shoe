@@ -4,7 +4,6 @@ import android.content.Context
 import android.media.AudioManager
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentGeneralSettingBinding
@@ -37,7 +36,11 @@ class GeneralSettingFragment : BaseFragment<FragmentGeneralSettingBinding, Gener
             when (item.title) {
                 getString(R.string.general_notification) -> {
                     sharedPreferences.saveNotificationModeState(isChecked)
-                    if (isChecked) service.playNotificationSound(requireContext(),"Thông Báo Được Bật","")
+                    if (isChecked) service.playNotificationSound(
+                        requireContext(),
+                        "Thông Báo Được Bật",
+                        ""
+                    )
                 }
 
                 getString(R.string.sound) -> {
@@ -57,27 +60,13 @@ class GeneralSettingFragment : BaseFragment<FragmentGeneralSettingBinding, Gener
         audioManager = requireContext().getSystemService(Context.AUDIO_SERVICE) as AudioManager
     }
 
-//    private fun playSuccessSound() {
-//        val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-//        val ringtone: Ringtone = RingtoneManager.getRingtone(requireContext(), notification)
-//        ringtone.play()    }
-//
-//    @RequiresApi(Build.VERSION_CODES.S)
-//    private fun triggerVibration() {
-//        val vibrator = vibratorManager.defaultVibrator
-//        if (vibrator.hasVibrator()) {
-//            val vibrationEffect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE)
-//            vibrator.vibrate(vibrationEffect)
-//        } else {
-//            Log.e("Vibration", "Device does not have a vibrator")
-//        }
-//    }
-
     @RequiresApi(Build.VERSION_CODES.S)
     override fun setupViews() {
-        binding.recyclerViewNotifications.adapter = adapter
-        binding.recyclerViewNotifications.layoutManager = LinearLayoutManager(requireContext())
-
+        binding.run {
+            headerLayout.tvTitle.text = getString(R.string.general_notification)
+            recyclerViewNotifications.adapter = adapter
+            recyclerViewNotifications.layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 
     override fun bindViewModel() {
@@ -85,8 +74,8 @@ class GeneralSettingFragment : BaseFragment<FragmentGeneralSettingBinding, Gener
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun setOnClick() {
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+        binding.headerLayout.imgBack.setOnClickListener {
+            navController?.popBackStack()
         }
     }
 }

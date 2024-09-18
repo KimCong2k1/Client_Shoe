@@ -26,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.muddz.styleabletoast.StyleableToast
 import kotlinx.coroutines.launch
 import java.util.Calendar
+
 @AndroidEntryPoint
 class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccountViewModel>(
     FragmentEditProfileBinding::inflate, SetUpAccountViewModel::class.java
@@ -45,11 +46,12 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = DatePickerDialog(requireContext(), { _, yearBirth, monthBirth, dayOfMonth ->
-            val selectedDate = "$yearBirth-${monthBirth + 1}-$dayOfMonth"
-            dateEditText.setText(selectedDate)
-            layoutData.requestFocus()
-        }, year, month, day)
+        val datePickerDialog =
+            DatePickerDialog(requireContext(), { _, yearBirth, monthBirth, dayOfMonth ->
+                val selectedDate = "$yearBirth-${monthBirth + 1}-$dayOfMonth"
+                dateEditText.setText(selectedDate)
+                layoutData.requestFocus()
+            }, year, month, day)
 
         datePickerDialog.show()
     }
@@ -59,6 +61,9 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
     }
 
     override fun setupViews() {
+        binding.run {
+            headerLayout.tvTitle.text = getString(R.string.edit_info)
+        }
         id = sharedPreferences.getIdUser()
         viewModel.profilefind(id)
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, gender)
@@ -165,12 +170,17 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
     }
 
     override fun setOnClick() {
-        binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+        binding.headerLayout.imgBack.setOnClickListener {
+            navController?.popBackStack()
         }
 
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 genderSelection = position
                 checkIfAnyFieldChanged()
             }
@@ -192,27 +202,44 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
     private fun setUpEditTextListeners() {
         binding.mailEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                validateField { CheckValidate.checkEmail(requireContext(), binding.mailEditText, binding.layoutInputMail,binding.layoutInputPhone) }
+                validateField {
+                    CheckValidate.checkEmail(
+                        requireContext(),
+                        binding.mailEditText,
+                        binding.layoutInputMail,
+                        binding.layoutInputPhone
+                    )
+                }
             } else false
         }
 
         binding.phoneEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                validateField { CheckValidate.checkPhone(
-                    requireContext(),
-                    binding.phoneEditText,
-                    binding.layoutInputPhone,
-                    binding.btnNextPager
-                ) }
+                validateField {
+                    CheckValidate.checkPhone(
+                        requireContext(),
+                        binding.phoneEditText,
+                        binding.layoutInputPhone,
+                        binding.btnNextPager
+                    )
+                }
             } else false
         }
 
         binding.nameEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_NEXT) {
-                validateField { CheckValidate.checkStr(requireContext(), binding.nameEditText, binding.layoutInputPhone,binding.layoutInputMail) }
+                validateField {
+                    CheckValidate.checkStr(
+                        requireContext(),
+                        binding.nameEditText,
+                        binding.layoutInputPhone,
+                        binding.layoutInputMail
+                    )
+                }
             } else false
         }
     }
+
     private fun validateField(validation: () -> Boolean): Boolean {
         return if (validation()) {
             true
@@ -227,7 +254,7 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
             CheckValidate.checkPhone(
                 requireContext(),
                 binding.phoneEditText,
-                binding.layoutInputPhone,binding.btnNextPager
+                binding.layoutInputPhone, binding.btnNextPager
             )
         }
 
@@ -253,7 +280,10 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding, SetUpAccoun
             submitProfileChanges()
         } else {
             // Additional logging for debugging
-            Log.d("EditProfileFragment", "Validation failed. Phone: $isPhoneValid ${binding.phoneEditText.text}, Email: $isEmailValid, Name: $isNameValid")
+            Log.d(
+                "EditProfileFragment",
+                "Validation failed. Phone: $isPhoneValid ${binding.phoneEditText.text}, Email: $isEmailValid, Name: $isNameValid"
+            )
             Toast.makeText(requireContext(), R.string.inputFullInfo, Toast.LENGTH_SHORT).show()
         }
     }

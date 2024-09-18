@@ -150,7 +150,7 @@
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_notificationFragment"
+            android:id="@+id/action_profileFragment_to_generalSettingFragment"
             app:destination="@id/generalSettingFragment" />
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
@@ -158,6 +158,9 @@
         <action
             android:id="@+id/action_profileFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_helpCenterFragment"
+            app:destination="@id/helpCenterFragment" />
     </fragment>
     <fragment
         android:id="@+id/addressFragment"

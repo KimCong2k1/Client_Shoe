@@ -8,6 +8,7 @@ import com.fpoly.shoes_app.framework.domain.model.Discount
 import com.fpoly.shoes_app.framework.domain.model.Ship
 import com.fpoly.shoes_app.framework.domain.model.profile.address.Addresse
 import com.fpoly.shoes_app.framework.domain.usecase.GetAddressDefaultUseCase
+import com.fpoly.shoes_app.framework.domain.usecase.GetShoeDetailUseCase
 import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -91,6 +92,14 @@ class CheckoutViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update {
                 it.copy(address = address)
+            }
+        }
+    }
+
+    fun clearDiscount() {
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(discount = null)
             }
         }
     }

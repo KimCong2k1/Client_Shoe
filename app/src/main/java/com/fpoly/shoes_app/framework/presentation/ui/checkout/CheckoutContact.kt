@@ -39,6 +39,7 @@ data class CheckoutUiState(
     val shipTotalString = if (shipTotal == 0L) IS_PRICE_NULL else shipTotal.formatPriceShoe()
     val discountTotalString = if (discountTotal == 0L) IS_PRICE_NULL
     else discountTotal.formatPriceShoe().toDiscount()
+    val isEnableClear = discount != null
     val totalString = (totalCart + shipTotal - discountTotal).formatPriceShoe()
     val isEnableButton = totalCart != 0L && shipTotal != 0L
     val isHaNoi = detailAddress.normalizeString().contains(HA_NOI)

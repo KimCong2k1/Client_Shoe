@@ -96,7 +96,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding, CheckoutViewModel
                 .collect { discount ->
                     binding.run {
                         tvDiscount.text = discount?.discount?.formatDiscountTitle()
-                            ?: getString(R.string.choose_shipping_title)
+                            ?: getString(R.string.promo_code_title)
                     }
                 }
         }
@@ -125,11 +125,10 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding, CheckoutViewModel
         }
 
         lifecycleScope.launch {
-            viewModel.uiState
-                .map { it.discountTotalString }
-                .collect {
-                    binding.tvDiscountTotal.text = it
-                }
+            viewModel.uiState.collect {
+                binding.tvDiscountTotal.text = it.discountTotalString
+                binding.imgClear.isVisible = it.isEnableClear
+            }
         }
 
         lifecycleScope.launch {
@@ -201,6 +200,10 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding, CheckoutViewModel
                     ),
                 )
             )
+        }
+
+        binding.imgClear.setOnClickListener {
+            viewModel.clearDiscount()
         }
     }
 }

@@ -5,7 +5,6 @@ import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentHelpCenterBinding
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
@@ -24,19 +23,19 @@ import kotlin.concurrent.schedule
 class HelpCenterFragment : BaseFragment<FragmentHelpCenterBinding, HelpCenterViewModel>(
     FragmentHelpCenterBinding::inflate, HelpCenterViewModel::class.java
 ), OnMapReadyCallback {
-    private lateinit var phone :String
+    private lateinit var phone: String
     private lateinit var mMap: GoogleMap
     private var latLng: LatLng? = null
-    private lateinit var address:String
+    private lateinit var address: String
 
     override fun setupPreViews() {
         binding.apply {
-            phone= getString(R.string.phoneHelp1)
-            phoneHelp.text= phone
-            store1Help.text= getString(R.string.store1Detail)
-            store2Help.text= getString(R.string.store2Detail)
+            phone = getString(R.string.phoneHelp1)
+            phoneHelp.text = phone
+            store1Help.text = getString(R.string.store1Detail)
+            store2Help.text = getString(R.string.store2Detail)
         }
-        address=getString(R.string.store1Detail)
+        address = getString(R.string.store1Detail)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         Timer().schedule(100) {
@@ -47,6 +46,9 @@ class HelpCenterFragment : BaseFragment<FragmentHelpCenterBinding, HelpCenterVie
     }
 
     override fun setupViews() {
+        binding.run {
+            headerLayout.tvTitle.text = getString(R.string.helpCenter)
+        }
     }
 
     override fun bindViewModel() {
@@ -57,15 +59,16 @@ class HelpCenterFragment : BaseFragment<FragmentHelpCenterBinding, HelpCenterVie
             phoneHelp.setOnClickListener {
                 val dialIntent = Intent(Intent.ACTION_DIAL)
                 dialIntent.data = Uri.parse("tel:$phone")
-                startActivity(dialIntent) }
+                startActivity(dialIntent)
+            }
             store1Help.setOnClickListener {
                 searchLocationByName(getString(R.string.store1Detail))
             }
             store2Help.setOnClickListener {
                 searchLocationByName(getString(R.string.store2Detail))
             }
-            toolbar.setNavigationOnClickListener {
-                findNavController().popBackStack()
+            headerLayout.imgBack.setOnClickListener {
+                navController?.popBackStack()
             }
         }
     }
@@ -74,22 +77,26 @@ class HelpCenterFragment : BaseFragment<FragmentHelpCenterBinding, HelpCenterVie
         mMap = googleMap
 
     }
+
     private fun searchLocationByName(locationName: String) {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
         try {
-            val addresses: List<Address> = geocoder.getFromLocationName(locationName, 1) ?: emptyList()
+            val addresses: List<Address> =
+                geocoder.getFromLocationName(locationName, 1) ?: emptyList()
             if (addresses.isNotEmpty()) {
                 val address = addresses[0]
                 latLng = LatLng(address.latitude, address.longitude)
                 updateMapAndAddress(latLng!!, address.getAddressLine(0))
             } else {
-                Toast.makeText(context, getString(R.string.no_find_address), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.no_find_address), Toast.LENGTH_SHORT)
+                    .show()
             }
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(context, "Error occurred", Toast.LENGTH_SHORT).show()
         }
     }
+
     private fun updateMapAndAddress(latLng: LatLng, address: String) {
         mMap.clear()
         mMap.addMarker(MarkerOptions().position(latLng).title(address))

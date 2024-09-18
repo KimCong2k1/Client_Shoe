@@ -8,6 +8,8 @@ import com.fpoly.shoes_app.databinding.FragmentCartBinding
 import com.fpoly.shoes_app.framework.domain.model.CheckoutArgs
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
+import com.fpoly.shoes_app.utility.PLUS
+import com.fpoly.shoes_app.utility.REDUCE
 import com.fpoly.shoes_app.utility.RequestKey
 import com.fpoly.shoes_app.utility.ResultKey
 import com.fpoly.shoes_app.utility.formatPriceShoe
@@ -96,14 +98,12 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(
             )
         }
 
-        //TODO update Cart
         cartAdapter.setOnClickPlus {
-            viewModel.handlePlus(it)
+            viewModel.updateShoe(it, PLUS)
         }
 
-        //TODO update Cart
         cartAdapter.setOnClickReduce {
-            viewModel.handleReduce(it)
+            viewModel.updateShoe(it, REDUCE)
         }
 
         binding.tvButton.setOnClickListener {

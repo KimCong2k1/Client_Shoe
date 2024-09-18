@@ -10,6 +10,8 @@ import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentShoeDetailBinding
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
+import com.fpoly.shoes_app.utility.PLUS
+import com.fpoly.shoes_app.utility.REDUCE
 import com.fpoly.shoes_app.utility.formatPriceShoe
 import com.fpoly.shoes_app.utility.formatQuantityShoe
 import com.fpoly.shoes_app.utility.formatReviewShoe
@@ -19,7 +21,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailViewModel>(
@@ -176,7 +177,6 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
                 showAlertDialog(
                     title = getString(R.string.add_cart_title),
                     button = getString(R.string.add_shoe_to_cart_button),
-                    buttonCancel = getString(R.string.cancel_dialog_shoe_to_cart_button),
                     onClick = { navController?.popBackStack() },
                 )
             }
@@ -192,8 +192,6 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
     }
 
     companion object {
-        const val REDUCE = 0
-        const val PLUS = 1
         const val MAX_SHOE = 999
         const val IS_WHITE_COLOR = "#FFF"
         const val RESET_COUNT_SHOES = 0

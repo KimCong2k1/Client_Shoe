@@ -21,6 +21,9 @@ const val IS_PRICE_NULL = "-"
 
 const val IS_100 = 100L
 
+const val REDUCE = 0
+const val PLUS = 1
+
 object RequestKey {
     const val SHIPPING_CHECKOUT_REQUEST_KEY = "shipping_checkout_request_key"
     const val DISCOUNT_CHECKOUT_REQUEST_KEY = "discount_checkout_request_key"

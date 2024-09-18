@@ -8,9 +8,9 @@ import com.fpoly.shoes_app.framework.domain.model.Size
 import com.fpoly.shoes_app.framework.domain.usecase.AddCartUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.GetShoeDetailUseCase
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.MAX_SHOE
-import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.PLUS
-import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.REDUCE
 import com.fpoly.shoes_app.framework.presentation.ui.shoes.shoesdetail.ShoeDetailFragment.Companion.RESET_COUNT_SHOES
+import com.fpoly.shoes_app.utility.PLUS
+import com.fpoly.shoes_app.utility.REDUCE
 import com.fpoly.shoes_app.utility.SharedPreferencesManager
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -153,6 +153,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         button: String = "",
         buttonCancel: String = "",
         onClick: () -> Unit = {},
+        onClickCancel: () -> Unit = {},
     ) {
         val builder = AlertDialog.Builder(requireActivity())
         val binding = AlertDialogViewBinding.inflate(LayoutInflater.from(requireContext()))
@@ -175,7 +176,10 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
                 onClick()
                 dialog.dismiss()
             }
-            tvCancel.setOnClickListener { dialog.dismiss() }
+            tvCancel.setOnClickListener {
+                onClickCancel()
+                dialog.dismiss()
+            }
         }
         dialog.show()
     }

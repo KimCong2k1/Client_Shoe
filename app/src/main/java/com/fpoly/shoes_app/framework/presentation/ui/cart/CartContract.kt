@@ -19,4 +19,5 @@ data class CartUiState(
         }
     } else 0
     val numberCheck = if (type == PLUS) numberShoe.plus(1) else numberShoe.minus(1)
+    val isVisibleTextEmpty get() = shoes.isNullOrEmpty() && isLoading.not()
 }

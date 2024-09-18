@@ -11,4 +11,5 @@ data class AddressCheckoutContract(
     val addressPair = address?.map {
         Triple(it, it.id == isSelected, it.permission == ADDRESS_DEFAULT)
     }
+    val isVisibleTextEmpty get() = addressPair.isNullOrEmpty() && isLoading.not()
 }

@@ -145,6 +145,7 @@
     <string name="check_out">Đặt hàng</string>
     <string name="review">Đánh giá</string>
     <string name="next">Tiếp theo</string>
+    <string name="list_null_text">Không có sản phẩm</string>
 
     <string name="favorites_title">Yêu thích</string>
     <string name="cart_title">Giỏ hàng</string>

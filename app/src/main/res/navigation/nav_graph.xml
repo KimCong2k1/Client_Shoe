@@ -273,6 +273,10 @@
             android:name="idShoe"
             app:argType="string" />
 
+        <argument
+            android:name="isCart"
+            app:argType="boolean" />
+
         <action
             android:id="@+id/action_shoeDetailFragment_to_reviewFragment"
             app:destination="@id/reviewFragment" />

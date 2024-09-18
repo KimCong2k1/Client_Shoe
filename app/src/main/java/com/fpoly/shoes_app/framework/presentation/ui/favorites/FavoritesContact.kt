@@ -13,4 +13,5 @@ data class FavoritesUiState(
     val isLoadingFavorite: Boolean = false,
 ) {
     val isLoading get() = isLoadingShoes || isLoadingCategories || isLoadingFavorite
+    val isVisibleTextEmpty get() = favoriteShoes.isNullOrEmpty() && isLoading.not()
 }

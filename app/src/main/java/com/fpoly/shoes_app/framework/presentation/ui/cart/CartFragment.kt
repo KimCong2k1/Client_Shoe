@@ -1,5 +1,6 @@
 package com.fpoly.shoes_app.framework.presentation.ui.cart
 
+import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
@@ -28,12 +29,24 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(
     @Inject
     lateinit var cartAdapter: CartAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener(RequestKey.RELOAD_CART_REQUEST_KEY) { _, _ -> }
+    }
+
     override fun setupViews() {
         (requireActivity() as? MainActivity)?.showBottomNavigation(true)
         binding.run {
             headerLayout.imgBack.isVisible = false
             headerLayout.tvTitle.text = getString(R.string.cart_title)
             rcvCart.adapter = cartAdapter
+        }
+
+        setFragmentResultListener(RequestKey.RELOAD_CART_REQUEST_KEY) { _, bundle ->
+            val isReload = bundle.getBoolean(ResultKey.RELOAD_CART_RESULT_KEY)
+            if (isReload) {
+                viewModel.getDataCart()
+            }
         }
 
         setFragmentResultListener(RequestKey.SHOW_ALERT_DIALOG_CHECKOUT_REQUEST_KEY) { _, bundle ->
@@ -75,6 +88,14 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(
 
         lifecycleScope.launch {
             viewModel.uiState.mapNotNull {
+                it.isVisibleTextEmpty
+            }.distinctUntilChanged().collect {
+                binding.tvListNull.isVisible = it
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.uiState.mapNotNull {
                 it.isLoading
             }.distinctUntilChanged().collect {
                 showProgressbar(it)
@@ -85,7 +106,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>(
     override fun setOnClick() {
         cartAdapter.setOnClick {
             navController?.navigate(
-                CartFragmentDirections.actionCartFragmentToShoeDetailFragment(it)
+                CartFragmentDirections.actionCartFragmentToShoeDetailFragment(it, true)
             )
         }
 

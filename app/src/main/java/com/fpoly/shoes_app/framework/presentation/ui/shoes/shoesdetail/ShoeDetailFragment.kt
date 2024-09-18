@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.fpoly.shoes_app.R
@@ -12,6 +13,8 @@ import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.PLUS
 import com.fpoly.shoes_app.utility.REDUCE
+import com.fpoly.shoes_app.utility.RequestKey
+import com.fpoly.shoes_app.utility.ResultKey
 import com.fpoly.shoes_app.utility.formatPriceShoe
 import com.fpoly.shoes_app.utility.formatQuantityShoe
 import com.fpoly.shoes_app.utility.formatReviewShoe
@@ -174,6 +177,12 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
 
             tvButton.setOnClickListener {
                 viewModel.addShoeToCart()
+                if (args.isCart) {
+                    val result = Bundle().apply {
+                        putBoolean(ResultKey.RELOAD_CART_RESULT_KEY, true)
+                    }
+                    setFragmentResult(RequestKey.RELOAD_CART_REQUEST_KEY, result)
+                }
                 showAlertDialog(
                     title = getString(R.string.add_cart_title),
                     button = getString(R.string.add_shoe_to_cart_button),

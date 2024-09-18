@@ -83,7 +83,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>(
 
         shoesAdapter.setOnClick {
             navController?.navigate(
-                SearchFragmentDirections.actionSearchFragmentToShoeDetailFragment(it.id ?: "")
+                SearchFragmentDirections.actionSearchFragmentToShoeDetailFragment(
+                    it.id.orEmpty(),
+                    false,
+                )
             )
         }
         shoesAdapter.setOnClickFavorite {

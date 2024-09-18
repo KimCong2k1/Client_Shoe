@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_background_toolbar"
-        app:navigationIcon="@drawable/baseline_keyboard_backspace_24"
         app:title="Nhập OTP"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,14 +102,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-            <CheckBox
-                android:layout_gravity="left"
-                android:id="@+id/checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:buttonTint="@color/text_color_primary"
-                app:checkedIconTint="@color/background_color"
-                android:text="@string/remember" />
+
 
 
     </LinearLayout>

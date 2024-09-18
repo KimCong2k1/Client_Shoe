@@ -14,6 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailActiveViewModel @Inject constructor(
     private val comfirmTakeRepository: ConfirmTakeRepository,
+//    private val cancleDetailVMRepository: ConfirmTakeRepository,
 ) : ViewModel() {
     private val _signUpResult = MutableStateFlow<Resource<ConfirmTakeModel>>(Resource.init(null))
     val confirmTakeResult: StateFlow<Resource<ConfirmTakeModel>> = _signUpResult
@@ -40,4 +41,26 @@ class DetailActiveViewModel @Inject constructor(
             }
         }
     }
+//    fun cancleDetailVM(id: String) {
+//        viewModelScope.launch {
+//            _signUpResult.value = Resource.loading(null)
+//            try {
+//                val response = comfirmTakeRepository.(id)
+//                if (response.isSuccessful) {
+//                    val signUpResponse = response.body()
+//                    if (signUpResponse != null) {
+//                        _signUpResult.value = Resource.success(signUpResponse)
+//                    } else {
+//                        _signUpResult.value = Resource.error(null, "Sign-up response is null")
+//                    }
+//                } else {
+//                    _signUpResult.value = Resource.error(null, "Sign-up failed")
+//                }
+//            } catch (e: HttpException) {
+//                _signUpResult.value = Resource.error(null, "HTTP Error: ${e.message()}")
+//            } catch (e: Exception) {
+//                _signUpResult.value = Resource.error(null, "Network error: ${e.message}")
+//            }
+//        }
+//    }
 }

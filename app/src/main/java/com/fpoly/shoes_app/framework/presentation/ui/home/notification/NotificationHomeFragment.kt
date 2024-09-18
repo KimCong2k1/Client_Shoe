@@ -25,8 +25,7 @@ class NotificationHomeFragment : BaseFragment<FragmentNotificationHomeBinding, N
 ) {
     private lateinit var idUser: String
     private lateinit var notificationsAdapter: NotificationsHomeAdapter
-    private var isLoadingMore = false
-    private var currentPage = 1
+    private var isFetching = false
 
     override fun setupPreViews() {
         idUser = sharedPreferences.getIdUser()
@@ -37,9 +36,8 @@ class NotificationHomeFragment : BaseFragment<FragmentNotificationHomeBinding, N
         notificationsAdapter = NotificationsHomeAdapter()
         binding.apply {
             swipeRefreshLayout.setOnRefreshListener {
-                currentPage = 1
                 notificationsAdapter.submitList(emptyList()) // Clear the list before loading new data
-                viewModel.fetchNotifications(idUser, currentPage)
+                viewModel.fetchNotifications(idUser)
             }
             recycViewNotifications.apply {
                 layoutManager = LinearLayoutManager(requireContext())
@@ -49,36 +47,33 @@ class NotificationHomeFragment : BaseFragment<FragmentNotificationHomeBinding, N
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(recyclerView, dx, dy)
                         val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                        val visibleItemCount = layoutManager.childCount
                         val totalItemCount = layoutManager.itemCount
-                        val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                        if (!isLoadingMore  && lastVisibleItem == totalItemCount - 1) {
-                            isLoadingMore = true
-                            currentPage++  // Increment the page
-                            viewModel.fetchNotifications(idUser, currentPage, isLoadMore = true)
+                        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+
+                        if (!binding.swipeRefreshLayout.isRefreshing && !isFetching) {
+                            if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && firstVisibleItemPosition >= 0) {
+                                isFetching = true
+                                viewModel.fetchNotifications(idUser) // Trigger load more
+                            }
                         }
                     }
                 })
             }
         }
-        viewModel.fetchNotifications(idUser, currentPage)
+        viewModel.fetchNotifications(idUser)
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun bindViewModel() {
         lifecycleScope.launch {
             viewModel.notificationsState.collect { state ->
                 binding.swipeRefreshLayout.isRefreshing = state.isLoading
-                if (!state.isLoading) {
-                    // Reset loading flag
-                    isLoadingMore = false
+                isFetching = state.isLoading
 
+                if (!state.isLoading) {
                     val groupedNotifications = groupNotificationsByDate(state.notifications)
-                    if (isLoadingMore) {
-                        // Append new data when loading more
-                        notificationsAdapter.appendData(groupedNotifications)
-                    } else {
-                        // Set new data when refreshing
-                        notificationsAdapter.submitList(groupedNotifications)
-                    }
+                    notificationsAdapter.appendData(groupedNotifications)
                 }
 
                 state.errorMessage?.let {
@@ -135,7 +130,6 @@ class NotificationHomeFragment : BaseFragment<FragmentNotificationHomeBinding, N
     }
 
     private fun showError(message: String) {
-        // Example implementation for error handling
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 }

@@ -60,13 +60,7 @@ class HistoryAdapter(
                 val firstOrderDetail = historyShoe.orderDetails[0]
                 sizeShoeTextView.text =  itemView.context.getString(R.string.size) +firstOrderDetail.size
                 colorShoeItemView.backgroundTintList =  ColorStateList.valueOf(Color.parseColor(firstOrderDetail.codeColor))
-                colorShoeTextView.text = itemView.context.getString(when (firstOrderDetail.textColor) {
-                    "White" -> R.string.White
-                    "Black" -> R.string.Black
-                    "Red" -> R.string.Red
-                    "Blue" -> R.string.Blue
-                    else -> R.string.noData
-                })
+                colorShoeTextView.text = firstOrderDetail.textColor
             }
 
             rateOrTrackShoe.setOnClickListener {

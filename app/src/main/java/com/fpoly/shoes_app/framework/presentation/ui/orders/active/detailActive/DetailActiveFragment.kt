@@ -57,9 +57,12 @@ class DetailActiveFragment: BaseFragment<FragmentDetailActiveBinding, DetailActi
                 4 -> 5
                 else -> allViews.size
             }
-            if (historyShoe!!.orderStatusDetails?.size==5){
+            if (historyShoe!!.orderStatusDetails?.size==5||historyShoe!!.orderStatusDetails?.size==1){
                 comfirmTake.visibility = View.VISIBLE
-            }
+                if (historyShoe!!.orderStatusDetails?.size==1){
+                    comfirmTake.text = getString(R.string.cancel)
+                }
+                }
             val colorStateList = ContextCompat.getColorStateList(requireContext(), R.color.black)
             allViews.take(numberOfViewsToTint).forEach { view ->
                 view.backgroundTintList = colorStateList
@@ -102,6 +105,37 @@ class DetailActiveFragment: BaseFragment<FragmentDetailActiveBinding, DetailActi
                 }
             }
         }
+// viewLifecycleOwner.lifecycleScope.launch {
+//            viewModel.cancleDetailVM.collect { result ->
+//                when (result.status) {
+//                    Status.SUCCESS -> {
+//                        showProgressbar(false)
+//                        val signUpResponse = result.data
+//                        if (signUpResponse?.order?.status ==0) {
+//                            findNavController().popBackStack()
+//                            StyleableToast.makeText(
+//                                requireContext(), getString(R.string.success), R.style.success
+//                            ).show()
+//                            return@collect
+//                        }
+//
+//                    }
+//
+//                    Status.ERROR -> {
+//                        val errorMessage = result.message ?: "Unknown error"
+//                        Log.e("errorMessage",errorMessage)
+//                        showProgressbar(false)
+//                    }
+//
+//                    Status.LOADING -> {
+//                        showProgressbar(true)
+//                    }
+//
+//                    Status.INIT -> {
+//                    }
+//                }
+//            }
+//        }
 
     }
 
@@ -111,8 +145,11 @@ class DetailActiveFragment: BaseFragment<FragmentDetailActiveBinding, DetailActi
                 findNavController().popBackStack()
             }
             comfirmTake.setOnClickListener {
+                if (historyShoe!!.orderStatusDetails?.size==1){
+//                    historyShoe?._id?.let { it1 -> viewModel.cancleDetailVM(it1) }
+                }
 
-                historyShoe?._id?.let { it1 -> viewModel.confirmTakeDetailVM(it1) }
+                    historyShoe?._id?.let { it1 -> viewModel.confirmTakeDetailVM(it1) }
             }
         }
 

@@ -36,8 +36,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>(
                         showProgressbar(false)
                         val signUpResponse = result.data
                         if (signUpResponse?.success == true) {
-                            val bundle = Bundle()
-                                bundle.putString("id", signUpResponse.user?.id)
+                            val bundle = Bundle().apply{
+                                putString("id", signUpResponse.user?.id)
+                                putString("email", signUpResponse.user?.fullName)
+                            }
                             val navController = findNavController()
                             binding.userNameEditText.text?.clear()
                             binding.passwordEditText.text?.clear()

@@ -15,45 +15,50 @@ class NotificationHomeViewModel @Inject constructor(
     private val notificationsRepository: NotificationsRepository
 ) : ViewModel() {
 
-    private val _notificationsState = MutableStateFlow(NotificationsUiState())
-    val notificationsState: StateFlow<NotificationsUiState> = _notificationsState
+    private val _notificationsState = MutableStateFlow(NotificationState())
+    val notificationsState: StateFlow<NotificationState> = _notificationsState
 
-    fun fetchNotifications(userId: String, currentPage: Int, isLoadMore: Boolean = false) {
+    private var isLastPage = false
+
+    fun fetchNotifications(userId: String) {
+        if (isLastPage || _notificationsState.value.isLoading) return
+
         viewModelScope.launch {
-            if (!isLoadMore) _notificationsState.value = NotificationsUiState(isLoading = true)
-
-            val result = notificationsRepository.loadNotifications(userId, currentPage)
-            result.onSuccess { response ->
-                val updatedNotifications = if (isLoadMore) {
-                    _notificationsState.value.notifications + response.notifications
+            _notificationsState.value = NotificationState(isLoading = true)
+            try {
+                val result = notificationsRepository.loadNotifications(userId)
+                if (result.isSuccess) {
+                    val notifications = result.getOrNull()
+                    if (notifications != null) {
+                        isLastPage = notifications.isEmpty()
+                        _notificationsState.value = NotificationState(
+                            notifications = notifications,
+                            isLoading = false
+                        )
+                    } else {
+                        _notificationsState.value = NotificationState(
+                            errorMessage = "No notifications found",
+                            isLoading = false
+                        )
+                    }
                 } else {
-                    response.notifications
+                    _notificationsState.value = NotificationState(
+                        errorMessage = result.exceptionOrNull()?.localizedMessage ?: "Unknown error",
+                        isLoading = false
+                    )
                 }
-
-                _notificationsState.value = NotificationsUiState(
-                    notifications = updatedNotifications,
-                    isLoading = false,
-                    hasMoreData = response.notifications.size == PAGE_SIZE,
-                    isLoadMore = isLoadMore
-                )
-            }.onFailure { exception ->
-                _notificationsState.value = NotificationsUiState(
-                    errorMessage = exception.message,
+            } catch (e: Exception) {
+                _notificationsState.value = NotificationState(
+                    errorMessage = e.localizedMessage ?: "Error fetching notifications",
                     isLoading = false
                 )
             }
         }
     }
 
-    data class NotificationsUiState(
-        val isLoading: Boolean = false,
+    data class NotificationState(
         val notifications: List<NotificationsHome> = emptyList(),
-        val errorMessage: String? = null,
-        val hasMoreData: Boolean = true,
-        val isLoadMore: Boolean = false
+        val isLoading: Boolean = false,
+        val errorMessage: String? = null
     )
-
-    companion object {
-        private const val PAGE_SIZE = 10
-    }
 }

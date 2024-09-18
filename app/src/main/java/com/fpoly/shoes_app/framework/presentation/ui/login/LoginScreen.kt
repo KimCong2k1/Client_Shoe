@@ -26,6 +26,7 @@ class LoginScreen : BaseFragment<FragmentLoginScreenBinding, LoginViewModel>(
     private var check = false
     private var username: String = ""
     private var password: String = ""
+    private var tokenFCM: String = ""
     private val navOptions =
         NavOptions.Builder().setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
             .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right).build()
@@ -42,9 +43,10 @@ class LoginScreen : BaseFragment<FragmentLoginScreenBinding, LoginViewModel>(
         with(sharedPreferences) {
             val userName = getUserName()
             val passWord = getPassWord()
+             tokenFCM = getToken()
             if (userName.isNotEmpty() && passWord.isNotEmpty()) {
                 check = true
-                viewModel.signIn(userName, passWord)
+                viewModel.signIn(userName, passWord,tokenFCM)
             }
             val userNameWait = getUserNameWait()
             if (userNameWait.isNotEmpty()) {
@@ -170,7 +172,8 @@ class LoginScreen : BaseFragment<FragmentLoginScreenBinding, LoginViewModel>(
                 password = passwordEditTextLogin.text?.trim().toString()
                 if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) viewModel.signIn(
                     username,
-                    password.toMD5()
+                    password.toMD5(),
+                    tokenFCM
                 ) else Toast.makeText(requireContext(), R.string.inputFullInfo, Toast.LENGTH_SHORT)
                     .show()
             }

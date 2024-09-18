@@ -13,11 +13,11 @@ import com.bumptech.glide.Glide
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.framework.domain.model.profile.notification.NotificationsHome
 
-// Sealed class to represent either a Header or a Notification item
 sealed class NotificationsItem {
     data class Header(val title: String) : NotificationsItem()
     data class NotificationItem(val notification: NotificationsHome) : NotificationsItem()
 }
+
 class NotificationsHomeAdapter : ListAdapter<NotificationsItem, RecyclerView.ViewHolder>(NotificationsDiffCallback()) {
 
     companion object {
@@ -90,8 +90,7 @@ class NotificationsHomeAdapter : ListAdapter<NotificationsItem, RecyclerView.Vie
         }
 
         currentList.addAll(filteredData)
-        submitList(currentList)  // Submit the updated list to the adapter
-        notifyDataSetChanged()   // Notify the adapter that data has changed
+        submitList(currentList)   // Use submitList to update the adapter
     }
 
     private fun areItemsTheSame(oldItem: NotificationsItem, newItem: NotificationsItem): Boolean {
@@ -112,7 +111,6 @@ class NotificationsDiffCallback : DiffUtil.ItemCallback<NotificationsItem>() {
         }
     }
 
-    @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: NotificationsItem, newItem: NotificationsItem): Boolean {
         return oldItem == newItem
     }

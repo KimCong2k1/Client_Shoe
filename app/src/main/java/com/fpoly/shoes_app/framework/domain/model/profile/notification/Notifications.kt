@@ -1,8 +1,6 @@
 package com.fpoly.shoes_app.framework.domain.model.profile.notification
+
 data class NotificationsHomeResponse(
-    val totalNotifications: Int,
-    val currentPage: Int,
-    val totalPages: Int,
     val notifications: List<NotificationsHome>
 )
 

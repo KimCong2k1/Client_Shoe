@@ -41,6 +41,7 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
     private val gender = arrayOf("Nữ", "Nam")
     private var uriPath: Uri? = null
     private var id: String = ""
+    private var email: String = ""
 
     private fun showDatePickerDialog(dateEditText: EditText) {
         val calendar = Calendar.getInstance()
@@ -83,7 +84,7 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
 
     override fun setupViews() {
         id = arguments?.getString("id") ?: sharedPreferences.getIdUser()
-
+    email= arguments?.getString("mail") ?: sharedPreferences.getIdUser()
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, gender)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinner.adapter = adapter

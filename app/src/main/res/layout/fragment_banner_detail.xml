@@ -17,7 +17,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dimen_24dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
@@ -31,7 +31,6 @@
                 android:id="@+id/tvTitleBanner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_24dp"
                 android:fontFamily="@font/poppins_medium"
                 android:includeFontPadding="false"
                 android:textColor="@color/primary_black"

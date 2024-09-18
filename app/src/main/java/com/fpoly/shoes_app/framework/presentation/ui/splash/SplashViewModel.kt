@@ -39,8 +39,8 @@ class SplashViewModel @Inject constructor(
             ),
             PageSplash(
                 "2",
-                "Thời Trang \nSang Trọng",
-                "Tìm kiếm giày thời trang hoàn hảo cho mọi dịp, từ đi làm đến đi chơi, với nhiều mẫu mã và màu sắc phong phú",
+                "Thời Trang, \nSang Trọng",
+                "Tìm kiếm giày thời trang hoàn hảo cho mọi dịp, từ đi làm đến đi chơi, với nhiều mẫu mã và màu sắc phong phú.",
                 R.drawable.img_2
             ),
             PageSplash(

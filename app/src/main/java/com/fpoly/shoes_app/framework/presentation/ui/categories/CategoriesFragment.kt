@@ -1,5 +1,6 @@
 package com.fpoly.shoes_app.framework.presentation.ui.categories
 
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.fpoly.shoes_app.databinding.FragmentCategoriesBinding
@@ -31,6 +32,14 @@ class CategoriesFragment : BaseFragment<FragmentCategoriesBinding, CategoriesVie
         lifecycleScope.launch {
             viewModel.uiState.collect { state ->
                 categoriesAdapter.submitList(state.categories)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.uiState.mapNotNull {
+                it.isVisibleTextEmpty
+            }.distinctUntilChanged().collect {
+                binding.tvListNull.isVisible = it
             }
         }
 

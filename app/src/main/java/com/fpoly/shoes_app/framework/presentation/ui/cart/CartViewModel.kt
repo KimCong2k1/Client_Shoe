@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fpoly.shoes_app.framework.domain.model.ShoeData
+import com.fpoly.shoes_app.framework.domain.model.UpdateCartRequest
 import com.fpoly.shoes_app.framework.domain.usecase.GetCartUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.RemoveCartUseCase
 import com.fpoly.shoes_app.framework.domain.usecase.UpdateCartUseCase
@@ -77,33 +78,33 @@ class CartViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    //TODO update Cart
-    fun handlePlus(shoesCart: ShoeData?) {
+    fun updateShoe(shoesCart: ShoeData?, type: Int) {
         viewModelScope.launch {
             _uiState.update {
-                it.copy(numberShoe = uiState.value.numberShoe.plus(1))
+                it.copy(
+                    numberShoe = shoesCart?.numberShoe ?: 0,
+                    type = type
+                )
             }
             updateShoeCart(shoesCart?.id.orEmpty())
         }
     }
 
-    //TODO update Cart
-    fun handleReduce(shoesCart: ShoeData?) {
-        viewModelScope.launch {
-            _uiState.update {
-                it.copy(numberShoe = uiState.value.numberShoe.minus(1))
-            }
-            updateShoeCart(shoesCart?.id.orEmpty())
-        }
-    }
-
-    //TODO update Cart
     private fun updateShoeCart(id: String) {
         flow {
-            emit(updateCartUseCase.invoke(id, 10))
+            emit(
+                updateCartUseCase.invoke(
+                    id = id,
+                    numberShoe = UpdateCartRequest(
+                        uiState.value.numberCheck,
+                    )
+                )
+            )
         }.onEach { resource ->
             when (resource.status) {
-                Status.SUCCESS -> getDataCart()
+                Status.SUCCESS -> {
+                    getDataCart()
+                }
 
                 Status.ERROR -> Log.e(
                     "CartViewModel", "updateShoeCart: Error ${resource.message}"

@@ -1,6 +1,7 @@
 package com.fpoly.shoes_app.framework.presentation.ui.checkout.address
 
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
@@ -51,6 +52,14 @@ class AddressCheckoutFragment :
                 .collect { addressPair ->
                     addressCheckoutAdapter.submitList(addressPair)
                 }
+        }
+
+        lifecycleScope.launch {
+            viewModel.uiState.mapNotNull {
+                it.isVisibleTextEmpty
+            }.distinctUntilChanged().collect {
+                binding.tvListNull.isVisible = it
+            }
         }
 
         lifecycleScope.launch {

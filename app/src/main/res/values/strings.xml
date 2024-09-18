@@ -20,7 +20,7 @@
 
     <!--    //quy-->
     <!--    key map-->
-    <string name="key_map" templateMergeStrategy="preserve" translatable="false">AIzaSyCH8B5nvbZwslomTAn6u4-ZGG145XHCXLA</string>
+    <string name="key_map">AIzaSyCH8B5nvbZwslomTAn6u4-ZGG145XHCXLA</string>
     <!--    string other-->
     <string name="capture">Máy Ảnh</string>
     <string name="selectImg">Chọn Nguồn Ảnh</string>
@@ -106,12 +106,14 @@
     <!--    <string name="profile">Cấu hình</string>-->
     <string name="phone_suggest">0123456789</string>
     <string name="phone">Số điện thoại người nhận</string>
-    <string name="phoneHelp">Số điện thoại :</string>
+    <string name="phoneHelp">Số điện thoại:</string>
     <string name="phoneHelp1">097.567.1080</string>
     <string name="store1Detail">57,Quan Hoa,Cầu Giấy</string>
     <string name="store2Detail">29,Trần Đại Nghĩa,Hai Bà Trưng</string>
     <string name="birthDay">0000-00-00</string>
     <string name="edit_info">Sửa thông tin</string>
+    <string name="add_address">Thêm địa chỉ</string>
+    <string name="address_detail">Địa chỉ chi tiết</string>
     <string name="address">Địa chỉ</string>
     <string name="name">Họ và tên</string>
     <string name="White">Trắng</string>
@@ -145,14 +147,15 @@
     <string name="check_out">Đặt hàng</string>
     <string name="review">Đánh giá</string>
     <string name="next">Tiếp theo</string>
+    <string name="list_null_text">Không có sản phẩm</string>
 
     <string name="favorites_title">Yêu thích</string>
     <string name="cart_title">Giỏ hàng</string>
 
     <string name="cart_delete_title">Bạn có đồng ý xóa sản phẩm này ra khỏi giỏ hàng ?</string>
     <string name="add_cart_title">Thêm sản phẩm vào giỏ hàng thành công ?</string>
-    <string name="add_shoe_to_cart_button">Xem các sản phẩm khác</string>
-    <string name="cancel_dialog_shoe_to_cart_button">Ở lại</string>
+    <string name="add_shoe_to_cart_button">Tiếp tục</string>
+    <string name="cancel_dialog_shoe_to_cart_button">Thoát</string>
 
     <string name="shipping_address">Địa chỉ nhận hàng</string>
     <string name="order_list">Sản phẩm</string>

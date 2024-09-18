@@ -11,12 +11,9 @@ import android.util.Base64
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentProfileBinding
 import com.fpoly.shoes_app.databinding.LayoutDialogBinding
@@ -35,21 +32,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 
-
 @Suppress("UNREACHABLE_CODE")
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewModel>(
     FragmentProfileBinding::inflate, SetUpAccountViewModel::class.java
 ) {
-    private var uriPath :Uri?=null
-    private var imageShow :String?=null
+    private var uriPath: Uri? = null
+    private var imageShow: String? = null
     private lateinit var captureImageLauncher: ActivityResultLauncher<Intent>
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
     private lateinit var idUser: String
     private var bmp: Bitmap? = null
-    private val navOptions =
-        NavOptions.Builder().setEnterAnim(R.anim.slide_in_right).setExitAnim(R.anim.slide_out_left)
-            .setPopEnterAnim(R.anim.slide_in_left).setPopExitAnim(R.anim.slide_out_right).build()
 
     private fun showBottomSheetDialog() {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
@@ -62,9 +55,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
             sharedPreferences.removeUser()
             sharedPreferences.removeIdUser()
             childFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            navController?.navigate(R.id.loginFragmentScreen, null,null)
-            Log.e("userWait", sharedPreferences.getUserNameWait())
-            Log.e("user", sharedPreferences.getUserName())
+            navController?.navigate(
+                ProfileFragmentDirections.actionProfileFragmentToLoginFragmentScreen()
+            )
             bottomSheetDialog.dismiss()
         }
         bottomSheetDialog.setContentView(dialogBinding.root)
@@ -80,7 +73,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
                 handleResult(uriPath)
             }
         }
-        binding.toolbar.navigationIcon?.setTint(ContextCompat.getColor(requireContext(), R.color.textColorPrimary))
 
         pickImageLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -96,6 +88,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
         (requireActivity() as MainActivity).showBottomNavigation(true)
         idUser = sharedPreferences.getIdUser()
         viewModel.profilefind(idUser)
+        binding.run {
+            headerLayout.tvTitle.text = getString(R.string.profile)
+            headerLayout.imgBack.isVisible = false
+        }
     }
 
     @SuppressLint("SuspiciousIndentation")
@@ -107,10 +103,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
                         val signUpResponse = result.data
                         if (signUpResponse?.success == true) {
                             imageShow = signUpResponse.user?.imageAccount?.`$binary`?.base64
-//                            StyleableToast.makeText(
-//                                requireContext(), getString(R.string.success), R.style.success
-//                            ).show()
-//                            service.playNotificationSound(requireContext())
                         }
 
                     }
@@ -121,11 +113,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
 
                     }
 
-                    Status.LOADING -> {
-                    }
+                    Status.LOADING -> {}
 
-                    Status.INIT -> {
-                    }
+                    Status.INIT -> {}
                 }
             }
             return@launch
@@ -152,16 +142,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
         val imagePath = uri?.let { File(Imagesss.getPathFromUri(it, context)) }
         viewModel.setUp(idUser, imagePath, null, null, null, null, null)
     }
+
     private fun handleSuccess(profileResponse: ProfileResponse?) {
         Log.e("profileResponse", profileResponse.toString())
         profileResponse?.user?.let { user ->
             binding.shimmerLayout.stopShimmer()
             binding.shimmerLayout.hideShimmer()
-            val dataImage =user.imageAccount?.`$binary`?.base64.toString()
+            val dataImage = user.imageAccount?.`$binary`?.base64.toString()
             imageShow = dataImage
             val decodeDataImg = Base64.decode(dataImage, Base64.DEFAULT)
             bmp = BitmapFactory.decodeByteArray(decodeDataImg, 0, decodeDataImg.size)
-            bmp?.let { Glides(it,requireContext(),binding.idAvatar) }
+            bmp?.let { Glides(it, requireContext(), binding.idAvatar) }
             binding.nameProfile.text = user.fullName ?: getString(R.string.name)
             binding.phoneProfile.text = user.phoneNumber ?: getString(R.string.phone_suggest)
         }
@@ -182,53 +173,36 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, SetUpAccountViewMod
     override fun setOnClick() {
         binding.apply {
             constraintLogout.setOnClickListener {
-            showBottomSheetDialog()
-        }
+                showBottomSheetDialog()
+            }
             constraintEdt.setOnClickListener {
-            navigateToFragment(R.id.editProfileFragment)
-        }
+                navController?.navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
+                )
+            }
             constraintAddess.setOnClickListener {
-            navController?.navigate(
-                ProfileFragmentDirections.actionProfileFragmentToAddressFragment(false)
-            )
-        }
+                navController?.navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToAddressFragment(false)
+                )
+            }
             constraintNotification.setOnClickListener {
-            navigateToFragment(R.id.generalSettingFragment)
-        }
+                navController?.navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToGeneralSettingFragment()
+                )
+            }
             constraintHelpCenter.setOnClickListener {
-            navigateToFragment(R.id.helpCenterFragment)
-        }
+                navController?.navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToHelpCenterFragment()
+                )
+            }
             relative.setOnClickListener {
-                AddImage.openImageDialog(imageShow,requireContext(), requireActivity()) { intent ->
+                AddImage.openImageDialog(imageShow, requireContext(), requireActivity()) { intent ->
                     when (intent.action) {
                         MediaStore.ACTION_IMAGE_CAPTURE -> captureImageLauncher.launch(intent)
                         Intent.ACTION_PICK -> pickImageLauncher.launch(intent)
                     }
                 }
-
-        }
-//            switchDarkMode.isChecked = sharedPreferences.isDarkModeEnabled()
-//            switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-//                sharedPreferences.saveDarkModeState(isChecked) // Save preference
-//                applyDarkMode(isChecked) // Apply theme
-//            }
+            }
         }
     }
-
-    private fun applyDarkMode(isDarkMode: Boolean) {
-        val nightMode = if (isDarkMode) {
-            AppCompatDelegate.MODE_NIGHT_YES
-        } else {
-            AppCompatDelegate.MODE_NIGHT_NO
-        }
-        AppCompatDelegate.setDefaultNightMode(nightMode)
-    }
-
-private fun navigateToFragment(fragmentId: Int) {
-    val navController = findNavController()
-    val currentDestination = navController.currentDestination
-    if (currentDestination == null || currentDestination.id != fragmentId) {
-        navController.navigate(fragmentId, null, navOptions)
-    }
-}
 }

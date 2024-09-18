@@ -8,6 +8,7 @@ import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentCreateNewPassBinding
 import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate.strNullOrEmpty
 import com.fpoly.shoes_app.framework.domain.model.newPass.NewPass
+import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.forgot.CustomDialogFragment
 import com.fpoly.shoes_app.utility.Status
@@ -30,6 +31,7 @@ class CreateNewPassFragment : BaseFragment<FragmentCreateNewPassBinding, CreateN
 
     }
     override fun setupViews() {
+        (requireActivity() as? MainActivity)?.showBottomNavigation(false)
         userId = sharedPreferences.getIdUser()
     }
 

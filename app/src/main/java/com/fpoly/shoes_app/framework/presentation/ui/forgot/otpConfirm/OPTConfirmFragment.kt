@@ -13,6 +13,7 @@ import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentOtpBinding
 import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate.strNullOrEmpty
 import com.fpoly.shoes_app.framework.domain.model.forgotMail.ForgotMail
+import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.framework.presentation.ui.forgot.forGotEmail.ForGotEmailViewModel
 import com.fpoly.shoes_app.utility.Status
@@ -62,6 +63,7 @@ class OPTConfirmFragment : BaseFragment<FragmentOtpBinding, OTPConfirmViewModel>
 
     }
     override fun setupViews() {
+        (requireActivity() as? MainActivity)?.showBottomNavigation(false)
         startCountdownTimer()
     }
 

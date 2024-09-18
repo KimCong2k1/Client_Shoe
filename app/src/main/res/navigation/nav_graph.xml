@@ -10,10 +10,17 @@
         android:name="com.fpoly.shoes_app.framework.presentation.ui.splash.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_SlashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
 
         <action
-            android:id="@+id/action_slashFragment_to_loginFragmentScreen"
-            app:destination="@id/loginFragmentScreen" />
+            android:id="@+id/action_SlashFragment_to_loginFragmentScreen"
+            app:destination="@id/loginFragmentScreen"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -149,7 +156,7 @@
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_notificationFragment"
+            android:id="@+id/action_profileFragment_to_generalSettingFragment"
             app:destination="@id/generalSettingFragment" />
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
@@ -157,6 +164,14 @@
         <action
             android:id="@+id/action_profileFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_helpCenterFragment"
+            app:destination="@id/helpCenterFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragmentScreen"
+            app:destination="@id/loginFragmentScreen"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addressFragment"
@@ -213,9 +228,7 @@
         <action
             android:id="@+id/action_loginFragmentScreen_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/loginFragmentScreen"
+            app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
 
     </fragment>
@@ -268,6 +281,10 @@
         <argument
             android:name="idShoe"
             app:argType="string" />
+
+        <argument
+            android:name="isCart"
+            app:argType="boolean" />
 
         <action
             android:id="@+id/action_shoeDetailFragment_to_reviewFragment"

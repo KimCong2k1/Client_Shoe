@@ -81,7 +81,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
         shoesAdapter.setOnClick {
             navController?.navigate(
-                HomeFragmentDirections.actionHomeFragmentToShoeDetailFragment(it.id ?: "")
+                HomeFragmentDirections.actionHomeFragmentToShoeDetailFragment(
+                    it.id.orEmpty(),
+                    false,
+                )
             )
         }
 

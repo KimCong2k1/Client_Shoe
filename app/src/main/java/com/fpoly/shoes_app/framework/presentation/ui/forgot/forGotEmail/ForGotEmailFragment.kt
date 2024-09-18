@@ -9,6 +9,7 @@ import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentForGotBinding
 import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate.strNullOrEmpty
 import com.fpoly.shoes_app.framework.domain.model.forgotMail.ForgotMail
+import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.Status
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +24,7 @@ class ForGotEmailFragment : BaseFragment<FragmentForGotBinding, ForGotEmailViewM
 
     }
     override fun setupViews() {
+        (requireActivity() as? MainActivity)?.showBottomNavigation(false)
     }
 
     override fun bindViewModel() {

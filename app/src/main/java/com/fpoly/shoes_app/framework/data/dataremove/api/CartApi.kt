@@ -2,6 +2,7 @@ package com.fpoly.shoes_app.framework.data.dataremove.api
 
 import com.fpoly.shoes_app.framework.domain.model.CartRequest
 import com.fpoly.shoes_app.framework.domain.model.Carts
+import com.fpoly.shoes_app.framework.domain.model.UpdateCartRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -22,8 +23,8 @@ interface CartApi {
 
     @POST("updateNumberShoe/{id}")
     suspend fun updateCart(
-        @Body numberShoe: Int,
         @Path("id") id: String,
+        @Body numberShoe: UpdateCartRequest,
     ): Response<Any>
 
     @DELETE("deleteCart/{id}")

@@ -60,7 +60,10 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
 
         shoesAdapter.setOnClick {
             navController?.navigate(
-                ShoesFragmentDirections.actionShoesFragmentToShoeDetailFragment(it.id ?: "")
+                ShoesFragmentDirections.actionShoesFragmentToShoeDetailFragment(
+                    it.id.orEmpty(),
+                    false,
+                )
             )
         }
 
@@ -86,6 +89,14 @@ class ShoesFragment : BaseFragment<FragmentShoesBinding, ShoesViewModel>(
                 it.shoes
             }.distinctUntilChanged().collect {
                 shoesAdapter.submitList(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.uiState.mapNotNull {
+                it.isVisibleTextEmpty
+            }.distinctUntilChanged().collect {
+                binding.tvListNull.isVisible = it
             }
         }
 

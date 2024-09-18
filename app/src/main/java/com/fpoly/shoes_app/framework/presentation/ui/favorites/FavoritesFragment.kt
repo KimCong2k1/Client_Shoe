@@ -44,6 +44,14 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
 
         lifecycleScope.launch {
             viewModel.uiState.mapNotNull {
+                it.isVisibleTextEmpty
+            }.distinctUntilChanged().collect {
+                binding.tvListNull.isVisible = it
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.uiState.mapNotNull {
                 it.isLoading
             }.distinctUntilChanged().collect {
                 showProgressbar(it)
@@ -59,7 +67,10 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
 
         favoriteAdapter.setOnClick {
             navController?.navigate(
-                FavoritesFragmentDirections.actionFavoritesFragmentToShoeDetailFragment(it.id.orEmpty())
+                FavoritesFragmentDirections.actionFavoritesFragmentToShoeDetailFragment(
+                    it.id.orEmpty(),
+                    false,
+                )
             )
         }
 

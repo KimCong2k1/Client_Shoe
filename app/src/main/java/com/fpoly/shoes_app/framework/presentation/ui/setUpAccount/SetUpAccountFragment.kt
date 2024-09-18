@@ -23,6 +23,7 @@ import com.fpoly.shoes_app.databinding.FragmentSetUpAccountBinding
 import com.fpoly.shoes_app.framework.data.othetasks.AddImage
 import com.fpoly.shoes_app.framework.data.othetasks.CheckValidate
 import com.fpoly.shoes_app.framework.domain.model.setUp.SetUpAccountResponse
+import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
 import com.fpoly.shoes_app.utility.Imagesss
 import com.fpoly.shoes_app.utility.Status
@@ -83,6 +84,7 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
     }
 
     override fun setupViews() {
+        (requireActivity() as? MainActivity)?.showBottomNavigation(false)
         id = arguments?.getString("id") ?: sharedPreferences.getIdUser()
     email= arguments?.getString("mail") ?: sharedPreferences.getIdUser()
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, gender)

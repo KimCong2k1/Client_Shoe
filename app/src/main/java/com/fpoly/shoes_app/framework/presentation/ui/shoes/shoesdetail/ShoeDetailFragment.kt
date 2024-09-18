@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.fpoly.shoes_app.R
 import com.fpoly.shoes_app.databinding.FragmentShoeDetailBinding
 import com.fpoly.shoes_app.framework.presentation.MainActivity
 import com.fpoly.shoes_app.framework.presentation.common.BaseFragment
+import com.fpoly.shoes_app.utility.PLUS
+import com.fpoly.shoes_app.utility.REDUCE
+import com.fpoly.shoes_app.utility.RequestKey
+import com.fpoly.shoes_app.utility.ResultKey
 import com.fpoly.shoes_app.utility.formatPriceShoe
 import com.fpoly.shoes_app.utility.formatQuantityShoe
 import com.fpoly.shoes_app.utility.formatReviewShoe
@@ -19,7 +24,6 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailViewModel>(
@@ -173,10 +177,15 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
 
             tvButton.setOnClickListener {
                 viewModel.addShoeToCart()
+                if (args.isCart) {
+                    val result = Bundle().apply {
+                        putBoolean(ResultKey.RELOAD_CART_RESULT_KEY, true)
+                    }
+                    setFragmentResult(RequestKey.RELOAD_CART_REQUEST_KEY, result)
+                }
                 showAlertDialog(
                     title = getString(R.string.add_cart_title),
                     button = getString(R.string.add_shoe_to_cart_button),
-                    buttonCancel = getString(R.string.cancel_dialog_shoe_to_cart_button),
                     onClick = { navController?.popBackStack() },
                 )
             }
@@ -192,8 +201,6 @@ class ShoeDetailFragment : BaseFragment<FragmentShoeDetailBinding, ShoeDetailVie
     }
 
     companion object {
-        const val REDUCE = 0
-        const val PLUS = 1
         const val MAX_SHOE = 999
         const val IS_WHITE_COLOR = "#FFF"
         const val RESET_COUNT_SHOES = 0

@@ -39,7 +39,7 @@ class EditOrAddFragment : BaseFragment<FragmentEditoraddBinding, EditOrAddViewMo
     private var bundle: Addresse? = null
     private var check: Int? = null
     private var checkBox: String? = null
-    private var addressDetail: String =""
+    private var addressDetail: String = ""
     private var latLng: LatLng? = null
     private var initialNameAddress: String? = null
     private var initialNameUser: String? = null
@@ -53,6 +53,9 @@ class EditOrAddFragment : BaseFragment<FragmentEditoraddBinding, EditOrAddViewMo
 
     @SuppressLint("SuspiciousIndentation")
     override fun setupViews() {
+        binding.run {
+            headerLayout.tvTitle.text = getString(R.string.add_address)
+        }
         bundle = arguments?.getParcelable("address")
         check = arguments?.getInt("check")
         initialNameAddress = bundle?.nameAddress ?: ""
@@ -61,7 +64,8 @@ class EditOrAddFragment : BaseFragment<FragmentEditoraddBinding, EditOrAddViewMo
         initialDetailAddress = bundle?.detailAddress ?: ""
         initialCheckAddress = bundle?.permission ?: "1"
         latLng = bundle?.latitude?.let { bundle?.longitude?.let { it1 -> LatLng(it, it1) } }
-        binding.btnAdd.text = if (check == 0) getString(R.string.add) else getString(R.string.update)
+        binding.btnAdd.text =
+            if (check == 0) getString(R.string.add) else getString(R.string.update)
         binding.addressDetail.visibility = if (check == 0) View.GONE else View.VISIBLE
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -124,19 +128,27 @@ class EditOrAddFragment : BaseFragment<FragmentEditoraddBinding, EditOrAddViewMo
             override fun onQueryTextChange(newText: String?): Boolean = false
         })
 
-        binding.nameAddressEditText.addTextChangedListener { binding.btnAdd.isEnabled = hasAddressChanged() }
-        binding.nameUserEditText.addTextChangedListener { binding.btnAdd.isEnabled = hasAddressChanged() }
-        binding.phoneUserEditText.addTextChangedListener { binding.btnAdd.isEnabled = hasAddressChanged() }
+        binding.nameAddressEditText.addTextChangedListener {
+            binding.btnAdd.isEnabled = hasAddressChanged()
+        }
+        binding.nameUserEditText.addTextChangedListener {
+            binding.btnAdd.isEnabled = hasAddressChanged()
+        }
+        binding.phoneUserEditText.addTextChangedListener {
+            binding.btnAdd.isEnabled = hasAddressChanged()
+        }
         binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
             checkBox = if (!isChecked) "1" else "0"
             binding.btnAdd.isEnabled = hasAddressChanged()
         }
 
-        binding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        binding.headerLayout.imgBack.setOnClickListener {
+            navController?.popBackStack()
+        }
 
         binding.btnAdd.setOnClickListener {
-            Log.e("checkValidate",checkAddressChanged().toString())
-            Log.e("checkValidate",latLng.toString())
+            Log.e("checkValidate", checkAddressChanged().toString())
+            Log.e("checkValidate", latLng.toString())
             if (checkAddressChanged()) {
 
                 val nameAddress = binding.nameAddressEditText.text.toString()
@@ -149,7 +161,16 @@ class EditOrAddFragment : BaseFragment<FragmentEditoraddBinding, EditOrAddViewMo
                     val id = sharedPreferences.getIdUser()
 
                     if (latiAddress != null && longAddress != null) {
-                        val address = AddAddress(detailAddress = addressDetail, nameAddress =  nameAddress, phoneNumber =  phoneUser, latitude =  latiAddress, longitude =  longAddress, userId =  id, fullName = nameUser, permission = checkBox)
+                        val address = AddAddress(
+                            detailAddress = addressDetail,
+                            nameAddress = nameAddress,
+                            phoneNumber = phoneUser,
+                            latitude = latiAddress,
+                            longitude = longAddress,
+                            userId = id,
+                            fullName = nameUser,
+                            permission = checkBox
+                        )
 
                         if (check == 0) {
                             viewModel.addAddress(address)
@@ -159,10 +180,18 @@ class EditOrAddFragment : BaseFragment<FragmentEditoraddBinding, EditOrAddViewMo
                             }
                         }
                     } else {
-                        Toast.makeText(context, "Unable to add or update the address.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Unable to add or update the address.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } else {
-                    Toast.makeText(context, "Please fill in the address details.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Please fill in the address details.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -179,13 +208,15 @@ class EditOrAddFragment : BaseFragment<FragmentEditoraddBinding, EditOrAddViewMo
     private fun searchLocationByName(locationName: String) {
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
         try {
-            val addresses: List<Address> = geocoder.getFromLocationName(locationName, 1) ?: emptyList()
+            val addresses: List<Address> =
+                geocoder.getFromLocationName(locationName, 1) ?: emptyList()
             if (addresses.isNotEmpty()) {
                 val address = addresses[0]
                 latLng = LatLng(address.latitude, address.longitude)
                 updateMapAndAddress(latLng!!, address.getAddressLine(0))
             } else {
-                Toast.makeText(context, getString(R.string.no_find_address), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.no_find_address), Toast.LENGTH_SHORT)
+                    .show()
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -198,7 +229,7 @@ class EditOrAddFragment : BaseFragment<FragmentEditoraddBinding, EditOrAddViewMo
         mMap.addMarker(MarkerOptions().position(latLng).title(address))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15.0f))
         Log.d("AddressDetailsFragment", "Updated map with address: $address")
-        addressDetail=address
+        addressDetail = address
     }
 
     private fun hasAddressChanged(): Boolean {
@@ -210,11 +241,12 @@ class EditOrAddFragment : BaseFragment<FragmentEditoraddBinding, EditOrAddViewMo
                 currentDetailAddress != initialDetailAddress ||
                 currentCheckBoxState != initialCheckAddress
     }
+
     private fun checkAddressChanged(): Boolean {
         val currentNameAddress = binding.nameAddressEditText.text.toString()
         val currentNameUser = binding.nameUserEditText.text.toString()
         val currentPhone = binding.phoneUserEditText.text.toString()
         val currentCheckBoxState = if (!binding.checkbox.isChecked) "1" else "0"
-        return (currentNameUser!=initialNameUser|| currentNameAddress!=initialNameAddress||currentCheckBoxState!=initialCheckAddress||currentPhone!=initialPhone)
+        return (currentNameUser != initialNameUser || currentNameAddress != initialNameAddress || currentCheckBoxState != initialCheckAddress || currentPhone != initialPhone)
     }
 }

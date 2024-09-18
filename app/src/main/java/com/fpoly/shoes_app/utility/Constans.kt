@@ -21,6 +21,9 @@ const val IS_PRICE_NULL = "-"
 
 const val IS_100 = 100L
 
+const val REDUCE = 0
+const val PLUS = 1
+
 object RequestKey {
     const val SHIPPING_CHECKOUT_REQUEST_KEY = "shipping_checkout_request_key"
     const val DISCOUNT_CHECKOUT_REQUEST_KEY = "discount_checkout_request_key"
@@ -28,6 +31,7 @@ object RequestKey {
     const val RELOAD_ADDRESS_CHECKOUT_REQUEST_KEY = "reload_address_checkout_request_key"
     const val SHOW_ALERT_DIALOG_CHECKOUT_REQUEST_KEY = "show_alert_dialog_checkout_request_key"
     const val KEY_FILTER_REQUEST_KEY = "key_filter_request_key"
+    const val RELOAD_CART_REQUEST_KEY = "reload_cart_request_key"
 }
 
 object ResultKey {
@@ -37,6 +41,7 @@ object ResultKey {
     const val RELOAD_ADDRESS_CHECKOUT_RESULT_KEY = "reload_address_checkout_result_key"
     const val SHOW_ALERT_DIALOG_CHECKOUT_RESULT_KEY = "show_alert_dialog_checkout_result_key"
     const val KEY_FILTER_RESULT_KEY = "key_filter_result_key"
+    const val RELOAD_CART_RESULT_KEY = "reload_cart_filter_result_key"
 }
 
 object ZaloPay {

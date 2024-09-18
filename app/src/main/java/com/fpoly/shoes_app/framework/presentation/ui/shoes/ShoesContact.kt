@@ -15,7 +15,6 @@ data class ShoesUiState(
     val isLoadingFavorite: Boolean = false,
 ) : Parcelable {
     val isLoading get() = isLoadingShoes || isLoadingCategories || isLoadingFavorite
-
     val shoes: List<Pair<Shoes, Boolean>>
         get() {
             val favoriteId = favoriteShoes?.map { it.id }?.toSet() ?: emptySet()
@@ -23,4 +22,5 @@ data class ShoesUiState(
                 shoe to favoriteId.contains(shoe.id)
             } ?: emptyList()
         }
+    val isVisibleTextEmpty get() = shoes.isEmpty() && isLoading.not()
 }

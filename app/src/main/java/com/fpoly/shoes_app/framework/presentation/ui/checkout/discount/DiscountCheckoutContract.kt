@@ -8,4 +8,5 @@ data class DiscountCheckoutUiState(
     val isSelected: String? = null,
 ) {
     val discountsPair = discounts?.map { Pair(it, it.id == isSelected) }
+    val isVisibleTextEmpty get() = discountsPair.isNullOrEmpty() && isLoading.not()
 }

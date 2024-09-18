@@ -86,18 +86,17 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
     override fun setupViews() {
         (requireActivity() as? MainActivity)?.showBottomNavigation(false)
         id = arguments?.getString("id") ?: sharedPreferences.getIdUser()
-    email= arguments?.getString("mail") ?: sharedPreferences.getIdUser()
+    email= arguments?.getString("email") ?: sharedPreferences.getUserName()
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, gender)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinner.adapter = adapter
-
+        binding.mailEditText.setText(email)
         addTextWatchers()
     }
 
     private fun addTextWatchers() {
         binding.nameEditText.addTextChangedListener(createTextWatcher())
         binding.phoneEditText.addTextChangedListener(createTextWatcher())
-        binding.mailEditText.addTextChangedListener(createTextWatcher())
         binding.dateEditText.addTextChangedListener(createTextWatcher())
     }
 
@@ -113,7 +112,6 @@ class SetUpAccountFragment : BaseFragment<FragmentSetUpAccountBinding, SetUpAcco
     private fun checkIfAnyFieldChanged() {
         val name = binding.nameEditText.text.toString().trim()
         val phone = binding.phoneEditText.text.toString().trim()
-        val email = binding.mailEditText.text.toString().trim()
         val birth = binding.dateEditText.text.toString().trim()
         val gender = binding.spinner.selectedItem.toString()
 

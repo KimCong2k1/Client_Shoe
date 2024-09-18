@@ -40,7 +40,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding, SignUpViewModel>(
                         if (signUpResponse?.success == true) {
                             val bundle = Bundle().apply{
                                 putString("id", signUpResponse.user?.id)
-                                putString("email", signUpResponse.user?.fullName)
+                                putString("email", signUpResponse.user?.nameAccount)
                             }
                             val navController = findNavController()
                             binding.userNameEditText.text?.clear()
